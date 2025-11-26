@@ -1,0 +1,37 @@
+{
+    "name": "chat",
+    "version": "1.9.0",
+    "description": "Climate Health Vulnerability Assessment Tool (CHAT) is a digital tool developed by eHealth Africa, based on the World Health Organization’s Checklists",
+    "license": "BSD-3-Clause",
+    "private": true,
+    "scripts": {
+        "build": "d2-app-scripts build",
+        "start": "d2-app-scripts start",
+        "test": "d2-app-scripts test",
+        "deploy": "d2-app-scripts deploy",
+        "lint": "d2-style check",
+        "format": "d2-style apply"
+    },
+    "devDependencies": {
+        "@dhis2/cli-app-scripts": "^12.0.0",
+        "@dhis2/cli-style": "^10.7.7"
+    },
+    "dependencies": {
+        "@dhis2/app-runtime": "^3.12.1",
+        "@dhis2/multi-calendar-dates": "1.0.0-alpha.27",
+        "@dhis2/ui": "^10.1.10",
+        "@tableau/embedding-api-react": "^3.13.1",
+        "@turf/area": "^6.5.0",
+        "highcharts": "^10.3.3",
+        "leaflet": "^1.9.4",
+        "react-leaflet": "^5.0.0",
+        "react-router-dom": "^6.26.1",
+        "tableau-api": "^2.2.3",
+        "tableau-react": "^2.2.0",
+        "zustand": "^4.5.5"
+    },
+    "resolutions": {
+        "@dhis2/cli-app-scripts/**/@dhis2/multi-calendar-dates": "1.2.3",
+        "@dhis2/multi-calendar-dates": "1.0.0-alpha.27"
+    }
+}

@@ -1,7 +1,7 @@
 {
     "name": "chat-app",
-    "version": "4.0.0",
-    "description": "",
+    "version": "2.0.0",
+    "description": "Climate Health Vulnerability Assessment Tool (CHAT) is a digital tool developed by eHealth Africa, based on the World Health Organization’s Checklists",
     "license": "BSD-3-Clause",
     "private": true,
     "scripts": {

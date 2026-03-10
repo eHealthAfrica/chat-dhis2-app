@@ -1,0 +1,235 @@
+/* ═══════════════════════════════════════════════════════════
+   PAGE
+═══════════════════════════════════════════════════════════ */
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 900px;
+}
+
+.pageHeader {
+    padding-block-end: 20px;
+    border-block-end: 1px solid #e2e8f0;
+    margin-block-end: 24px;
+}
+
+.pageTitle {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+}
+
+.pageDesc {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 60px 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EMPTY STATE
+═══════════════════════════════════════════════════════════ */
+.empty {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.emptyIcon {
+    font-size: 48px;
+    margin-block-end: 12px;
+}
+
+.emptyTitle {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #334155;
+}
+
+.emptyBody {
+    margin: 0;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROGRAM CARD GRID
+═══════════════════════════════════════════════════════════ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card:hover {
+    border-color: #4f5fa8;
+    box-shadow: 0 4px 20px rgba(79, 95, 168, 0.12);
+    transform: translateY(-1px);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cardIcon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.cardMeta {
+    flex: 1;
+    min-width: 0;
+}
+
+.cardName {
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardCode {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+.statusBadge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.active   { background: #dcfce7; color: #15803d; }
+.inactive { background: #f1f5f9; color: #64748b; }
+
+.cardId {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: #f8fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.idLabel {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.idValue {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    color: #334155;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STATS ROW
+═══════════════════════════════════════════════════════════ */
+.statsRow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 12px 0 0;
+    border-block-start: 1px solid #f1f5f9;
+}
+
+.statsLoading {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 2px;
+}
+
+.statDivider {
+    width: 1px;
+    height: 32px;
+    background: #e2e8f0;
+}
+
+.statNum {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.completed { color: #15803d; }
+.inProgress { color: #92400e; }
+
+.statLabel {
+    font-size: 10px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CARD ARROW
+═══════════════════════════════════════════════════════════ */
+.cardArrow {
+    position: absolute;
+    inset-block-start: 20px;
+    inset-inline-end: 20px;
+    font-size: 16px;
+    color: #cbd5e1;
+    transition: color 0.12s, transform 0.12s;
+}
+
+.card:hover .cardArrow {
+    color: #4f5fa8;
+    transform: translateX(3px);
+}

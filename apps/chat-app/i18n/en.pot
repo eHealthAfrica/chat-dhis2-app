@@ -1,0 +1,510 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2026-03-10T08:49:18.905Z\n"
+"PO-Revision-Date: 2026-03-10T08:49:18.905Z\n"
+
+msgid "Oops!"
+msgstr "Oops!"
+
+msgid "Sorry, an unexpected error has occurred."
+msgstr "Sorry, an unexpected error has occurred."
+
+msgid "{{count}} org units"
+msgid_plural "{{count}} org units"
+msgstr[0] "{{count}} org unit"
+msgstr[1] "{{count}} org units"
+
+msgid "{{count}} levels"
+msgid_plural "{{count}} levels"
+msgstr[0] "{{count}} level"
+msgstr[1] "{{count}} levels"
+
+msgid "{{count}} groups"
+msgid_plural "{{count}} groups"
+msgstr[0] "{{count}} group"
+msgstr[1] "{{count}} groups"
+
+msgid "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+msgstr "Selected: {{commaSeparatedListOfOrganisationUnits}}"
+
+msgid "Nothing selected"
+msgstr "Nothing selected"
+
+msgid "User organisation unit"
+msgstr "User organisation unit"
+
+msgid "User sub-units"
+msgstr "User sub-units"
+
+msgid "User sub-x2-units"
+msgstr "User sub-x2-units"
+
+msgid "Select a level"
+msgstr "Select a level"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Select a group"
+msgstr "Select a group"
+
+msgid "Deselect all"
+msgstr "Deselect all"
+
+msgid "Data Capture"
+msgstr "Data Capture"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Organisation unit"
+msgstr "Organisation unit"
+
+msgid "Has incomplete required fields"
+msgstr "Has incomplete required fields"
+
+msgid "Draft restored — {{time}}"
+msgstr "Draft restored — {{time}}"
+
+msgid "Saved at {{time}}"
+msgstr "Saved at {{time}}"
+
+msgid "Submission failed."
+msgstr "Submission failed."
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Edit assessment"
+msgstr "Edit assessment"
+
+msgid "New assessment"
+msgstr "New assessment"
+
+msgid "Level"
+msgstr "Level"
+
+msgid "Submission failed"
+msgstr "Submission failed"
+
+msgid "Save progress"
+msgstr "Save progress"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Submit"
+msgstr "Submit"
+
+msgid "Program ID"
+msgstr "Program ID"
+
+msgid "Completed"
+msgstr "Completed"
+
+msgid "In progress"
+msgstr "In progress"
+
+msgid "Select a program to view and capture assessment events."
+msgstr "Select a program to view and capture assessment events."
+
+msgid "Loading programs…"
+msgstr "Loading programs…"
+
+msgid "No active programs"
+msgstr "No active programs"
+
+msgid "Import an assessment program in Settings to get started."
+msgstr "Import an assessment program in Settings to get started."
+
+msgid "Delete this draft? This cannot be undone."
+msgstr "Delete this draft? This cannot be undone."
+
+msgid "All"
+msgstr "All"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "Drafts"
+msgstr "Drafts"
+
+msgid "Assessments"
+msgstr "Assessments"
+
+msgid "Failed to load events"
+msgstr "Failed to load events"
+
+msgid "Unknown error"
+msgstr "Unknown error"
+
+msgid "Retry"
+msgstr "Retry"
+
+msgid "Select an organisation unit on the left to view its assessments."
+msgstr "Select an organisation unit on the left to view its assessments."
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Event date"
+msgstr "Event date"
+
+msgid "Last updated"
+msgstr "Last updated"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Draft"
+msgstr "Draft"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "No assessments found."
+msgstr "No assessments found."
+
+msgid "View"
+msgstr "View"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Program type"
+msgstr "Program type"
+
+msgid "Saved"
+msgstr "Saved"
+
+msgid "Program Stage"
+msgstr "Program Stage"
+
+msgid "Stage name"
+msgstr "Stage name"
+
+msgid "Stage ID"
+msgstr "Stage ID"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Sections"
+msgstr "Sections"
+
+msgid "Data elements"
+msgstr "Data elements"
+
+msgid "No data elements found."
+msgstr "No data elements found."
+
+msgid "Search data elements…"
+msgstr "Search data elements…"
+
+msgid "Value type"
+msgstr "Value type"
+
+msgid "Compulsory"
+msgstr "Compulsory"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No sections found."
+msgstr "No sections found."
+
+msgid "Order"
+msgstr "Order"
+
+msgid "Section name"
+msgstr "Section name"
+
+msgid "Elements"
+msgstr "Elements"
+
+msgid "Section ID"
+msgstr "Section ID"
+
+msgid "No program indicators found."
+msgstr "No program indicators found."
+
+msgid "Search indicators…"
+msgstr "Search indicators…"
+
+msgid "Analytics type"
+msgstr "Analytics type"
+
+msgid "Aggregation"
+msgstr "Aggregation"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "Overview"
+msgstr "Overview"
+
+msgid "Data Elements"
+msgstr "Data Elements"
+
+msgid "Indicators"
+msgstr "Indicators"
+
+msgid "Program details"
+msgstr "Program details"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Loading program…"
+msgstr "Loading program…"
+
+msgid "Failed to load program"
+msgstr "Failed to load program"
+
+msgid "Delete this assessment? This cannot be undone."
+msgstr "Delete this assessment? This cannot be undone."
+
+msgid ""
+"Manage Chat assessments. Each assessment creates a DHIS2 dataset and is "
+"registered in the prediction backend."
+msgstr ""
+"Manage Chat assessments. Each assessment creates a DHIS2 dataset and is "
+"registered in the prediction backend."
+
+msgid "Failed to load assessments"
+msgstr "Failed to load assessments"
+
+msgid "No assessments yet"
+msgstr "No assessments yet"
+
+msgid ""
+"Create your first assessment to start collecting chat data and provisioning "
+"DHIS2 datasets."
+msgstr ""
+"Create your first assessment to start collecting chat data and provisioning "
+"DHIS2 datasets."
+
+msgid "Create assessment"
+msgstr "Create assessment"
+
+msgid "—"
+msgstr "—"
+
+msgid "Inactive"
+msgstr "Inactive"
+
+msgid "No"
+msgstr "No"
+
+msgid "Hide description"
+msgstr "Hide description"
+
+msgid "Show description"
+msgstr "Show description"
+
+msgid "Level {{level}}"
+msgstr "Level {{level}}"
+
+msgid ""
+"Select the facility or area for this assessment. This cannot be changed "
+"once you proceed."
+msgstr ""
+"Select the facility or area for this assessment. This cannot be changed "
+"once you proceed."
+
+msgid "Proceed to form"
+msgstr "Proceed to form"
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid "Must be a whole number"
+msgstr "Must be a whole number"
+
+msgid "Must be a positive whole number"
+msgstr "Must be a positive whole number"
+
+msgid "Must be a negative whole number"
+msgstr "Must be a negative whole number"
+
+msgid "Must be zero or a positive whole number"
+msgstr "Must be zero or a positive whole number"
+
+msgid "Must be between 0 and 100"
+msgstr "Must be between 0 and 100"
+
+msgid "Must be a number"
+msgstr "Must be a number"
+
+msgid "{{filled}} of {{total}} required fields completed"
+msgstr "{{filled}} of {{total}} required fields completed"
+
+msgid "Assessment saved successfully"
+msgstr "Assessment saved successfully"
+
+msgid "Failed to save assessment"
+msgstr "Failed to save assessment"
+
+msgid "Program saved to DHIS2 successfully"
+msgstr "Program saved to DHIS2 successfully"
+
+msgid "Failed to save program to DHIS2"
+msgstr "Failed to save program to DHIS2"
+
+msgid "Assessment submitted successfully"
+msgstr "Assessment submitted successfully"
+
+msgid "Failed to submit assessment"
+msgstr "Failed to submit assessment"
+
+msgid "Hide"
+msgstr "Hide"
+
+msgid "Search…"
+msgstr "Search…"
+
+msgid "Option set"
+msgstr "Option set"
+
+msgid "Section"
+msgstr "Section"
+
+msgid "Drop your metadata JSON here"
+msgstr "Drop your metadata JSON here"
+
+msgid "Or click to browse. Only .json files are supported."
+msgstr "Or click to browse. Only .json files are supported."
+
+msgid "Browse file"
+msgstr "Browse file"
+
+msgid "Review the preview below, then import."
+msgstr "Review the preview below, then import."
+
+msgid "Option sets"
+msgstr "Option sets"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Only .json files are supported."
+msgstr "Only .json files are supported."
+
+msgid "Failed to parse JSON."
+msgstr "Failed to parse JSON."
+
+msgid "Name is required"
+msgstr "Name is required"
+
+msgid "Short name is required"
+msgstr "Short name is required"
+
+msgid "Code is required"
+msgstr "Code is required"
+
+msgid "Use letters, digits, underscores, and hyphens only"
+msgstr "Use letters, digits, underscores, and hyphens only"
+
+msgid "Failed to import assessment."
+msgstr "Failed to import assessment."
+
+msgid "Breadcrumb"
+msgstr "Breadcrumb"
+
+msgid "CHAT"
+msgstr "CHAT"
+
+msgid "Import assessment"
+msgstr "Import assessment"
+
+msgid ""
+"Upload a DHIS2 metadata JSON export, review the detected program, sections, "
+"data elements and option sets, then confirm details and import."
+msgstr ""
+"Upload a DHIS2 metadata JSON export, review the detected program, sections, "
+"data elements and option sets, then confirm details and import."
+
+msgid "File error"
+msgstr "File error"
+
+msgid "Parse warning"
+msgstr "Parse warning"
+
+msgid "Import failed"
+msgstr "Import failed"
+
+msgid "Local store save failed"
+msgstr "Local store save failed"
+
+msgid "The program was saved to DHIS2 successfully. Only the local record failed."
+msgstr "The program was saved to DHIS2 successfully. Only the local record failed."
+
+msgid "Importing…"
+msgstr "Importing…"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Ready to import"
+msgstr "Ready to import"
+
+msgid "Preview loaded"
+msgstr "Preview loaded"
+
+msgid "Option Sets"
+msgstr "Option Sets"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Program name"
+msgstr "Program name"
+
+msgid "Program Indicators"
+msgstr "Program Indicators"
+
+msgid "Program Stage Sections"
+msgstr "Program Stage Sections"
+
+msgid "Import steps"
+msgstr "Import steps"
+
+msgid "Load file"
+msgstr "Load file"
+
+msgid "Review"
+msgstr "Review"
+
+msgid "Import"
+msgstr "Import"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Chat"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

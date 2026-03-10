@@ -1,7 +1,14 @@
-# DHIS2 Platform
-node_modules
-.d2
-src/locales
-build
-.DS_Store
+**/node_modules/
+**/.d2
+**/build/
+**/src/locales/
 .vscode
+**.tsbuildinfo
+**yarn-error.log
+.cursor
+.DS_Store
+.turbo
+.playwright-mcp
+.playwright-mcp/**
+.ralph
+.idea

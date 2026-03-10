@@ -1,0 +1,398 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 900px;
+}
+
+.backBtn {
+    margin-block-end: var(--spacers-dp8);
+    align-self: flex-start;
+}
+
+/* ── Program header ── */
+.programHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacers-dp24);
+    padding-block-end: var(--spacers-dp12);
+    border-block-end: 1px solid var(--colors-grey300);
+    margin-block-end: var(--spacers-dp16);
+}
+
+.programHeaderMain {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.programName {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #212934;
+    line-height: 1.2;
+}
+
+.programMeta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    flex-wrap: wrap;
+}
+
+.programCode {
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--colors-grey200);
+    color: var(--colors-grey800);
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--colors-grey300);
+}
+
+.programShortName {
+    font-size: 13px;
+    color: var(--colors-grey600);
+}
+
+.programDesc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--colors-grey700);
+    line-height: 1.5;
+    max-width: 640px;
+}
+
+.orgUnitBadge {
+    flex-shrink: 0;
+    font-size: 13px;
+    color: var(--colors-grey700);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--colors-grey100);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+/* ── Two-column layout ── */
+.layout {
+    display: grid;
+    grid-template-columns: 20vw 1fr;
+    gap: var(--spacers-dp16);
+    align-items: start;
+}
+
+/* ── Vertical section nav ── */
+.sectionNav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    position: sticky;
+    top: 16px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    text-align: start;
+    cursor: pointer;
+    transition: background 0.12s;
+    width: 100%;
+    color: var(--colors-grey700);
+}
+
+.navItem:hover:not(.navDisabled) {
+    background: var(--colors-grey200);
+}
+
+.navActive {
+    background: #e8edf8 !important;
+    color: #4f5fa8;
+    font-weight: 600;
+}
+
+.navDone {
+    color: #0f766e;
+}
+
+.navDisabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.navBubble {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 800;
+    background: #fff;
+    transition: all 0.15s;
+}
+
+.navActive .navBubble {
+    background: #4f5fa8;
+    border-color: #4f5fa8;
+    color: #fff;
+}
+
+.navDone .navBubble {
+    background: #0f766e;
+    border-color: #0f766e;
+    color: #fff;
+}
+
+.navLabel {
+    font-size: 13px;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.navWarn {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Right column ── */
+.contentCol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+    width: 58vw;
+}
+
+.cardBody {
+    padding: var(--spacers-dp16);
+}
+
+/* ── Footer ── */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacers-dp12) var(--spacers-dp16);
+    background: #fff;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 6px;
+}
+
+.saveStatus {
+    font-size: 12px;
+    color: var(--colors-grey600);
+    font-style: italic;
+}
+
+/* ── Org unit gate ── */
+.orgUnitGate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.gateLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: #212934;
+    margin: 0;
+}
+
+.gateHint {
+    font-size: 13px;
+    color: var(--colors-grey700);
+    margin: 0;
+}
+
+.orgUnitSelectorWrap {
+    border: 1px solid var(--colors-grey400);
+    border-radius: 5px;
+    background: var(--colors-grey100);
+    padding: var(--spacers-dp16);
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.selectedOrgUnit {
+    font-size: 13px;
+    color: var(--colors-grey800);
+    margin: 0;
+}
+
+.selectedOrgUnitName {
+    font-weight: 600;
+}
+
+/* ── Section step ── */
+.sectionStep {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp8);
+}
+
+.sectionTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #212934;
+    margin: 0;
+}
+
+.sectionProgress {
+    font-size: 13px;
+    color: var(--colors-grey600);
+    margin: 0 0 var(--spacers-dp8);
+}
+
+.fieldList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp16);
+}
+
+/* ── Org unit selection card (inside OrgUnitGate) ── */
+.ouCard {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp12);
+    padding: var(--spacers-dp12) var(--spacers-dp16);
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 8px;
+    margin-block: var(--spacers-dp12);
+}
+
+.ouCardIcon {
+    font-size: 24px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.ouCardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+.ouCardName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #14532d;
+    line-height: 1.3;
+}
+
+.ouCardCode {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: #166534;
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    padding: 1px 6px;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+.ouCardLevel {
+    font-size: 11px;
+    color: #15803d;
+}
+
+.ouCardCheck {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Org unit row in form header ── */
+.ouHeaderRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--colors-grey050);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-width: 200px;
+    max-width: 260px;
+}
+
+.ouHeaderField {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 14px;
+    min-width: 0;
+    border-block-end: 1px solid var(--colors-grey300);
+}
+
+.ouHeaderField:last-child {
+    border-block-end: none;
+}
+
+.ouFieldLabel {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--colors-grey600);
+    white-space: nowrap;
+}
+
+.ouFieldValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #212934;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ouFieldCode {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #212934;
+    white-space: nowrap;
+}

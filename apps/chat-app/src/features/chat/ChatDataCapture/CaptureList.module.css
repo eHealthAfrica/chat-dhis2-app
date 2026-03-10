@@ -1,0 +1,206 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.backBtn {
+    margin-block-end: 8px;
+    align-self: flex-start;
+}
+
+.notice {
+    margin-block-end: var(--spacers-dp16);
+}
+
+/* ── Two-column layout ── */
+.layout {
+    display: grid;
+    grid-template-columns: 20vw 1fr;
+    gap: var(--spacers-dp16);
+    align-items: start;
+}
+
+/* ── Left: org unit panel ── */
+.ouPanel {
+    position: sticky;
+    top: 16px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.ouPanelLabel {
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--colors-grey700);
+    border-block-end: 1px solid var(--colors-grey300);
+    background: var(--colors-grey050);
+}
+
+.ouTree {
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    padding: var(--spacers-dp8);
+}
+
+.ouLoading {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacers-dp24);
+}
+
+/* ── Right: content column ── */
+.contentCol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacers-dp12);
+    min-width: 58vw;
+}
+
+/* Stats row */
+.statsRow {
+    display: flex;
+    gap: var(--spacers-dp8);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #fff;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 5px;
+}
+
+.statNum {
+    font-size: 20px;
+    font-weight: 700;
+    color: #212934;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 13px;
+    color: var(--colors-grey700);
+}
+
+/* Toolbar inside card */
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacers-dp8);
+    padding: var(--spacers-dp12) var(--spacers-dp16);
+    border-block-end: 1px solid var(--colors-grey300);
+}
+
+/* Filter pills */
+.filterPills {
+    display: flex;
+    gap: 2px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--colors-grey050);
+}
+
+.pill {
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 400;
+    border: none;
+    background: transparent;
+    color: var(--colors-grey700);
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    white-space: nowrap;
+    border-inline-end: 1px solid var(--colors-grey300);
+}
+
+.pill:last-child { border-inline-end: none; }
+.pill:hover { background: var(--colors-grey200); color: #212934; }
+
+.pillActive {
+    background: #fff;
+    color: #212934;
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--colors-blue600);
+}
+
+/* Empty / loading */
+.emptyState {
+    padding: var(--spacers-dp24);
+    text-align: center;
+    color: var(--colors-grey600);
+    font-size: 14px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacers-dp24);
+}
+
+/* ── Program header ── */
+.programHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacers-dp16);
+    padding-block-end: var(--spacers-dp12);
+    border-block-end: 1px solid var(--colors-grey300);
+    margin-block-end: var(--spacers-dp16);
+}
+
+.programHeaderMain {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.programName {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #212934;
+    line-height: 1.2;
+}
+
+.programMeta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacers-dp8);
+    flex-wrap: wrap;
+}
+
+.programCode {
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--colors-grey200);
+    color: var(--colors-grey800);
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid var(--colors-grey300);
+}
+
+.programShortName {
+    font-size: 13px;
+    color: var(--colors-grey600);
+}
+
+.programDesc {
+    margin: 0;
+    font-size: 13px;
+    color: var(--colors-grey700);
+    line-height: 1.5;
+    max-width: 640px;
+}

@@ -1,37 +1,48 @@
-This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
+# CHAT App
 
-## Available Scripts
+A DHIS2 application for chat-based data capture and assessment management. Extracted from the [CHAP Frontend](https://github.com/dhis2-chap/chap-frontend) monorepo, retaining only the chat modules.
 
-In the project directory, you can run:
+## Project Structure
 
-### `yarn start`
+```
+├── apps/
+│   └── chat-app/              # DHIS2 chat application
+├── packages/
+│   └── ui/                    # Shared UI components + API client core
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `yarn test`
+- Node.js 20.x or higher
+- pnpm 10.x or higher
 
-Launches the test runner and runs all available tests found in `/src`.<br />
+### Installation and Development
 
-See the section about [running tests](https://platform.dhis2.nu/#/scripts/test) for more information.
+```bash
+pnpm install
+pnpm build
+pnpm start
+```
 
-### `yarn build`
+### Code Quality
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+pnpm linter:check    # Run linting
+pnpm tsc:check       # Type checking
+```
 
-The build is minified and the filenames include the hashes.<br />
-A deployable `.zip` file can be found in `build/bundle`!
+## License
 
-See the section about [building](https://platform.dhis2.nu/#/scripts/build) for more information.
+BSD-3-Clause License for chat-app, MIT License for shared packages. See the original [CHAP Frontend repository](https://github.com/dhis2-chap/chap-frontend) for full license details.
 
-### `yarn deploy`
+## Attribution
 
-Deploys the built app in the `build` folder to a running DHIS2 instance.<br />
-This command will prompt you to enter a server URL as well as the username and password of a DHIS2 user with the App Management authority.<br/>
-You must run `yarn build` before running `yarn deploy`.<br />
+This project is derived from [dhis2-chap/chap-frontend](https://github.com/dhis2-chap/chap-frontend), originally developed by the [DHIS2 CHAP](https://github.com/dhis2-chap) team. The original repository contains the full CHAP Modeling platform for predictive modeling and health forecasting integrated with DHIS2.
 
-See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
+## Links
+
+- [Original Repository](https://github.com/dhis2-chap/chap-frontend)
+- [DHIS2 CHAP Wiki](https://github.com/dhis2-chap/chap-core/wiki)
+- [DHIS2 Community](https://community.dhis2.org/)

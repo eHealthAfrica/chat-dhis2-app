@@ -99,7 +99,7 @@
 .stepBubble {
     width: 24px;
     height: 24px;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 2px solid #e2e8f0;
     background: #fff;
     display: flex;
@@ -134,7 +134,7 @@
     justify-content: center;
     gap: 14px;
     padding: 56px 40px;
-    border-radius: 14px;
+    border-radius: 10px;
     background: #f8fafc;
     cursor: pointer;
     transition: background 0.18s;
@@ -145,7 +145,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 14px;
+    border-radius: 10px;
     border: 2px dashed #cbd5e1;
     pointer-events: none;
     transition: border-color 0.18s;
@@ -167,7 +167,7 @@
 .dzIconBox {
     width: 76px;
     height: 76px;
-    border-radius: 18px;
+    border-radius: 10px;
     background: #fff;
     border: 1px solid #e2e8f0;
     display: flex;
@@ -190,7 +190,7 @@
     right: -6px;
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: #6875c0;
     color: #fff;
     font-size: 16px;
@@ -389,6 +389,16 @@
 }
 .card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
 
+.programCard {
+    inline-size: min(425px, 100%);
+    block-size: 320px;
+}
+
+.programCard .cBody {
+    block-size: calc(320px - 43px);
+    overflow: auto;
+}
+
 /* Each card type gets a tinted header */
 .card.cp  .cHead { background: var(--program-bg);    border-block-end-color: var(--program-ring);    }
 .card.cs  .cHead { background: var(--sections-bg);   border-block-end-color: var(--sections-ring);   }
@@ -428,7 +438,7 @@
 .cNum {
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: #e2e8f0;
     color: #94a3b8;
     display: flex;
@@ -459,7 +469,7 @@
     width: 220px;
     max-width: 28vw;
     padding: 7px 10px;
-    border-radius: 999px;
+    border-radius: 10px;
     border: 1.5px solid #e2e8f0;
     background: rgba(255,255,255,0.9);
     font-size: 12.5px;
@@ -487,7 +497,7 @@
     display: inline-flex;
     align-items: center;
     padding: 1px 8px;
-    border-radius: 100px;
+    border-radius: 10px;
     font-size: 11px;
     font-weight: 700;
     background: #e2e8f0;
@@ -566,6 +576,67 @@
     color: #475569;
     display: inline-block;
     word-break: break-all;
+}
+
+.assignCardBody {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #f8faff;
+}
+
+.assignHint {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+.assignSelectorWrap {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.assignSummary {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.assignSummaryLabel {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #64748b;
+}
+
+.assignChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.assignChip {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #c8d8f8;
+    background: #eef4ff;
+    color: #36518f;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.assignError {
+    margin: 0;
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -690,7 +761,7 @@
     justify-content: center;
     width: 22px;
     height: 22px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: var(--sections-bg);
     color: var(--sections);
     border: 1px solid var(--sections-ring);
@@ -703,7 +774,7 @@
     align-items: center;
     justify-content: center;
     padding: 1px 9px;
-    border-radius: 100px;
+    border-radius: 10px;
     font-size: 11.5px;
     font-weight: 700;
     background: var(--sections-bg);
@@ -909,7 +980,7 @@
     align-items: center;
     gap: 4px;
     padding: 3px 10px;
-    border-radius: 100px;
+    border-radius: 10px;
     background: #f0fdf4;
     border: 1px solid #bbf7d0;
     color: #15803d;

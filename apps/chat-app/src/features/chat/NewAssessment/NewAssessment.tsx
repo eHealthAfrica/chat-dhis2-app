@@ -3,9 +3,16 @@ import { useDataEngine } from '@dhis2/app-runtime';
 import { useNavigate } from 'react-router-dom';
 import { Button, IconArrowLeft16, NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
+import { useOrgUnitRoots } from '../../../hooks/useOrgUnitRoots';
+import {
+    OrganisationUnitSelector,
+    OrganisationUnit,
+    SelectionChangeEvent,
+} from '../../../components/OrganisationUnitSelector';
 import { useSaveProgramToDhis2 } from '../hooks/useSaveProgramToDhis2';
 import { useSaveAssessment } from '../ChatSettings/hooks/useAssessments';
 import { parseAssessmentJson, RawMetadataJson, AssessmentPreview } from './parseAssessmentJson';
+import { Card } from './Card';
 import { Steps } from './Steps';
 import { DropZone } from './DropZone';
 import { FileBanner } from './FileBanner';
@@ -22,6 +29,7 @@ interface FormErrors {
     name?: string;
     shortName?: string;
     code?: string;
+    organisationUnits?: string;
 }
 
 type Dhis2Program = { id: string; name: string; shortName: string; code: string };
@@ -29,32 +37,31 @@ type Dhis2Program = { id: string; name: string; shortName: string; code: string 
 export const NewAssessment = () => {
     const navigate = useNavigate();
     const engine = useDataEngine();
+    const { roots, isLoading: rootsLoading } = useOrgUnitRoots();
 
     const { saveProgramToDhis2, isSaving: isSavingDhis2 } = useSaveProgramToDhis2();
     const saveAssessment = useSaveAssessment();
 
     const isSaving = isSavingDhis2 || saveAssessment.isPending;
 
-    /* ── File / parse state ─────────────────────────────────── */
     const [fileName, setFileName] = useState<string | null>(null);
     const [parseError, setParseError] = useState<string | null>(null);
     const [preview, setPreview] = useState<AssessmentPreview | null>(null);
     const [warnings, setWarnings] = useState<string[]>([]);
+    const [workflowStep, setWorkflowStep] = useState<2 | 3>(2);
 
-    /* ── Form state ─────────────────────────────────────────── */
     const [name, setName] = useState('');
     const [shortName, setShortName] = useState('');
     const [code, setCode] = useState('');
     const [description, setDescription] = useState('');
     const [errors, setErrors] = useState<FormErrors>({});
+    const [selectedOrgUnits, setSelectedOrgUnits] = useState<OrganisationUnit[]>([]);
 
-    /* ── Import error state ─────────────────────────────────── */
     const [localStoreError, setLocalStoreError] = useState<string | null>(null);
     const [globalError, setGlobalError] = useState<string | null>(null);
     const [resolvedProgram, setResolvedProgram] = useState<Dhis2Program | null>(null);
     const [dhis2Saved, setDhis2Saved] = useState(false);
 
-    /* ── Search state ───────────────────────────────────────── */
     const [deQ, setDeQ] = useState('');
     const [osQ, setOsQ] = useState('');
     const [piQ, setPiQ] = useState('');
@@ -65,16 +72,29 @@ export const NewAssessment = () => {
     };
 
     const reset = () => {
-        setFileName(null); setPreview(null); setWarnings([]);
-        setParseError(null); clearImportErrors(); setErrors({});
-        setName(''); setShortName(''); setCode(''); setDescription('');
-        setDeQ(''); setOsQ(''); setPiQ('');
-        setResolvedProgram(null); setDhis2Saved(false);
+        setFileName(null);
+        setPreview(null);
+        setWarnings([]);
+        setParseError(null);
+        clearImportErrors();
+        setErrors({});
+        setWorkflowStep(2);
+        setName('');
+        setShortName('');
+        setCode('');
+        setDescription('');
+        setSelectedOrgUnits([]);
+        setDeQ('');
+        setOsQ('');
+        setPiQ('');
+        setResolvedProgram(null);
+        setDhis2Saved(false);
     };
 
-    /* ── File loading ───────────────────────────────────────── */
     const loadFile = useCallback((file: File) => {
-        setParseError(null); clearImportErrors(); setErrors({});
+        setParseError(null);
+        clearImportErrors();
+        setErrors({});
 
         if (!file.name.toLowerCase().endsWith('.json')) {
             setParseError(i18n.t('Only .json files are supported.'));
@@ -89,6 +109,7 @@ export const NewAssessment = () => {
                 const parsed = parseAssessmentJson(raw);
                 setPreview(parsed);
                 setWarnings(parsed.parseErrors ?? []);
+                setWorkflowStep(2);
 
                 const p = parsed.program;
                 const ps = parsed.programStage;
@@ -105,7 +126,8 @@ export const NewAssessment = () => {
                     setDescription(safe(ps?.description));
                 }
             } catch (e) {
-                setPreview(null); setWarnings([]);
+                setPreview(null);
+                setWarnings([]);
                 setParseError(
                     e instanceof Error
                         ? `${i18n.t('Failed to parse JSON:')} ${e.message}`
@@ -116,7 +138,6 @@ export const NewAssessment = () => {
         reader.readAsText(file);
     }, []);
 
-    /* ── Filtered preview ───────────────────────────────────── */
     const filtered = useMemo(() => {
         if (!preview) return null;
         const q = (s: string) => s.toLowerCase();
@@ -146,18 +167,40 @@ export const NewAssessment = () => {
         };
     }, [preview, deQ, osQ, piQ]);
 
-    /* ── Validation ─────────────────────────────────────────── */
     const validate = (): FormErrors => {
-        const e: FormErrors = {};
-        if (!name.trim()) e.name = i18n.t('Name is required');
-        if (!shortName.trim()) e.shortName = i18n.t('Short name is required');
-        if (!code.trim()) e.code = i18n.t('Code is required');
-        else if (!/^[A-Z0-9_-]+$/i.test(code.trim()))
-            e.code = i18n.t('Use letters, digits, underscores, and hyphens only');
-        return e;
+        const nextErrors: FormErrors = {};
+        if (!name.trim()) nextErrors.name = i18n.t('Name is required');
+        if (!shortName.trim()) nextErrors.shortName = i18n.t('Short name is required');
+        if (!code.trim()) nextErrors.code = i18n.t('Code is required');
+        else if (!/^[A-Z0-9_-]+$/i.test(code.trim())) {
+            nextErrors.code = i18n.t('Use letters, digits, underscores, and hyphens only');
+        }
+        if (selectedOrgUnits.length === 0) {
+            nextErrors.organisationUnits = i18n.t('Select at least one organisation unit before importing.');
+        }
+        return nextErrors;
     };
 
-    /* ── Save to local dataStore ───────────────────────────── */
+    const handleOrgUnitSelect = (event: SelectionChangeEvent) => {
+        const plain = event.items.filter(organisationUnit => organisationUnit.path);
+        setSelectedOrgUnits(plain);
+        setErrors(prev => {
+            if (!prev.organisationUnits) return prev;
+
+            const next = { ...prev };
+            delete next.organisationUnits;
+            return next;
+        });
+    };
+
+    const handleNextStep = () => {
+        setWorkflowStep(3);
+    };
+
+    const handlePreviousStep = () => {
+        setWorkflowStep(2);
+    };
+
     const saveToLocalStore = async (program: Dhis2Program): Promise<boolean> => {
         setLocalStoreError(null);
         try {
@@ -176,12 +219,11 @@ export const NewAssessment = () => {
         }
     };
 
-    /* ── Full import ────────────────────────────────────────── */
     const onImport = async () => {
         clearImportErrors();
-        const v = validate();
-        setErrors(v);
-        if (Object.keys(v).length || !preview) return;
+        const validationErrors = validate();
+        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length || !preview) return;
 
         try {
             await saveProgramToDhis2({ preview });
@@ -201,7 +243,10 @@ export const NewAssessment = () => {
             const programs = dhis2Result.program.programs;
             if (!programs || programs.length === 0) {
                 throw new Error(
-                    i18n.t('Could not find the imported program in DHIS2 (code: {{code}}). Please check the import and try again.', { code: searchCode }),
+                    i18n.t(
+                        'Could not find the imported program in DHIS2 (code: {{code}}). Please check the import and try again.',
+                        { code: searchCode },
+                    ),
                 );
             }
 
@@ -216,7 +261,6 @@ export const NewAssessment = () => {
         }
     };
 
-    /* ── Retry handler ──────────────────────────────────────── */
     const retryLocalStore = async () => {
         if (!resolvedProgram) return;
         const ok = await saveToLocalStore(resolvedProgram);
@@ -224,11 +268,10 @@ export const NewAssessment = () => {
     };
 
     const hasErrors = localStoreError !== null;
+    const currentStep = !preview ? 1 : (isSaving || dhis2Saved ? 4 : workflowStep);
 
-    /* ── Render ─────────────────────────────────────────────── */
     return (
         <div className={styles.page}>
-
             <div className={styles.topNav}>
                 <Button small icon={<IconArrowLeft16 />} onClick={() => navigate('/chat/settings')}>
                     {i18n.t('Back')}
@@ -252,15 +295,15 @@ export const NewAssessment = () => {
                             )}
                         </p>
                     </div>
-                    <Steps current={preview ? 2 : 1} />
+                    <Steps current={currentStep} />
                 </div>
             </div>
 
             {(parseError || warnings.length > 0) && (
                 <div className={styles.errStack}>
                     {parseError && <NoticeBox error title={i18n.t('File error')}>{parseError}</NoticeBox>}
-                    {warnings.map((w, idx) => (
-                        <NoticeBox key={idx} warning title={i18n.t('Parse warning')}>{w}</NoticeBox>
+                    {warnings.map((warning, idx) => (
+                        <NoticeBox key={idx} warning title={i18n.t('Parse warning')}>{warning}</NoticeBox>
                     ))}
                 </div>
             )}
@@ -294,7 +337,7 @@ export const NewAssessment = () => {
                     <FileBanner fileName={fileName!} preview={preview} onRemove={reset} />
 
                     <div className={styles.cards}>
-                        {filtered && (
+                        {filtered && workflowStep === 2 && (
                             <>
                                 <ProgramCard preview={filtered} />
                                 <SectionsCard sections={filtered.sections} />
@@ -303,25 +346,128 @@ export const NewAssessment = () => {
                                 <ProgramIndicatorsCard indicators={filtered.programIndicators} query={piQ} setQuery={setPiQ} />
                             </>
                         )}
+
+                        {filtered && workflowStep === 3 && (
+                            <>
+                                <ProgramCard preview={filtered} />
+                                <Card
+                                    accent="cf"
+                                    step={3}
+                                    title={i18n.t('Assign organisation units')}
+                                    badge={selectedOrgUnits.length}
+                                    preview={
+                                        selectedOrgUnits.length > 0
+                                            ? selectedOrgUnits
+                                                .map(organisationUnit =>
+                                                    organisationUnit.name
+                                                    ?? organisationUnit.displayName
+                                                    ?? organisationUnit.id,
+                                                )
+                                                .join(', ')
+                                            : i18n.t('No organisation units selected')
+                                    }
+                                    defaultOpen
+                                >
+                                    <div className={styles.assignCardBody}>
+                                        <p className={styles.assignHint}>
+                                            {i18n.t('Select the organisation units for this assessment before importing.')}
+                                        </p>
+
+                                        <div className={styles.assignSelectorWrap}>
+                                            {!rootsLoading && roots.length > 0 && (
+                                                <OrganisationUnitSelector
+                                                    roots={roots.map(root => root.id)}
+                                                    selected={selectedOrgUnits}
+                                                    onSelect={handleOrgUnitSelect}
+                                                    hideGroupSelect
+                                                    hideLevelSelect
+                                                    hideUserOrgUnits
+                                                    i18n={{
+                                                        t: (key: string, opts?: Record<string, any>) => {
+                                                            if (!opts) return key;
+                                                            let str = key;
+                                                            if (opts.count !== undefined) {
+                                                                const plural = opts.count !== 1
+                                                                    ? (opts.defaultValue_plural ?? opts.defaultValue ?? key)
+                                                                    : (opts.defaultValue ?? key);
+                                                                str = String(plural);
+                                                            }
+                                                            return str.replace(/\{\{(\w+)\}\}/g, (_, token) =>
+                                                                opts[token] !== undefined
+                                                                    ? String(opts[token])
+                                                                    : `{{${token}}}`,
+                                                            );
+                                                        },
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+
+                                        {selectedOrgUnits.length > 0 && (
+                                            <div className={styles.assignSummary}>
+                                                <span className={styles.assignSummaryLabel}>
+                                                    {i18n.t('Selected organisation units')}
+                                                </span>
+                                                <div className={styles.assignChips}>
+                                                    {selectedOrgUnits.map(organisationUnit => (
+                                                        <span
+                                                            key={organisationUnit.id}
+                                                            className={styles.assignChip}
+                                                        >
+                                                            {organisationUnit.name
+                                                                ?? organisationUnit.displayName
+                                                                ?? organisationUnit.id}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {errors.organisationUnits && (
+                                            <p className={styles.assignError}>{errors.organisationUnits}</p>
+                                        )}
+                                    </div>
+                                </Card>
+                            </>
+                        )}
                     </div>
 
                     <div className={styles.footer}>
-                        <Button
-                            primary
-                            onClick={onImport}
-                            loading={isSaving}
-                            disabled={isSaving || hasErrors}
-                        >
-                            {isSaving ? i18n.t('Importing…') : i18n.t('Import assessment')}
-                        </Button>
+                        {workflowStep === 2 ? (
+                            <Button
+                                primary
+                                onClick={handleNextStep}
+                                disabled={isSaving || hasErrors}
+                            >
+                                {i18n.t('Next')}
+                            </Button>
+                        ) : (
+                            <>
+                                <Button secondary onClick={handlePreviousStep} disabled={isSaving}>
+                                    {i18n.t('Previous')}
+                                </Button>
+                                <Button
+                                    primary
+                                    onClick={onImport}
+                                    loading={isSaving}
+                                    disabled={isSaving || hasErrors || selectedOrgUnits.length === 0}
+                                >
+                                    {isSaving ? i18n.t('Importingâ€¦') : i18n.t('Import assessment')}
+                                </Button>
+                            </>
+                        )}
                         <Button secondary onClick={() => navigate('/chat/settings')} disabled={isSaving}>
                             {dhis2Saved ? i18n.t('Close') : i18n.t('Cancel')}
                         </Button>
                         <div className={styles.footerSummary}>
-                            <span>{i18n.t('Ready to import')}</span>
+                            <span>{workflowStep === 2 ? i18n.t('Review complete') : i18n.t('Ready to import')}</span>
                             <span className={styles.footerBadge}>
                                 ✓
-                                {i18n.t('Preview loaded')}
+                                {workflowStep === 2
+                                    ? i18n.t('Preview loaded')
+                                    : i18n.t('Organisation units selected: {{count}}', {
+                                        count: selectedOrgUnits.length,
+                                    })}
                             </span>
                         </div>
                     </div>

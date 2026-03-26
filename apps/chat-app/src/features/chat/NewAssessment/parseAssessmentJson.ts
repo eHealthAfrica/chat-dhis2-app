@@ -68,6 +68,10 @@ interface RawProgramIndicator {
     analyticsType?: string;
 }
 
+interface RawOrganisationUnitRef {
+    id?: string;
+}
+
 export interface RawMetadataJson {
     programs?: RawProgram[];
     programStages?: RawProgramStage[];
@@ -76,6 +80,7 @@ export interface RawMetadataJson {
     optionSets?: RawOptionSet[];
     options?: RawOption[];
     programIndicators?: RawProgramIndicator[];
+    organisationUnits?: RawOrganisationUnitRef[];
 }
 
 /* ── Parsed / enriched types exposed to the UI ────────────── */
@@ -140,9 +145,14 @@ export interface ParsedProgramIndicator {
     analyticsType: string;
 }
 
+export interface ParsedOrganisationUnitRef {
+    id: string;
+}
+
 export interface AssessmentPreview {
     program: ParsedProgram | null;
     programStage: ParsedProgramStage | null;
+    organisationUnits: ParsedOrganisationUnitRef[];
     sections: ParsedSection[];
     dataElements: ParsedDataElement[];
     optionSets: ParsedOptionSet[];
@@ -175,6 +185,17 @@ export function parseAssessmentJson(raw: RawMetadataJson): AssessmentPreview {
               description: raw.programStages[0].description ?? '',
           }
         : null;
+
+    const organisationUnits: ParsedOrganisationUnitRef[] = [];
+    (raw.organisationUnits ?? []).forEach((organisationUnit, index) => {
+        const id = organisationUnit?.id?.trim();
+        if (!id) {
+            errors.push(`organisationUnits[${index}] is missing an id.`);
+            return;
+        }
+
+        organisationUnits.push({ id });
+    });
 
     /* option lookup maps */
     const optionsBySetId = new Map<string, ParsedOption[]>();
@@ -246,6 +267,7 @@ export function parseAssessmentJson(raw: RawMetadataJson): AssessmentPreview {
     return {
         program,
         programStage,
+        organisationUnits,
         sections,
         dataElements,
         optionSets,

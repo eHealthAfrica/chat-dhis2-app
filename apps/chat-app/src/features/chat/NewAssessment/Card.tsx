@@ -12,6 +12,7 @@ interface CardProps {
     defaultOpen?: boolean
     children: React.ReactNode
     headRight?: React.ReactNode
+    className?: string
 }
 
 export const Card = ({
@@ -23,11 +24,12 @@ export const Card = ({
     defaultOpen = true,
     children,
     headRight,
+    className,
 }: CardProps) => {
     const [open, setOpen] = useState(defaultOpen)
 
     return (
-        <div className={[styles.card, styles[accent]].join(' ')}>
+        <div className={[styles.card, styles[accent], className ?? ''].join(' ').trim()}>
             <div className={styles.cHead} onClick={() => setOpen(o => !o)} role="button" tabIndex={0}>
                 <div className={styles.cNum}>{step}</div>
                 <div className={styles.cLeft}>

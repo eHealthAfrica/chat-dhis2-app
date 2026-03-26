@@ -3,10 +3,8 @@
     flex-direction: column;
     gap: 0;
     padding: 12px;
-    border-radius: 28px;
-    background:
-        radial-gradient(circle at top left, rgba(11, 107, 203, 0.08), transparent 28%),
-        linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
 }
 
 .backBtn {
@@ -25,7 +23,7 @@
     gap: var(--spacers-dp16);
     padding: 22px 24px;
     border: 1px solid rgba(208, 213, 221, 0.92);
-    border-radius: 24px;
+    border-radius: 10px;
     background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
     box-shadow:
         0 20px 40px rgba(15, 23, 42, 0.08),
@@ -62,7 +60,7 @@
     background: #eef2f6;
     color: var(--colors-grey800);
     padding: 4px 9px;
-    border-radius: 999px;
+    border-radius: 10px;
     border: 1px solid var(--colors-grey300);
 }
 
@@ -94,7 +92,7 @@
     top: 16px;
     padding: 16px 14px;
     border: 1px solid var(--colors-grey300);
-    border-radius: 22px;
+    border-radius: 10px;
     background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
     box-shadow:
         0 20px 45px rgba(15, 23, 42, 0.08),
@@ -106,7 +104,7 @@
     align-items: center;
     gap: 10px;
     padding: 12px 14px;
-    border-radius: 14px;
+    border-radius: 10px;
     border: 1px solid transparent;
     background: transparent;
     text-align: start;
@@ -141,7 +139,7 @@
     flex-shrink: 0;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 2px solid currentColor;
     display: flex;
     align-items: center;
@@ -177,7 +175,7 @@
     flex-shrink: 0;
     width: 16px;
     height: 16px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: #f59e0b;
     color: #fff;
     font-size: 10px;
@@ -197,7 +195,7 @@
 .formCard {
     padding: 0;
     border: 1px solid rgba(208, 213, 221, 0.9);
-    border-radius: 24px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow:
         0 24px 48px rgba(15, 23, 42, 0.1),
@@ -217,7 +215,7 @@
     padding: 18px 22px;
     background: #fff;
     border: 1px solid rgba(208, 213, 221, 0.92);
-    border-radius: 22px;
+    border-radius: 10px;
     box-shadow:
         0 16px 34px rgba(15, 23, 42, 0.08),
         0 4px 12px rgba(15, 23, 42, 0.04);
@@ -253,7 +251,7 @@
 
 .orgUnitSelectorWrap {
     border: 1px solid var(--colors-grey300);
-    border-radius: 18px;
+    border-radius: 10px;
     background: linear-gradient(180deg, #fdfefe 0%, #f3f6fa 100%);
     padding: 18px;
     max-height: 420px;
@@ -303,7 +301,7 @@
     padding: 14px 18px;
     background: linear-gradient(180deg, #f0fdf4 0%, #e8f8ee 100%);
     border: 1.5px solid #86efac;
-    border-radius: 16px;
+    border-radius: 10px;
     margin-block: 12px;
     box-shadow: 0 8px 18px rgba(22, 163, 74, 0.08);
 }
@@ -338,7 +336,7 @@
     background: #dcfce7;
     border: 1px solid #86efac;
     padding: 2px 7px;
-    border-radius: 999px;
+    border-radius: 10px;
     width: fit-content;
 }
 
@@ -351,7 +349,7 @@
     flex-shrink: 0;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: #16a34a;
     color: #fff;
     font-size: 12px;
@@ -367,7 +365,7 @@
     gap: 0;
     background: #f8fbff;
     border: 1px solid #d0d5dd;
-    border-radius: 18px;
+    border-radius: 10px;
     overflow: hidden;
     flex-shrink: 0;
     min-width: 220px;
@@ -430,7 +428,7 @@
 @media (max-width: 768px) {
     .page {
         padding: 8px;
-        border-radius: 18px;
+        border-radius: 10px;
     }
 
     .programHeader {

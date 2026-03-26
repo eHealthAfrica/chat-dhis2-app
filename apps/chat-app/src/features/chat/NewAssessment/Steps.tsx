@@ -4,7 +4,7 @@ import styles from './NewAssessment.module.css'
 type SState = 'done' | 'active' | 'pending'
 
 interface StepsProps {
-    current: 1 | 2 | 3
+    current: 1 | 2 | 3 | 4
 }
 
 export const Steps = ({ current }: StepsProps) => {
@@ -24,7 +24,12 @@ export const Steps = ({ current }: StepsProps) => {
             </div>
             <div className={[styles.stepConnector, current > 2 ? styles.done : ''].join(' ')} />
             <div className={cls(3)}>
-                <div className={styles.stepBubble}>3</div>
+                <div className={styles.stepBubble}>{st(3) === 'done' ? '✓' : '3'}</div>
+                {i18n.t('Assign organisation units')}
+            </div>
+            <div className={[styles.stepConnector, current > 3 ? styles.done : ''].join(' ')} />
+            <div className={cls(4)}>
+                <div className={styles.stepBubble}>4</div>
                 {i18n.t('Import')}
             </div>
         </div>

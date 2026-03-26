@@ -25,7 +25,14 @@ export const ProgramCard = ({ preview }: ProgramCardProps) => {
         if (ps.description) rows.push({ label: i18n.t('Description'), val: ps.description, wide: true })
     }
     return (
-        <Card accent="cp" step={1} title={i18n.t('Program')} preview={p?.name} defaultOpen>
+        <Card
+            accent="cp"
+            step={1}
+            title={i18n.t('Program')}
+            preview={p?.name}
+            defaultOpen
+            className={styles.programCard}
+        >
             <div className={styles.iGrid}>
                 {rows.map(r => (
                     <div

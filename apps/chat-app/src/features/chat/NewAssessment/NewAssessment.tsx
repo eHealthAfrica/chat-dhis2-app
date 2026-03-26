@@ -276,6 +276,9 @@ export const NewAssessment = () => {
                 <Button small icon={<IconArrowLeft16 />} onClick={() => navigate('/chat/settings')}>
                     {i18n.t('Back')}
                 </Button>
+                <Button small secondary onClick={() => navigate('/chat/guides/assessment-setup')}>
+                    {i18n.t('Open setup guide')}
+                </Button>
                 <div className={styles.crumbs} aria-label={i18n.t('Breadcrumb')}>
                     <span>{i18n.t('CHAT')}</span>
                     <span className={styles.crumbSep}>/</span>

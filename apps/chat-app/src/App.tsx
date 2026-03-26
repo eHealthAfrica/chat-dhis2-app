@@ -12,6 +12,8 @@ import { SyncUrlWithGlobalShell } from './utils/syncUrlWithGlobalShell';
 import { ChatLayout } from './features/chat/ChatLayout';
 import { ChatSettingsPage } from './features/chat/pages/ChatSettingsPage';
 import { NewAssessmentPage } from './features/chat/pages/NewAssessmentPage';
+import { DataCaptureGuidePage } from './features/chat/pages/DataCaptureGuidePage';
+import { AssessmentSetupGuidePage } from './features/chat/pages/AssessmentSetupGuidePage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CaptureHome, CaptureList, CaptureForm } from './features/chat/ChatDataCapture';
@@ -72,6 +74,23 @@ const router = createHashRouter([
                                 <NewAssessmentPage />
                             </RequireAuthority>
                         ),
+                    },
+                    {
+                        path: 'guides',
+                        children: [
+                            {
+                                path: 'data-capture',
+                                element: <DataCaptureGuidePage />,
+                            },
+                            {
+                                path: 'assessment-setup',
+                                element: (
+                                    <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
+                                        <AssessmentSetupGuidePage />
+                                    </RequireAuthority>
+                                ),
+                            },
+                        ],
                     },
                     {
                         path: 'data-capture',

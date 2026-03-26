@@ -2,12 +2,13 @@ import i18n from '@dhis2/d2-i18n';
 import { IconChevronLeft24 } from '@dhis2/ui';
 import cx from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import {
     Sidenav,
     SidenavItems,
     SidenavLink,
+    SidenavParent,
 } from './sidenav';
 import { useHasAuthority } from '../../hooks/useHasAuthority';
 
@@ -39,7 +40,10 @@ export const Sidebar = ({
 }) => {
     const collapsedExternally = useRef<boolean>(false);
     const [collapsed, setCollapsed] = useState(false);
+    const location = useLocation();
     const { hasAuthority: canAccessSettings } = useHasAuthority('F_CHAT_ADD_SETTINGS');
+    const isGuideRoute = location.pathname.startsWith('/chat/guides');
+    const [guidesOpen, setGuidesOpen] = useState(isGuideRoute);
 
     useEffect(() => {
         // only react if explicitly defined
@@ -50,6 +54,12 @@ export const Sidebar = ({
             collapsedExternally.current = !!hideSidebar;
         }
     }, [hideSidebar]);
+
+    useEffect(() => {
+        if (isGuideRoute) {
+            setGuidesOpen(true);
+        }
+    }, [isGuideRoute]);
 
     return (
         <aside
@@ -63,6 +73,22 @@ export const Sidebar = ({
                         label={i18n.t('Data Capture')}
                         to="/chat/data-capture"
                     />
+                    <SidenavParent
+                        label={i18n.t('Guides')}
+                        open={guidesOpen}
+                        onClick={() => setGuidesOpen(current => !current)}
+                    >
+                        <SidebarNavLink
+                            label={i18n.t('Data capture guide')}
+                            to="/chat/guides/data-capture"
+                        />
+                        {canAccessSettings && (
+                            <SidebarNavLink
+                                label={i18n.t('Assessment setup guide')}
+                                to="/chat/guides/assessment-setup"
+                            />
+                        )}
+                    </SidenavParent>
                     {canAccessSettings && (
                         <SidebarNavLink
                             label={i18n.t('Settings')}

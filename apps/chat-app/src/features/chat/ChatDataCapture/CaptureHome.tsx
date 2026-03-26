@@ -98,6 +98,7 @@ const ProgramCard = ({ assessment, userUid }: { assessment: Assessment; userUid:
 };
 
 const CaptureHome = () => {
+    const navigate = useNavigate();
     const { assessments, isLoading } = useAssessments();
     const { user } = useCurrentUser();
 

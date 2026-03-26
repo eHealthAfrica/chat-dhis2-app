@@ -10,6 +10,8 @@
 * redesign capture home, capture list, and capture form layouts with stronger card structure and updated responsive styling
 * add a stepped assessment import flow with review and organisation unit selection before import
 * update assessment import preview sizing and related creation flow UI refinements
+* add in-app guide pages for data capture and assessment setup with a dedicated `Guides` sidebar menu section
+* add SVG mockup assets for guide illustrations covering capture home, event list, capture form, import review, and organisation unit assignment
 
 ### Bug Fixes
 
@@ -19,5 +21,3 @@
 * cap app border-radius values at `10px` across updated chat UI surfaces
 
 
-
-create a plan to create guides for each set how to capture data and how to setup assessment tool

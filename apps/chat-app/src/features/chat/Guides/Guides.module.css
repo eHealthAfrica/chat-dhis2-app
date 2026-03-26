@@ -1,0 +1,272 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: min(80vw, 1240px);
+    margin: 0 auto;
+    padding: 12px;
+    background: #fff;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 28px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.headerMain {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0b6bcb;
+}
+
+.title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: #182230;
+    line-height: 1.15;
+}
+
+.lead {
+    margin: 0;
+    max-width: 760px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #667085;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.sideNav {
+    position: sticky;
+    top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.sideLabel {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #667085;
+}
+
+.sideButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #182230;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sideButton:hover {
+    background: #eef4fb;
+    border-color: #b2ddff;
+}
+
+.sideStep {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: #eaf2ff;
+    color: #0b6bcb;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.callout {
+    padding: 16px 18px;
+    border: 1px solid #d8e6f6;
+    border-radius: 10px;
+    background: #f5f9ff;
+}
+
+.calloutTitle {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0b6bcb;
+}
+
+.calloutBody {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #475467;
+}
+
+.stepCard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 22px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.stepHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.stepBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #0b6bcb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.stepTitleWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.stepTitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #182230;
+}
+
+.stepBody {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #475467;
+}
+
+.bulletList {
+    margin: 0;
+    padding-left: 18px;
+    color: #475467;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.bulletList li + li {
+    margin-top: 6px;
+}
+
+.footerCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.footerText {
+    margin: 0;
+    font-size: 14px;
+    color: #475467;
+}
+
+@media (max-width: 1024px) {
+    .page {
+        width: min(92vw, 1240px);
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sideNav {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .header {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .headerActions {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .footerCard {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

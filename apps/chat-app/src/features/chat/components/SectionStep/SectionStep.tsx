@@ -1,11 +1,44 @@
 import { useState } from 'react';
 import i18n from '@dhis2/d2-i18n';
-import { DataElementField, DataElementMeta } from '../DataElementField';
+import {
+    DataElementField,
+    DataElementMeta,
+    parseCoordinateValue,
+} from '../DataElementField';
 import styles from '../../ChatDataCapture/CaptureForm.module.css';
 
 export const validateField = (meta: DataElementMeta, value: string): string | undefined => {
     if (meta.compulsory && !value?.trim()) return i18n.t('This field is required');
     if (!value?.trim()) return undefined; // optional field, no further checks needed
+
+    if (meta.valueType === 'COORDINATE') {
+        const { latitude, longitude } = parseCoordinateValue(value);
+
+        if (!latitude || !longitude) {
+            return i18n.t('Both latitude and longitude are required');
+        }
+
+        const latitudeValue = Number(latitude);
+        const longitudeValue = Number(longitude);
+
+        if (Number.isNaN(latitudeValue)) {
+            return i18n.t('Latitude must be a number');
+        }
+
+        if (Number.isNaN(longitudeValue)) {
+            return i18n.t('Longitude must be a number');
+        }
+
+        if (latitudeValue < -90 || latitudeValue > 90) {
+            return i18n.t('Latitude must be between -90 and 90');
+        }
+
+        if (longitudeValue < -180 || longitudeValue > 180) {
+            return i18n.t('Longitude must be between -180 and 180');
+        }
+
+        return undefined;
+    }
 
     const n = Number(value);
 
@@ -38,7 +71,9 @@ export const isSectionValid = (
     dataElements: DataElementMeta[],
     values: Record<string, string>,
 ): boolean =>
-    dataElements.filter(de => de.compulsory).every(de => !!values[de.id]?.trim());
+    dataElements
+        .filter(de => de.compulsory)
+        .every(de => validateField(de, values[de.id] ?? '') === undefined);
 
 interface SectionStepProps {
     section: { id: string; name: string; dataElements: DataElementMeta[] };

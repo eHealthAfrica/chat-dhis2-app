@@ -2,7 +2,7 @@ const config = {
     type: 'app',
     title: 'CHAT – Climate Health Vulnerability Assessment Tool',
 
-    id: 'b789a17f-de09-4a43-9854-f2623ef6e1f2',
+    id: 'cbe8c2e9-6d64-4236-b1ec-396483082e58',
     minDHIS2Version: '2.40',
 
     customAuthorities: [

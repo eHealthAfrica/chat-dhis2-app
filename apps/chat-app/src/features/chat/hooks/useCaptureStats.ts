@@ -2,6 +2,9 @@ import { useDataEngine } from '@dhis2/app-runtime';
 import { useQuery }      from '@tanstack/react-query';
 import { Assessment }    from '../ChatSettings/hooks/useAssessments';
 
+const groupedDraftsLocalKey = (userUid: string, programId: string) =>
+    `capture_drafts:${userUid}_${programId}_drafts`;
+
 interface StatsResult {
     completed:  number;
     inProgress: number;
@@ -27,9 +30,13 @@ export const useCaptureStats = (assessment: Assessment | null, userUid: string |
                 },
             }) as { events: { pager: { total: number } } };
 
-            const completed  = result.events.pager?.total ?? 0;
-            const draftKey   = `capture_draft:${assessment!.programId}:${userUid}`;
-            const inProgress = localStorage.getItem(draftKey) ? 1 : 0;
+            const completed = result.events.pager?.total ?? 0;
+            const rawDrafts = localStorage.getItem(
+                groupedDraftsLocalKey(userUid!, assessment!.programId),
+            );
+            const inProgress = rawDrafts
+                ? (JSON.parse(rawDrafts) as unknown[]).length
+                : 0;
 
             return { completed, inProgress };
         },

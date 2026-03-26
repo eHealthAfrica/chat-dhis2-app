@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CircularLoader } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
@@ -6,73 +7,96 @@ import { useCurrentUser } from '../hooks/useCurrentUser';
 import { useCaptureStats } from '../hooks/useCaptureStats';
 import styles from './CaptureHome.module.css';
 
-/* ─────────────────────────────────────────────────────────────
-   Program card
-───────────────────────────────────────────────────────────── */
+const getAssessmentMark = (assessment: Assessment) =>
+    assessment.code?.trim()?.charAt(0)?.toUpperCase()
+    || assessment.name?.trim()?.charAt(0)?.toUpperCase()
+    || 'A';
+
 const ProgramCard = ({ assessment, userUid }: { assessment: Assessment; userUid: string }) => {
     const navigate = useNavigate();
     const { stats, isLoading } = useCaptureStats(assessment, userUid);
 
+    const openAssessment = () => {
+        navigate(`/chat/data-capture/${assessment.programId}`);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openAssessment();
+        }
+    };
+
+    const showShortName = Boolean(
+        assessment.shortName && assessment.shortName !== assessment.name,
+    );
+
     return (
         <div
             className={styles.card}
-            onClick={() => navigate(`/chat/data-capture/${assessment.programId}`)}
+            onClick={openAssessment}
+            onKeyDown={handleKeyDown}
             role="button"
             tabIndex={0}
         >
             <div className={styles.cardHeader}>
-                <div className={styles.cardIcon}>📋</div>
+                <div className={styles.cardIcon}>{getAssessmentMark(assessment)}</div>
+
                 <div className={styles.cardMeta}>
-                    <h3 className={styles.cardName}>{assessment.name}</h3>
-                    <span className={styles.cardCode}>{assessment.code}</span>
-                </div>
-                <span
-                    className={[
-                        styles.statusBadge,
-                        assessment.status === 'active' ? styles.active : styles.inactive,
-                    ].join(' ')}
-                >
-                    {assessment.status}
-                </span>
-            </div>
-
-            <div className={styles.cardId} style={{ height: '10vh' }}>
-                <span className={styles.idLabel}>{i18n.t('Program ID')}</span>
-                <span className={styles.idValue}>{assessment.programId}</span>
-            </div>
-
-            <div className={styles.statsRow}>
-                {isLoading ? (
-                    <div className={styles.statsLoading}>
-                        <CircularLoader extrasmall />
+                    <div className={styles.cardNameRow}>
+                        <h3 className={styles.cardName}>{assessment.name}</h3>
+                        <span
+                            className={[
+                                styles.statusBadge,
+                                assessment.status === 'active' ? styles.active : styles.inactive,
+                            ].join(' ')}
+                        >
+                            {assessment.status}
+                        </span>
                     </div>
-                ) : (
-                    <>
-                        <div className={styles.statItem}>
-                            <span className={[styles.statNum, styles.completed].join(' ')}>
-                                {stats.completed}
-                            </span>
-                            <span className={styles.statLabel}>{i18n.t('Completed')}</span>
-                        </div>
-                        <div className={styles.statDivider} />
-                        <div className={styles.statItem}>
-                            <span className={[styles.statNum, styles.inProgress].join(' ')}>
-                                {stats.inProgress}
-                            </span>
-                            <span className={styles.statLabel}>{i18n.t('In progress')}</span>
-                        </div>
-                    </>
-                )}
+
+                    {showShortName && (
+                        <p className={styles.cardShortName}>{assessment.shortName}</p>
+                    )}
+                </div>
             </div>
 
-            <div className={styles.cardArrow}>→</div>
+            <div className={styles.cardBody}>
+                <div className={styles.statsRow}>
+                    {isLoading ? (
+                        <div className={styles.statsLoading}>
+                            <CircularLoader extrasmall />
+                        </div>
+                    ) : (
+                        <>
+                            <div className={styles.statItem}>
+                                <span className={[styles.statNum, styles.completed].join(' ')}>
+                                    {stats.completed}
+                                </span>
+                                <span className={styles.statLabel}>{i18n.t('Completed')}</span>
+                            </div>
+
+                            <div className={styles.statItem}>
+                                <span className={[styles.statNum, styles.inProgress].join(' ')}>
+                                    {stats.inProgress}
+                                </span>
+                                <span className={styles.statLabel}>{i18n.t('In progress')}</span>
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+
+            <div className={styles.cardFooter}>
+                <span className={styles.cardHint}>
+                    {i18n.t('Select a program to view and capture assessment events.')}
+                </span>
+                <span className={styles.cardArrow}>{i18n.t('Open')}</span>
+            </div>
         </div>
     );
 };
 
-/* ─────────────────────────────────────────────────────────────
-   Home
-───────────────────────────────────────────────────────────── */
 const CaptureHome = () => {
     const { assessments, isLoading } = useAssessments();
     const { user } = useCurrentUser();
@@ -82,20 +106,27 @@ const CaptureHome = () => {
     return (
         <div className={styles.page}>
             <div className={styles.pageHeader}>
-                <h2 className={styles.pageTitle}>{i18n.t('Data Capture')}</h2>
-                <p className={styles.pageDesc}>
-                    {i18n.t('Select a program to view and capture assessment events.')}
-                </p>
+                <div className={styles.pageHeaderMain}>
+                    <h2 className={styles.pageTitle}>{i18n.t('Data Capture')}</h2>
+                    <p className={styles.pageDesc}>
+                        {i18n.t('Select a program to view and capture assessment events.')}
+                    </p>
+                </div>
+
+                <div className={styles.pageStat}>
+                    <span className={styles.pageStatValue}>{active.length}</span>
+                    <span className={styles.pageStatLabel}>{i18n.t('Active programs')}</span>
+                </div>
             </div>
 
             {isLoading ? (
                 <div className={styles.centered}>
                     <CircularLoader small />
-                    <span>{i18n.t('Loading programs…')}</span>
+                    <span>{i18n.t('Loading programs...')}</span>
                 </div>
             ) : active.length === 0 ? (
                 <div className={styles.empty}>
-                    <div className={styles.emptyIcon}>📋</div>
+                    <div className={styles.emptyIcon}>A</div>
                     <p className={styles.emptyTitle}>{i18n.t('No active programs')}</p>
                     <p className={styles.emptyBody}>
                         {i18n.t('Import an assessment program in Settings to get started.')}

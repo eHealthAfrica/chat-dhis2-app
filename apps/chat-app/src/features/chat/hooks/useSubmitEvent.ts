@@ -1,35 +1,29 @@
-import { useDataEngine }               from '@dhis2/app-runtime';
+import { useDataEngine } from '@dhis2/app-runtime';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAlert }                    from '@dhis2/app-service-alerts';
-import i18n                            from '@dhis2/d2-i18n';
-import { EventDraft }                  from './useDraft';
+import { useAlert } from '@dhis2/app-service-alerts';
+import i18n from '@dhis2/d2-i18n';
+import { EventDraft } from './useDraft';
 
-/* ─────────────────────────────────────────────────────────────
-   Build DHIS2 event payload from draft
-───────────────────────────────────────────────────────────── */
 const buildEventPayload = (draft: EventDraft, programStageId: string) => ({
-    program:      draft.programId,
+    program: draft.programId,
     programStage: programStageId,
-    orgUnit:      draft.orgUnit,
-    status:       'COMPLETED',
-    eventDate:    new Date().toISOString().split('T')[0],
-    dataValues:   Object.entries(draft.values).map(([dataElement, value]) => ({
+    orgUnit: draft.orgUnit,
+    status: 'COMPLETED',
+    occurredAt: draft.reportDate || draft.eventDate || new Date().toISOString().split('T')[0],
+    dataValues: Object.entries(draft.values).map(([dataElement, value]) => ({
         dataElement,
         value,
     })),
 });
 
-/* ─────────────────────────────────────────────────────────────
-   Hook
-───────────────────────────────────────────────────────────── */
 interface SubmitPayload {
-    draft:          EventDraft;
+    draft: EventDraft;
     programStageId: string;
     onDraftDeleted: () => Promise<void>;
 }
 
 export const useSubmitEvent = () => {
-    const engine      = useDataEngine();
+    const engine = useDataEngine();
     const queryClient = useQueryClient();
 
     const { show: showSuccess } = useAlert(
@@ -48,16 +42,17 @@ export const useSubmitEvent = () => {
 
             if (draft.eventId) {
                 await engine.mutate({
-                    resource: `events/${draft.eventId}`,
-                    type:     'update',
-                    data:     { ...payload, event: draft.eventId },
+                    resource: 'tracker/events',
+                    id: draft.eventId,
+                    type: 'update',
+                    data: { ...payload, event: draft.eventId },
                 });
                 eventId = draft.eventId;
             } else {
                 const result = await engine.mutate({
-                    resource: 'events',
-                    type:     'create',
-                    data:     payload,
+                    resource: 'tracker/events',
+                    type: 'create',
+                    data: payload,
                 }) as { response: { importSummaries: Array<{ reference: string }> } };
                 eventId = result.response.importSummaries[0]?.reference ?? '';
             }

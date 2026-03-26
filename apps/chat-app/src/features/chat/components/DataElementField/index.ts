@@ -1,2 +1,11 @@
-export { DataElementField } from './DataElementField';
-export type { DataElementMeta, FieldProps, Option } from './DataElementField';
+export {
+    DataElementField,
+    parseCoordinateValue,
+    serializeCoordinateValue,
+} from './DataElementField';
+export type {
+    CoordinateParts,
+    DataElementMeta,
+    FieldProps,
+    Option,
+} from './DataElementField';

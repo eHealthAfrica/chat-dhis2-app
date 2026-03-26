@@ -155,7 +155,7 @@ export const useSaveProgramToDhis2 = ({
                     atomicMode:     'NONE',
                 },
             });
-            return result as SaveProgramResult;
+            return result as unknown as SaveProgramResult;
         },
         onSuccess: (result) => {
             showSuccessAlert();

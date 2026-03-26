@@ -2,24 +2,35 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    max-width: 900px;
+    padding: 12px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top left, rgba(11, 107, 203, 0.08), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
 }
 
 .backBtn {
-    margin-block-end: var(--spacers-dp8);
+    margin-block-end: 12px;
     align-self: flex-start;
 }
 
-/* ── Program header ── */
+.notice {
+    margin-block-end: var(--spacers-dp16);
+}
+
 .programHeader {
     display: flex;
-    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    gap: var(--spacers-dp24);
-    padding-block-end: var(--spacers-dp12);
-    border-block-end: 1px solid var(--colors-grey300);
-    margin-block-end: var(--spacers-dp16);
+    gap: var(--spacers-dp16);
+    padding: 22px 24px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.08),
+        0 4px 12px rgba(15, 23, 42, 0.04);
+    margin-block-end: 18px;
 }
 
 .programHeaderMain {
@@ -31,9 +42,9 @@
 
 .programName {
     margin: 0;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 700;
-    color: #212934;
+    color: #182230;
     line-height: 1.2;
 }
 
@@ -48,10 +59,10 @@
     font-family: "Courier New", monospace;
     font-size: 12px;
     font-weight: 600;
-    background: var(--colors-grey200);
+    background: #eef2f6;
     color: var(--colors-grey800);
-    padding: 2px 7px;
-    border-radius: 3px;
+    padding: 4px 9px;
+    border-radius: 999px;
     border: 1px solid var(--colors-grey300);
 }
 
@@ -62,66 +73,59 @@
 
 .programDesc {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--colors-grey700);
     line-height: 1.5;
     max-width: 640px;
 }
 
-.orgUnitBadge {
-    flex-shrink: 0;
-    font-size: 13px;
-    color: var(--colors-grey700);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
-    background: var(--colors-grey100);
-    border: 1px solid var(--colors-grey300);
-    border-radius: 5px;
-    white-space: nowrap;
-}
-
-/* ── Two-column layout ── */
 .layout {
     display: grid;
-    grid-template-columns: 20vw 1fr;
-    gap: var(--spacers-dp16);
+    grid-template-columns: minmax(460px, 320px) minmax(0, 1fr);
+    gap: 20px;
     align-items: start;
 }
 
-/* ── Vertical section nav ── */
 .sectionNav {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 8px;
     position: sticky;
     top: 16px;
+    padding: 16px 14px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.08),
+        0 3px 10px rgba(15, 23, 42, 0.06);
 }
 
 .navItem {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 9px 12px;
-    border-radius: 6px;
-    border: none;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid transparent;
     background: transparent;
     text-align: start;
     cursor: pointer;
-    transition: background 0.12s;
+    transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
     width: 100%;
     color: var(--colors-grey700);
 }
 
 .navItem:hover:not(.navDisabled) {
-    background: var(--colors-grey200);
+    background: #f3f6fa;
+    border-color: #e4e7ec;
 }
 
 .navActive {
-    background: #e8edf8 !important;
-    color: #4f5fa8;
-    font-weight: 600;
+    background: #eaf2ff !important;
+    border-color: #b2ddff;
+    color: #0b6bcb;
+    box-shadow: 0 8px 18px rgba(11, 107, 203, 0.08);
 }
 
 .navDone {
@@ -135,22 +139,22 @@
 
 .navBubble {
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     border: 2px solid currentColor;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 800;
     background: #fff;
     transition: all 0.15s;
 }
 
 .navActive .navBubble {
-    background: #4f5fa8;
-    border-color: #4f5fa8;
+    background: #0b6bcb;
+    border-color: #0b6bcb;
     color: #fff;
 }
 
@@ -165,9 +169,8 @@
     line-height: 1.3;
     flex: 1;
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
 .navWarn {
@@ -184,27 +187,40 @@
     justify-content: center;
 }
 
-/* ── Right column ── */
 .contentCol {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp16);
-    width: 58vw;
+    gap: 16px;
+    min-width: 0;
+}
+
+.formCard {
+    padding: 0;
+    border: 1px solid rgba(208, 213, 221, 0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 24px 48px rgba(15, 23, 42, 0.1),
+        0 8px 20px rgba(15, 23, 42, 0.05);
 }
 
 .cardBody {
-    padding: var(--spacers-dp16);
+    padding: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
 }
 
-/* ── Footer ── */
 .footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacers-dp12) var(--spacers-dp16);
+    gap: 16px;
+    padding: 18px 22px;
     background: #fff;
-    border: 1px solid var(--colors-grey300);
-    border-radius: 6px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 22px;
+    box-shadow:
+        0 16px 34px rgba(15, 23, 42, 0.08),
+        0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .saveStatus {
@@ -213,33 +229,36 @@
     font-style: italic;
 }
 
-/* ── Org unit gate ── */
 .orgUnitGate {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp8);
+    gap: 10px;
 }
 
 .gateLabel {
     font-size: 13px;
-    font-weight: 600;
-    color: #212934;
+    font-weight: 700;
+    color: #182230;
     margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 .gateHint {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--colors-grey700);
-    margin: 0;
+    margin: 0 0 6px;
+    line-height: 1.6;
 }
 
 .orgUnitSelectorWrap {
-    border: 1px solid var(--colors-grey400);
-    border-radius: 5px;
-    background: var(--colors-grey100);
-    padding: var(--spacers-dp16);
-    max-height: 360px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fdfefe 0%, #f3f6fa 100%);
+    padding: 18px;
+    max-height: 420px;
     overflow-y: auto;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .selectedOrgUnit {
@@ -252,42 +271,41 @@
     font-weight: 600;
 }
 
-/* ── Section step ── */
 .sectionStep {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp8);
+    gap: 10px;
 }
 
 .sectionTitle {
-    font-size: 15px;
-    font-weight: 600;
-    color: #212934;
+    font-size: 20px;
+    font-weight: 700;
+    color: #182230;
     margin: 0;
 }
 
 .sectionProgress {
     font-size: 13px;
     color: var(--colors-grey600);
-    margin: 0 0 var(--spacers-dp8);
+    margin: 0 0 10px;
 }
 
 .fieldList {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp16);
+    gap: 18px;
 }
 
-/* ── Org unit selection card (inside OrgUnitGate) ── */
 .ouCard {
     display: flex;
     align-items: center;
-    gap: var(--spacers-dp12);
-    padding: var(--spacers-dp12) var(--spacers-dp16);
-    background: #f0fdf4;
+    gap: 14px;
+    padding: 14px 18px;
+    background: linear-gradient(180deg, #f0fdf4 0%, #e8f8ee 100%);
     border: 1.5px solid #86efac;
-    border-radius: 8px;
-    margin-block: var(--spacers-dp12);
+    border-radius: 16px;
+    margin-block: 12px;
+    box-shadow: 0 8px 18px rgba(22, 163, 74, 0.08);
 }
 
 .ouCardIcon {
@@ -319,8 +337,8 @@
     color: #166534;
     background: #dcfce7;
     border: 1px solid #86efac;
-    padding: 1px 6px;
-    border-radius: 3px;
+    padding: 2px 7px;
+    border-radius: 999px;
     width: fit-content;
 }
 
@@ -331,8 +349,8 @@
 
 .ouCardCheck {
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: #16a34a;
     color: #fff;
@@ -343,25 +361,27 @@
     justify-content: center;
 }
 
-/* ── Org unit row in form header ── */
 .ouHeaderRow {
     display: flex;
     flex-direction: column;
     gap: 0;
-    background: var(--colors-grey050);
-    border: 1px solid var(--colors-grey300);
-    border-radius: 5px;
+    background: #f8fbff;
+    border: 1px solid #d0d5dd;
+    border-radius: 18px;
     overflow: hidden;
     flex-shrink: 0;
-    min-width: 200px;
-    max-width: 260px;
+    min-width: 220px;
+    max-width: 280px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 10px 20px rgba(15, 23, 42, 0.05);
 }
 
 .ouHeaderField {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 8px 14px;
+    gap: 3px;
+    padding: 10px 16px;
     min-width: 0;
     border-block-end: 1px solid var(--colors-grey300);
 }
@@ -395,4 +415,43 @@
     font-weight: 700;
     color: #212934;
     white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sectionNav {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 8px;
+        border-radius: 18px;
+    }
+
+    .programHeader {
+        padding: 18px;
+        flex-direction: column;
+    }
+
+    .programName {
+        font-size: 22px;
+    }
+
+    .cardBody {
+        padding: 18px;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .saveStatus {
+        text-align: center;
+    }
 }

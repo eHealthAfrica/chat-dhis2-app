@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { InputField, TextAreaField, SingleSelectField, SingleSelectOption } from '@dhis2/ui';
+import {
+    Button,
+    InputField,
+    SingleSelectField,
+    SingleSelectOption,
+    TextAreaField,
+} from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 
 /* ─────────────────────────────────────────────────────────────
@@ -20,6 +26,69 @@ export interface Option {
     code: string;
     name: string;
 }
+
+export interface CoordinateParts {
+    latitude: string;
+    longitude: string;
+}
+
+const normalizeCoordinatePart = (value: string) => value.trim();
+
+export const parseCoordinateValue = (value: string): CoordinateParts => {
+    const raw = value.trim();
+
+    if (!raw) {
+        return { latitude: '', longitude: '' };
+    }
+
+    if (raw.startsWith('{')) {
+        try {
+            const parsed = JSON.parse(raw) as
+                | { latitude?: string | number; longitude?: string | number }
+                | { coordinates?: [number | string, number | string] };
+
+            if ('coordinates' in parsed && Array.isArray(parsed.coordinates)) {
+                return {
+                    longitude: String(parsed.coordinates[0] ?? '').trim(),
+                    latitude: String(parsed.coordinates[1] ?? '').trim(),
+                };
+            }
+
+            if ('latitude' in parsed || 'longitude' in parsed) {
+                return {
+                    latitude: String(parsed.latitude ?? '').trim(),
+                    longitude: String(parsed.longitude ?? '').trim(),
+                };
+            }
+
+            return {
+                latitude: '',
+                longitude: '',
+            };
+        } catch {
+            return { latitude: '', longitude: '' };
+        }
+    }
+
+    const cleaned = raw.replace(/^\[/, '').replace(/\]$/, '');
+    const [longitude = '', latitude = ''] = cleaned.split(',', 2);
+
+    return {
+        latitude: latitude.trim(),
+        longitude: longitude.trim(),
+    };
+};
+
+export const serializeCoordinateValue = (latitude: string, longitude: string) => {
+    const normalizedLatitude = normalizeCoordinatePart(latitude);
+    const normalizedLongitude = normalizeCoordinatePart(longitude);
+
+    if (!normalizedLatitude && !normalizedLongitude) {
+        return '';
+    }
+
+    return `[${normalizedLongitude},${normalizedLatitude}]`;
+};
 
 /* ─────────────────────────────────────────────────────────────
    Field variants
@@ -152,6 +221,132 @@ export const OptionSetField = ({ dataElementId, label, value, required, error, o
     </SingleSelectField>
 );
 
+export const CoordinateField = ({
+    dataElementId,
+    label,
+    value,
+    required,
+    error,
+    onChange,
+    onBlur,
+    disabled,
+}: FieldProps) => {
+    const { latitude, longitude } = parseCoordinateValue(value);
+    const [locationError, setLocationError] = useState<string | null>(null);
+    const [isLocating, setIsLocating] = useState(false);
+
+    const updateCoordinate = (nextLatitude: string, nextLongitude: string) => {
+        onChange(dataElementId, serializeCoordinateValue(nextLatitude, nextLongitude));
+    };
+
+    const handleUseCurrentLocation = () => {
+        if (!navigator.geolocation) {
+            setLocationError(i18n.t('Current location is not available in this browser'));
+            return;
+        }
+
+        setIsLocating(true);
+        setLocationError(null);
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                updateCoordinate(
+                    String(position.coords.latitude),
+                    String(position.coords.longitude),
+                );
+                setIsLocating(false);
+            },
+            () => {
+                setLocationError(i18n.t('Could not retrieve your current location'));
+                setIsLocating(false);
+            },
+        );
+    };
+
+    return (
+        <div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                }}
+            >
+                <div
+                    style={{
+                        fontSize: 14,
+                        fontWeight: 600,
+                        color: '#212934',
+                    }}
+                >
+                    {label}
+                    {required && ' *'}
+                </div>
+
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'minmax(180px, 220px) repeat(2, minmax(0, 1fr))',
+                        gap: 12,
+                        alignItems: 'end',
+                    }}
+                >
+                    <Button
+                        secondary
+                        disabled={disabled || isLocating}
+                        onClick={handleUseCurrentLocation}
+                        style={{
+                            minHeight: 40,
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {isLocating
+                            ? i18n.t('Detecting location...')
+                            : i18n.t('Use current location')}
+                    </Button>
+                    <InputField
+                        label={i18n.t('Latitude')}
+                        value={latitude}
+                        type="number"
+                        step="any"
+                        required={required}
+                        error={!!error}
+                        disabled={disabled}
+                        onChange={({ value: nextLatitude }) =>
+                            updateCoordinate(nextLatitude ?? '', longitude)}
+                        onBlur={() => onBlur?.(dataElementId)}
+                    />
+                    <InputField
+                        label={i18n.t('Longitude')}
+                        value={longitude}
+                        type="number"
+                        step="any"
+                        required={required}
+                        error={!!error || !!locationError}
+                        validationText={error || locationError || undefined}
+                        disabled={disabled}
+                        onChange={({ value: nextLongitude }) =>
+                            updateCoordinate(latitude, nextLongitude ?? '')}
+                        onBlur={() => onBlur?.(dataElementId)}
+                    />
+                </div>
+
+                {(error || locationError) && (
+                    <div
+                        style={{
+                            fontSize: 12,
+                            fontWeight: 600,
+                            color: '#d14343',
+                        }}
+                    >
+                        {error || locationError}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
 /* ─────────────────────────────────────────────────────────────
    Field resolver
 ───────────────────────────────────────────────────────────── */
@@ -249,6 +444,10 @@ export const DataElementField = ({
 
             case 'TRUE_ONLY':
                 field = <TrueOnlyField {...props} />;
+                break;
+
+            case 'COORDINATE':
+                field = <CoordinateField {...props} />;
                 break;
 
             default:

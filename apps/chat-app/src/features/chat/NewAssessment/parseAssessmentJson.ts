@@ -51,6 +51,7 @@ interface RawProgramStage {
 interface RawProgram {
     id: string;
     name: string;
+    code?: string;
     shortName?: string;
     programType?: string;
     programStages?: { id: string }[];
@@ -81,6 +82,7 @@ export interface RawMetadataJson {
 export interface ParsedProgram {
     id: string;
     name: string;
+    code?: string;
     shortName: string;
     programType: string;
 }
@@ -157,6 +159,7 @@ export function parseAssessmentJson(raw: RawMetadataJson): AssessmentPreview {
         ? {
               id: raw.programs[0].id,
               name: raw.programs[0].name,
+              code: raw.programs[0].code,
               shortName: raw.programs[0].shortName ?? raw.programs[0].name,
               programType: raw.programs[0].programType ?? '—',
           }

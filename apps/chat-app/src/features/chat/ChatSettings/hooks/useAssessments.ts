@@ -14,13 +14,27 @@ export interface Assessment {
 const STORE_KEY = 'chatAssessments';
 const QUERY_KEY = ['chat', 'assessments'];
 
+const normalizeAssessment = (
+    assessment: Assessment & { dateConfig?: unknown },
+): Assessment => ({
+    id: assessment.id,
+    name: assessment.name,
+    shortName: assessment.shortName,
+    code: assessment.code,
+    programId: assessment.programId,
+    status: assessment.status,
+    createdAt: assessment.createdAt,
+});
+
 const readStore = async (dataEngine: ReturnType<typeof useDataEngine>): Promise<Assessment[]> => {
     try {
         const resp = await dataEngine.query({
             store: { resource: `dataStore/chat/${STORE_KEY}` },
         });
-        const d = resp.store as { assessments?: Assessment[] };
-        return d?.assessments ?? [];
+        const d = resp.store as {
+            assessments?: Array<Assessment & { dateConfig?: unknown }>;
+        };
+        return (d?.assessments ?? []).map(normalizeAssessment);
     } catch {
         return [];
     }
@@ -76,14 +90,14 @@ export const useSaveAssessment = () => {
             let result: Assessment;
 
             if (existingIdx !== -1) {
-                result = { ...existing[existingIdx], ...payload };
+                result = normalizeAssessment({ ...existing[existingIdx], ...payload });
                 updated = existing.map((a, i) => i === existingIdx ? result : a);
             } else {
-                result = {
+                result = normalizeAssessment({
                     ...payload,
                     id: `assessment-${Date.now()}`,
                     createdAt: new Date().toISOString(),
-                };
+                });
                 updated = [...existing, result];
             }
 

@@ -1,26 +1,63 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
-    Button, ButtonStrip, CircularLoader, NoticeBox,
-    IconAdd16, IconArrowLeft16, IconDelete16, IconEdit16, IconView16,
-    DataTable, DataTableHead, DataTableRow, DataTableBody,
-    DataTableCell, DataTableColumnHeader, Tag,
+    Button,
+    ButtonStrip,
+    CircularLoader,
+    NoticeBox,
+    IconAdd16,
+    IconArrowLeft16,
+    IconDelete16,
+    IconEdit16,
+    IconView16,
+    DataTable,
+    DataTableHead,
+    DataTableRow,
+    DataTableBody,
+    DataTableCell,
+    DataTableColumnHeader,
+    Tag,
 } from '@dhis2/ui';
 import { Card } from '@dhis2-chat/ui';
 import i18n from '@dhis2/d2-i18n';
-import { useEvents, Dhis2Event } from '../hooks/useEvents';
+import { Dhis2Event, useEvents } from '../hooks/useEvents';
 import { useDhis2Program } from '../hooks/useDhis2Program';
 import { useAssessments } from '../ChatSettings/hooks/useAssessments';
 import { useCurrentUser } from '../hooks/useCurrentUser';
 import { EventDraft, useDraft } from '../hooks/useDraft';
 import { useOrgUnitRoots } from '../../../hooks/useOrgUnitRoots';
-import { OrganisationUnitSelector, OrganisationUnit, SelectionChangeEvent } from '../../../components/OrganisationUnitSelector';
+import {
+    OrganisationUnitSelector,
+    OrganisationUnit,
+    SelectionChangeEvent,
+} from '../../../components/OrganisationUnitSelector';
 import styles from './CaptureList.module.css';
 
-/* ─────────────────────────────────────────────────────────────
-   Main
-───────────────────────────────────────────────────────────── */
-type StatusFilter = 'ALL' | 'COMPLETED' | 'ACTIVE' | 'DRAFT';
+type StatusFilter = 'ALL' | 'COMPLETED' | 'DRAFT';
+
+const EMPTY_VALUE = '—';
+
+const formatDate = (value?: string | null) =>
+    value ? new Date(value).toLocaleDateString() : EMPTY_VALUE;
+
+const formatDateTime = (value?: string | null) =>
+    value ? new Date(value).toLocaleString() : EMPTY_VALUE;
+
+const formatUser = (
+    userInfo?: { displayName?: string; username?: string } | null,
+) => userInfo?.displayName || userInfo?.username || EMPTY_VALUE;
+
+const isWithinSelectedOrgUnit = (
+    draft: EventDraft,
+    selectedOu: { id: string; path: string } | null,
+) => {
+    if (!selectedOu) return false;
+    if (draft.orgUnit === selectedOu.id) return true;
+    if (!draft.orgUnitPath || !selectedOu.path) return false;
+
+    return draft.orgUnitPath === selectedOu.path
+        || draft.orgUnitPath.startsWith(`${selectedOu.path}/`);
+};
 
 const CaptureList = () => {
     const { programId } = useParams<{ programId: string }>();
@@ -33,9 +70,15 @@ const CaptureList = () => {
     const description = program?.programStages?.[0]?.description ?? null;
 
     const LS_OU_KEY = `captureOrgUnit:${programId}`;
-    const [selectedOu, setSelectedOu] = useState<{ id: string; name: string; path: string } | null>(() => {
-        try { return JSON.parse(localStorage.getItem(LS_OU_KEY) ?? 'null'); } catch { return null; }
-    });
+    const [selectedOu, setSelectedOu] = useState<{ id: string; name: string; path: string } | null>(
+        () => {
+            try {
+                return JSON.parse(localStorage.getItem(LS_OU_KEY) ?? 'null');
+            } catch {
+                return null;
+            }
+        },
+    );
 
     const handleOuChange = (e: SelectionChangeEvent) => {
         const plain = e.items.filter(ou => ou.path);
@@ -44,8 +87,14 @@ const CaptureList = () => {
             localStorage.removeItem(LS_OU_KEY);
             return;
         }
+
         const ou = plain[plain.length - 1];
-        const next = { id: ou.id, name: ou.name ?? ou.displayName ?? ou.id, path: ou.path ?? '' };
+        const next = {
+            id: ou.id,
+            name: ou.name ?? ou.displayName ?? ou.id,
+            path: ou.path ?? '',
+        };
+
         setSelectedOu(next);
         localStorage.setItem(LS_OU_KEY, JSON.stringify(next));
     };
@@ -55,46 +104,81 @@ const CaptureList = () => {
         : [];
 
     const [statusFilter, setStatusFilter] = useState<StatusFilter>('ALL');
-    const [draft, setDraft] = useState<EventDraft | null>(null);
+    const [drafts, setDrafts] = useState<EventDraft[]>([]);
+    const [draftsLoading, setDraftsLoading] = useState(false);
+
+    const { listDrafts, deleteDraft } = useDraft(programId ?? '', user?.id ?? '');
 
     useEffect(() => {
-        if (!user || !programId) return;
-        try {
-            const raw = localStorage.getItem(`capture_draft:${programId}:${user.id}`);
-            if (raw) setDraft(JSON.parse(raw));
-        } catch { /* ignore */ }
-    }, [user, programId]);
+        if (!user || !programId) {
+            setDrafts([]);
+            return;
+        }
 
-    const { deleteDraft } = useDraft(programId ?? '', user?.id ?? '');
+        let active = true;
 
-    const handleDeleteDraft = async () => {
+        const loadDrafts = async () => {
+            setDraftsLoading(true);
+            try {
+                const nextDrafts = await listDrafts();
+                if (active) setDrafts(nextDrafts);
+            } finally {
+                if (active) setDraftsLoading(false);
+            }
+        };
+
+        loadDrafts();
+
+        return () => {
+            active = false;
+        };
+    }, [listDrafts, programId, user]);
+
+    const handleDeleteDraft = async (draft: EventDraft) => {
         if (!window.confirm(i18n.t('Delete this draft? This cannot be undone.'))) return;
-        await deleteDraft();
-        setDraft(null);
+
+        await deleteDraft({ draftId: draft.draftId });
+        setDrafts(prev => prev.filter(item => item.draftId !== draft.draftId));
     };
 
     const { events, isLoading, isError, error, refetch } = useEvents(
         programId ?? null,
         selectedOu?.id ?? null,
     );
+    const branchDrafts = drafts.filter(draft => isWithinSelectedOrgUnit(draft, selectedOu));
+    const visibleDrafts = statusFilter === 'ALL' || statusFilter === 'DRAFT'
+        ? branchDrafts
+        : [];
 
-    const showDraft =
-        draft && selectedOu && draft.orgUnit === selectedOu.id &&
-        (statusFilter === 'ALL' || statusFilter === 'DRAFT');
-
-    const filteredEvents = events.filter(e =>
-        statusFilter === 'ALL' || statusFilter === 'DRAFT' || e.status === statusFilter,
+    const filteredEvents = events.filter(event =>
+        statusFilter === 'ALL'
+            ? true
+            : event.status === statusFilter,
     );
 
-    const completedCount = events.filter(e => e.status === 'COMPLETED').length;
-    const inProgressCount = draft ? 1 : 0;
+    const completedCount = events.filter(event => event.status === 'COMPLETED').length;
+    const inProgressCount = branchDrafts.length;
 
     const STATUS_FILTERS: { key: StatusFilter; label: string }[] = [
         { key: 'ALL', label: i18n.t('All') },
         { key: 'COMPLETED', label: i18n.t('Completed') },
-        { key: 'ACTIVE', label: i18n.t('Active') },
         { key: 'DRAFT', label: i18n.t('Drafts') },
     ];
+
+    const isTableLoading = isLoading || draftsLoading;
+
+    const getEventOrgUnitName = (event: Dhis2Event) => event.orgUnitName || event.orgUnit || EMPTY_VALUE;
+
+    const renderActions = (event: Dhis2Event) => (
+        <Button
+            small
+            secondary
+            icon={event.status === 'COMPLETED' ? <IconView16 /> : <IconEdit16 />}
+            onClick={() => navigate(`/chat/data-capture/${programId}/${event.event}`)}
+        >
+            {event.status === 'COMPLETED' ? i18n.t('View') : i18n.t('Edit')}
+        </Button>
+    );
 
     return (
         <div className={styles.page}>
@@ -137,7 +221,6 @@ const CaptureList = () => {
             )}
 
             <div className={styles.layout}>
-                {/* ── Left: org unit tree ── */}
                 <div className={styles.ouPanel}>
                     <p className={styles.ouPanelLabel}>{i18n.t('Organisation unit')}</p>
                     {rootsLoading ? (
@@ -145,13 +228,12 @@ const CaptureList = () => {
                     ) : (
                         <div className={styles.ouTree}>
                             <OrganisationUnitSelector
-                                roots={roots.map(r => r.id)}
+                                roots={roots.map(root => root.id)}
                                 selected={selected}
                                 onSelect={handleOuChange}
                                 hideGroupSelect
                                 hideLevelSelect
                                 hideUserOrgUnits
-
                                 i18n={{
                                     t: (key: string, opts?: Record<string, any>) => {
                                         if (!opts) return key;
@@ -162,8 +244,10 @@ const CaptureList = () => {
                                                 : (opts.defaultValue ?? key);
                                             str = String(plural);
                                         }
-                                        return str.replace(/\{\{(\w+)\}\}/g, (_, k) =>
-                                            opts[k] !== undefined ? String(opts[k]) : `{{${k}}}`,
+                                        return str.replace(/\{\{(\w+)\}\}/g, (_, token) =>
+                                            opts[token] !== undefined
+                                                ? String(opts[token])
+                                                : `{{${token}}}`,
                                         );
                                     },
                                 }}
@@ -172,9 +256,7 @@ const CaptureList = () => {
                     )}
                 </div>
 
-                {/* ── Right: stats + table ── */}
                 <div className={styles.contentCol}>
-                    {/* Stats */}
                     <div className={styles.statsRow}>
                         <div className={styles.stat}>
                             <span className={styles.statNum}>{completedCount}</span>
@@ -186,14 +268,16 @@ const CaptureList = () => {
                         </div>
                     </div>
 
-                    <Card>
-                        {/* Toolbar */}
+                    <Card className={styles.listCard}>
                         <div className={styles.toolbar}>
                             <div className={styles.filterPills}>
                                 {STATUS_FILTERS.map(({ key, label }) => (
                                     <button
                                         key={key}
-                                        className={[styles.pill, statusFilter === key ? styles.pillActive : ''].join(' ')}
+                                        className={[
+                                            styles.pill,
+                                            statusFilter === key ? styles.pillActive : '',
+                                        ].join(' ')}
                                         onClick={() => setStatusFilter(key)}
                                     >
                                         {label}
@@ -210,31 +294,41 @@ const CaptureList = () => {
                                 {i18n.t('New assessment')}
                             </Button>
                         </div>
+                        {selectedOu && (
+                            <p className={styles.scopeHint}>
+                                {i18n.t('Showing assessments for the selected organisation unit and all descendants.')}
+                            </p>
+                        )}
 
                         {!selectedOu ? (
                             <div className={styles.emptyState}>
                                 <p>{i18n.t('Select an organisation unit on the left to view its assessments.')}</p>
                             </div>
-                        ) : isLoading ? (
+                        ) : isTableLoading ? (
                             <div className={styles.loading}><CircularLoader small /></div>
                         ) : (
-                            <DataTable>
+                            <div className={styles.tableShell}>
+                                <DataTable>
                                 <DataTableHead>
                                     <DataTableRow>
                                         <DataTableColumnHeader>{i18n.t('Status')}</DataTableColumnHeader>
-                                        <DataTableColumnHeader>{i18n.t('Event date')}</DataTableColumnHeader>
+                                        <DataTableColumnHeader>{i18n.t('Report date')}</DataTableColumnHeader>
                                         <DataTableColumnHeader>{i18n.t('Organisation unit')}</DataTableColumnHeader>
+                                        <DataTableColumnHeader>{i18n.t('Created by')}</DataTableColumnHeader>
+                                        <DataTableColumnHeader>{i18n.t('Last updated by')}</DataTableColumnHeader>
                                         <DataTableColumnHeader>{i18n.t('Last updated')}</DataTableColumnHeader>
                                         <DataTableColumnHeader>{i18n.t('Actions')}</DataTableColumnHeader>
                                     </DataTableRow>
                                 </DataTableHead>
                                 <DataTableBody>
-                                    {showDraft && (
-                                        <DataTableRow>
+                                    {visibleDrafts.map(draft => (
+                                        <DataTableRow key={draft.draftId}>
                                             <DataTableCell><Tag neutral>{i18n.t('Draft')}</Tag></DataTableCell>
-                                            <DataTableCell>{new Date(draft!.savedAt).toLocaleDateString()}</DataTableCell>
-                                            <DataTableCell>{draft!.orgUnitName}</DataTableCell>
-                                            <DataTableCell>{new Date(draft!.savedAt).toLocaleTimeString()}</DataTableCell>
+                                            <DataTableCell>{formatDate(draft.reportDate || draft.savedAt)}</DataTableCell>
+                                            <DataTableCell>{draft.orgUnitName}</DataTableCell>
+                                            <DataTableCell>{user?.displayName ?? user?.username ?? EMPTY_VALUE}</DataTableCell>
+                                            <DataTableCell>{user?.displayName ?? user?.username ?? EMPTY_VALUE}</DataTableCell>
+                                            <DataTableCell>{formatDateTime(draft.savedAt)}</DataTableCell>
                                             <DataTableCell>
                                                 <ButtonStrip>
                                                     <Button
@@ -244,7 +338,12 @@ const CaptureList = () => {
                                                         onClick={() =>
                                                             navigate(`/chat/data-capture/${programId}/new`, {
                                                                 state: {
-                                                                    orgUnit: { id: draft!.orgUnit, name: draft!.orgUnitName, path: '' },
+                                                                    draftId: draft.draftId,
+                                                                    orgUnit: {
+                                                                        id: draft.orgUnit,
+                                                                        name: draft.orgUnitName,
+                                                                        path: draft.orgUnitPath ?? '',
+                                                                    },
                                                                     continueDraft: true,
                                                                 },
                                                             })}
@@ -255,47 +354,43 @@ const CaptureList = () => {
                                                         small
                                                         destructive
                                                         icon={<IconDelete16 />}
-                                                        onClick={handleDeleteDraft}
+                                                        onClick={() => handleDeleteDraft(draft)}
                                                     >
                                                         {i18n.t('Delete')}
                                                     </Button>
                                                 </ButtonStrip>
                                             </DataTableCell>
                                         </DataTableRow>
-                                    )}
+                                    ))}
 
-                                    {filteredEvents.length === 0 && !showDraft ? (
+                                    {filteredEvents.length === 0 && visibleDrafts.length === 0 ? (
                                         <DataTableRow>
-                                            <DataTableCell colSpan="5" align="center">
+                                            <DataTableCell
+                                                colSpan="7"
+                                                align="center"
+                                                className={styles.tableEmptyCell}
+                                            >
                                                 {i18n.t('No assessments found.')}
                                             </DataTableCell>
                                         </DataTableRow>
-                                    ) : filteredEvents.map((ev: Dhis2Event) => (
-                                        <DataTableRow key={ev.event}>
+                                    ) : filteredEvents.map(event => (
+                                        <DataTableRow key={event.event}>
                                             <DataTableCell>
-                                                {ev.status === 'COMPLETED'
+                                                {event.status === 'COMPLETED'
                                                     ? <Tag positive>{i18n.t('Completed')}</Tag>
                                                     : <Tag neutral>{i18n.t('Active')}</Tag>}
                                             </DataTableCell>
-                                            <DataTableCell>
-                                                {ev.eventDate ? new Date(ev.eventDate).toLocaleDateString() : '—'}
-                                            </DataTableCell>
-                                            <DataTableCell>{ev.orgUnitName}</DataTableCell>
-                                            <DataTableCell>{new Date(ev.lastUpdated).toLocaleString()}</DataTableCell>
-                                            <DataTableCell>
-                                                <Button
-                                                    small
-                                                    secondary
-                                                    icon={ev.status === 'COMPLETED' ? <IconView16 /> : <IconEdit16 />}
-                                                    onClick={() => navigate(`/chat/data-capture/${programId}/${ev.event}`)}
-                                                >
-                                                    {ev.status === 'COMPLETED' ? i18n.t('View') : i18n.t('Edit')}
-                                                </Button>
-                                            </DataTableCell>
+                                            <DataTableCell>{formatDate(event.occurredAt)}</DataTableCell>
+                                            <DataTableCell>{getEventOrgUnitName(event)}</DataTableCell>
+                                            <DataTableCell>{formatUser(event.createdBy)}</DataTableCell>
+                                            <DataTableCell>{formatUser(event.updatedBy)}</DataTableCell>
+                                            <DataTableCell>{formatDateTime(event.updatedAt)}</DataTableCell>
+                                            <DataTableCell>{renderActions(event)}</DataTableCell>
                                         </DataTableRow>
-                                    ))}
+                                        ))}
                                 </DataTableBody>
-                            </DataTable>
+                                </DataTable>
+                            </div>
                         )}
                     </Card>
                 </div>

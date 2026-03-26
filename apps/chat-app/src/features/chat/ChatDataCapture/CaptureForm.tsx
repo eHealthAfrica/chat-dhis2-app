@@ -1,103 +1,174 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
-    Button, ButtonStrip, CircularLoader, NoticeBox,
-    IconArrowLeft16, IconArrowRight16, IconSave16,
+    Button,
+    ButtonStrip,
+    CircularLoader,
+    IconArrowLeft16,
+    IconArrowRight16,
+    IconSave16,
+    InputField,
+    NoticeBox,
 } from '@dhis2/ui';
 import { Card } from '@dhis2-chat/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useDhis2Program } from '../hooks/useDhis2Program';
-import { useDraft, EventDraft } from '../hooks/useDraft';
+import { EventDraft, useDraft } from '../hooks/useDraft';
 import { useEvent } from '../hooks/useEvents';
+import { useOrgUnitDetails } from '../hooks/useOrgUnitDetails';
 import { useSubmitEvent } from '../hooks/useSubmitEvent';
 import { useCurrentUser } from '../hooks/useCurrentUser';
 import { SectionStep, isSectionValid } from '../components/SectionStep';
 import { useAssessments } from '../ChatSettings/hooks/useAssessments';
 import { OrgUnitGate, SelectedOrgUnit } from '../components/OrgUnitGate';
+import { OrgUnitCard } from '../components/OrgUnitGate/OrgUnitGate';
 import styles from './CaptureForm.module.css';
-import { OrgUnitCard } from '@/features/chat/components/OrgUnitGate/OrgUnitGate';
 
-/* ─────────────────────────────────────────────────────────────
-   Vertical section nav
-───────────────────────────────────────────────────────────── */
+const normalizeDateInputValue = (value?: string | null) => {
+    if (!value) return '';
+
+    const trimmed = value.trim();
+    if (!trimmed) return '';
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+
+    const parsed = new Date(trimmed);
+    if (Number.isNaN(parsed.getTime())) return '';
+
+    return parsed.toISOString().split('T')[0];
+};
+
 interface SectionNavProps {
     labels: string[];
-    current: number; // 0 = org unit gate
+    current: number;
     completed: number[];
-    valid: boolean[]; // per-section validity
+    valid: boolean[];
+    reportDateValid: boolean;
     onSelect: (idx: number) => void;
     orgUnitSet: boolean;
+    hideOrgUnitStep: boolean;
 }
 
-const SectionNav = ({ labels, current, completed, valid, onSelect, orgUnitSet }: SectionNavProps) => (
-    <nav className={styles.sectionNav}>
-        {/* Org unit step — always index 0 */}
-        <button
-            className={[
-                styles.navItem,
-                current === 0 ? styles.navActive : '',
-                orgUnitSet ? styles.navDone : '',
-            ].join(' ')}
-            onClick={() => onSelect(0)}
-        >
-            <span className={styles.navBubble}>
-                {orgUnitSet ? '✓' : '1'}
-            </span>
-            <span className={styles.navLabel}>{i18n.t('Organisation unit')}</span>
-        </button>
+const SectionNav = ({
+    labels,
+    current,
+    completed,
+    valid,
+    reportDateValid,
+    onSelect,
+    orgUnitSet,
+    hideOrgUnitStep,
+}: SectionNavProps) => {
+    const highestDone = completed.length > 0 ? Math.max(...completed) : -1;
+    const firstVisibleStep = hideOrgUnitStep ? 1 : 0;
 
-        {/* Section steps — index 1..n */}
-        {labels.map((label, idx) => {
-            const stepIdx = idx + 1;
-            const isDone = completed.includes(stepIdx);
-            const isActive = current === stepIdx;
-            // a section is reachable only if it has been completed already,
-            // or it is the immediate next step after the highest completed one
-            const highestDone = completed.length > 0 ? Math.max(...completed) : 0;
-            const canClick = orgUnitSet && (isDone || stepIdx === highestDone + 1);
+    const canClick = (stepIdx: number, isDone: boolean) =>
+        stepIdx === firstVisibleStep || (orgUnitSet && (isDone || stepIdx === highestDone + 1));
 
-            return (
+    return (
+        <nav className={styles.sectionNav}>
+            {!hideOrgUnitStep && (
                 <button
-                    key={stepIdx}
                     className={[
                         styles.navItem,
-                        isActive ? styles.navActive : '',
-                        isDone ? styles.navDone : '',
-                        !canClick ? styles.navDisabled : '',
+                        current === 0 ? styles.navActive : '',
+                        orgUnitSet ? styles.navDone : '',
                     ].join(' ')}
-                    disabled={!canClick}
-                    onClick={() => canClick && onSelect(stepIdx)}
+                    onClick={() => onSelect(0)}
                 >
                     <span className={styles.navBubble}>
-                        {isDone ? '\u2713' : stepIdx + 1}
+                        {orgUnitSet ? '\u2713' : '1'}
                     </span>
-                    <span className={styles.navLabel}>{label}</span>
-                    {isDone && !valid[idx] && (
-                        <span className={styles.navWarn} title={i18n.t('Has incomplete required fields')}>!</span>
-                    )}
+                    <span className={styles.navLabel}>{i18n.t('Organisation unit')}</span>
                 </button>
-            );
-        })}
-    </nav>
-);
+            )}
 
-/* ─────────────────────────────────────────────────────────────
-   Main
-───────────────────────────────────────────────────────────── */
+            {(() => {
+                const stepIdx = 1;
+                const isDone = completed.includes(stepIdx);
+                const isActive = current === stepIdx;
+                const isClickable = canClick(stepIdx, isDone);
+
+                return (
+                    <button
+                        className={[
+                            styles.navItem,
+                            isActive ? styles.navActive : '',
+                            isDone ? styles.navDone : '',
+                            !isClickable ? styles.navDisabled : '',
+                        ].join(' ')}
+                        disabled={!isClickable}
+                        onClick={() => isClickable && onSelect(stepIdx)}
+                    >
+                        <span className={styles.navBubble}>
+                            {isDone ? '\u2713' : hideOrgUnitStep ? '1' : '2'}
+                        </span>
+                        <span className={styles.navLabel}>{i18n.t('Report date')}</span>
+                        {isDone && !reportDateValid && (
+                            <span
+                                className={styles.navWarn}
+                                title={i18n.t('Has incomplete required fields')}
+                            >
+                                !
+                            </span>
+                        )}
+                    </button>
+                );
+            })()}
+
+            {labels.map((label, idx) => {
+                const stepIdx = idx + 2;
+                const isDone = completed.includes(stepIdx);
+                const isActive = current === stepIdx;
+                const isClickable = canClick(stepIdx, isDone);
+
+                return (
+                    <button
+                        key={stepIdx}
+                        className={[
+                            styles.navItem,
+                            isActive ? styles.navActive : '',
+                            isDone ? styles.navDone : '',
+                            !isClickable ? styles.navDisabled : '',
+                        ].join(' ')}
+                        disabled={!isClickable}
+                        onClick={() => isClickable && onSelect(stepIdx)}
+                    >
+                        <span className={styles.navBubble}>
+                            {isDone ? '\u2713' : hideOrgUnitStep ? stepIdx : stepIdx + 1}
+                        </span>
+                        <span className={styles.navLabel}>{label}</span>
+                        {isDone && !valid[idx] && (
+                            <span
+                                className={styles.navWarn}
+                                title={i18n.t('Has incomplete required fields')}
+                            >
+                                !
+                            </span>
+                        )}
+                    </button>
+                );
+            })}
+        </nav>
+    );
+};
+
 const CaptureForm = () => {
     const { programId, eventId } = useParams<{ programId: string; eventId?: string }>();
     const navigate = useNavigate();
     const location = useLocation();
 
     const prefilledOrgUnit = location.state?.orgUnit as SelectedOrgUnit | undefined;
-    // Only restore a draft when the user explicitly clicked "Continue" in CaptureList
     const continueDraft = location.state?.continueDraft === true;
+    const requestedDraftId = location.state?.draftId as string | undefined;
 
     const { assessments } = useAssessments();
     const assessment = assessments.find(a => a.programId === programId) ?? null;
     const { user } = useCurrentUser();
     const { program, isLoading: progLoad } = useDhis2Program(programId ?? null);
     const { event, isLoading: evLoad } = useEvent(eventId ?? null);
+    const { details: eventOrgUnitDetails, isLoading: eventOrgUnitLoad } = useOrgUnitDetails(
+        event?.orgUnit ?? null,
+    );
     const submitEvent = useSubmitEvent();
 
     const { readDraft, saveDraft, deleteDraft } = useDraft(
@@ -106,66 +177,106 @@ const CaptureForm = () => {
     );
 
     const [orgUnit, setOrgUnit] = useState<SelectedOrgUnit | null>(null);
-    const [currentSection, setCurrentSection] = useState<number>(0);
+    const [currentStep, setCurrentStep] = useState(0);
     const [values, setValues] = useState<Record<string, string>>({});
-    const [completedSections, setCompletedSections] = useState<number[]>([]);
-    const [saveStatus, setSaveStatus] = useState<string>('');
+    const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+    const [reportDate, setReportDate] = useState('');
+    const [activeDraftId, setActiveDraftId] = useState<string | null>(requestedDraftId ?? null);
+    const [reportDateTouched, setReportDateTouched] = useState(false);
+    const [saveStatus, setSaveStatus] = useState('');
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [draftLoaded, setDraftLoaded] = useState(false);
 
     const isEditMode = !!eventId;
+    const isCompletedEvent = isEditMode && event?.status === 'COMPLETED';
+
+    const stage = program?.programStages?.[0];
+    const sections = stage?.programStageSections ?? [];
+    const reportDateRequired = true;
 
     useEffect(() => {
         if (!user || progLoad || draftLoaded) return;
-        if (isEditMode && evLoad) return;
+        if (isEditMode && (evLoad || eventOrgUnitLoad)) return;
 
         const load = async () => {
-            // Edit mode: load the existing DHIS2 event
-            if (isEditMode) {
-                if (event) {
-                    const flat: Record<string, string> = {};
-                    event.dataValues.forEach((dv) => {
-                        flat[dv.dataElement] = dv.value;
-                    });
-                    setValues(flat);
-                    setOrgUnit({ id: event.orgUnit, name: event.orgUnitName, path: '' });
-                    setCurrentSection(1);
-                    const stageLen = program?.programStages?.[0]?.programStageSections?.length ?? 0;
-                    setCompletedSections(Array.from({ length: stageLen }, (_, i) => i + 1));
-                    setDraftLoaded(true);
-                    return;
-                }
+            if (isEditMode && event) {
+                const flat: Record<string, string> = {};
+                event.dataValues.forEach(dataValue => {
+                    flat[dataValue.dataElement] = dataValue.value;
+                });
+
+                const stageLen = program?.programStages?.[0]?.programStageSections?.length ?? 0;
+                setValues(flat);
+                setOrgUnit({
+                    id: event.orgUnit,
+                    name: eventOrgUnitDetails?.displayName
+                        || eventOrgUnitDetails?.name
+                        || event.orgUnitName
+                        || event.orgUnit,
+                    path: eventOrgUnitDetails?.path ?? '',
+                });
+                setReportDate(normalizeDateInputValue(event.occurredAt));
+                setCurrentStep(stageLen > 0 ? 2 : 1);
+                setCompletedSteps(Array.from({ length: stageLen + 2 }, (_, index) => index));
+                setDraftLoaded(true);
+                return;
             }
 
-            // New assessment: only restore draft if user explicitly chose "Continue"
             if (continueDraft) {
-                const draft = await readDraft();
+                const draft = await readDraft(
+                    requestedDraftId ? { draftId: requestedDraftId } : undefined,
+                );
+
                 if (draft) {
                     setValues(draft.values);
-                    setOrgUnit(draft.orgUnit ? { id: draft.orgUnit, name: draft.orgUnitName, path: '' } : null);
-                    setCurrentSection(draft.currentSection);
-                    setCompletedSections(draft.completedSections);
-                    setSaveStatus(i18n.t('Draft restored — {{time}}', { time: new Date(draft.savedAt).toLocaleTimeString() }));
+                    setOrgUnit(
+                        draft.orgUnit
+                            ? {
+                                id: draft.orgUnit,
+                                name: draft.orgUnitName,
+                                path: draft.orgUnitPath ?? '',
+                            }
+                            : null,
+                    );
+                    setReportDate(normalizeDateInputValue(draft.reportDate ?? draft.eventDate ?? ''));
+                    setCurrentStep(
+                        draft.currentSection,
+                    );
+                    setCompletedSteps(draft.completedSections);
+                    setActiveDraftId(draft.draftId);
+                    setSaveStatus(i18n.t('Draft restored at {{time}}', {
+                        time: new Date(draft.savedAt).toLocaleTimeString(),
+                    }));
                     setDraftLoaded(true);
                     return;
                 }
             }
 
-            // Fresh start: pre-fill org unit if provided (from "New assessment" button)
             if (prefilledOrgUnit) {
                 setOrgUnit(prefilledOrgUnit);
-                setCurrentSection(1);
-                setCompletedSections([0]);
+                setCurrentStep(1);
+                setCompletedSteps([0]);
             }
+
             setDraftLoaded(true);
         };
 
         load();
-    }, [user, progLoad, evLoad, draftLoaded, isEditMode, event]);
-
-    /* ── Derived ── */
-    const stage = program?.programStages?.[0];
-    const sections = stage?.programStageSections ?? [];
+    }, [
+        continueDraft,
+        draftLoaded,
+        evLoad,
+        event,
+        eventOrgUnitDetails,
+        eventOrgUnitLoad,
+        isEditMode,
+        prefilledOrgUnit,
+        progLoad,
+        program,
+        readDraft,
+        requestedDraftId,
+        user,
+    ]);
 
     const compulsoryMap = Object.fromEntries(
         (stage?.programStageDataElements ?? []).map(psde => [psde.dataElement.id, psde.compulsory]),
@@ -174,94 +285,136 @@ const CaptureForm = () => {
         (stage?.programStageDataElements ?? []).map(psde => [psde.dataElement.id, psde.dataElement]),
     );
 
-    const sectionMetas = sections.map(sec => ({
-        id: sec.id,
-        name: sec.name,
-        dataElements: sec.dataElements
+    const sectionMetas = sections.map(section => ({
+        id: section.id,
+        name: section.name,
+        dataElements: section.dataElements
             .map((ref) => {
-                const de = deMap[ref.id];
-                if (!de) return null;
-                return { id: de.id, name: de.name, valueType: de.valueType, compulsory: compulsoryMap[de.id] ?? false, description: de.description || undefined, optionSet: de.optionSet ?? undefined };
+                const dataElement = deMap[ref.id];
+                if (!dataElement) return null;
+
+                return {
+                    id: dataElement.id,
+                    name: dataElement.name,
+                    valueType: dataElement.valueType,
+                    compulsory: compulsoryMap[dataElement.id] ?? false,
+                    description: dataElement.description || undefined,
+                    optionSet: dataElement.optionSet ?? undefined,
+                };
             })
-            .filter(Boolean) as any[],
+            .filter(Boolean) as Array<{
+                id: string;
+                name: string;
+                valueType: string;
+                compulsory: boolean;
+                description?: string;
+                optionSet?: { options: Array<{ code: string; name: string }> };
+            }>,
     }));
 
-    // Per-section validity (used by nav to flag incomplete sections)
-    const sectionValidity = sectionMetas.map(s => isSectionValid(s.dataElements, values));
+    const sectionValidity = sectionMetas.map(section => isSectionValid(section.dataElements, values));
+    const reportDateValid = !reportDateRequired || !!reportDate;
+    const sectionIdx = currentStep - 2;
+    const currentMeta = currentStep >= 2 ? sectionMetas[sectionIdx] : null;
+    const isReportDateStep = currentStep === 1;
+    const isLastSection = currentStep === sectionMetas.length + 1;
+    const hasSections = sectionMetas.length > 0;
+    const currentStepValid = currentStep === 0
+        ? !!orgUnit
+        : currentStep === 1
+            ? reportDateValid
+            : (sectionValidity[sectionIdx] ?? true);
+    const allSectionsValid = sectionValidity.every(Boolean) && !!orgUnit && !!stage && reportDateValid;
+    const showSubmit = hasSections ? isLastSection : isReportDateStep;
+    const showNext = currentStep > 0 && !showSubmit;
+    const canSaveProgress = Boolean(user && orgUnit && reportDate);
 
-    const sectionIdx = currentSection - 1;
-    const currentMeta = sectionMetas[sectionIdx];
-    const isLastSection = currentSection === sectionMetas.length;
-    const currentSectionValid = sectionIdx >= 0 ? sectionValidity[sectionIdx] : true;
-    const allSectionsValid = sectionValidity.every(Boolean) && !!orgUnit;
-
-    /* ── Handlers ── */
     const handleFieldChange = useCallback((id: string, value: string) => {
         setValues(prev => ({ ...prev, [id]: value }));
     }, []);
 
-    const handleOrgUnitConfirm = (ou: SelectedOrgUnit) => {
-        setOrgUnit(ou);
-        const newCompleted = completedSections.includes(0) ? completedSections : [...completedSections, 0];
-        setCompletedSections(newCompleted);
-        // jump to first section if not already in one
-        if (currentSection === 0) setCurrentSection(1);
+    const handleOrgUnitConfirm = (nextOrgUnit: SelectedOrgUnit) => {
+        setOrgUnit(nextOrgUnit);
+        setCompletedSteps(prev => (prev.includes(0) ? prev : [...prev, 0]));
+        if (currentStep === 0) setCurrentStep(1);
+    };
+
+    const markCurrentStepComplete = () => {
+        if (!currentStepValid || completedSteps.includes(currentStep)) return;
+        setCompletedSteps(prev => [...prev, currentStep]);
     };
 
     const handleNext = () => {
-        const newCompleted = completedSections.includes(currentSection)
-            ? completedSections
-            : [...completedSections, currentSection];
-        setCompletedSections(newCompleted);
-        setCurrentSection(prev => prev + 1);
+        if (currentStep === 1 && !reportDateValid) {
+            setReportDateTouched(true);
+            return;
+        }
+
+        markCurrentStepComplete();
+        setCurrentStep(prev => prev + 1);
     };
 
     const handleNavSelect = (idx: number) => {
-        // mark current section completed when navigating away,
-        // but only if it is valid — keeps the unlock chain honest
-        if (currentSectionValid && !completedSections.includes(currentSection)) {
-            setCompletedSections(prev => [...prev, currentSection]);
-        }
-        setCurrentSection(idx);
+        markCurrentStepComplete();
+        setCurrentStep(idx);
     };
 
     const buildDraft = (overrides: Partial<EventDraft> = {}): EventDraft => ({
-        draftId: `${programId}:${user!.id}`,
+        draftId: activeDraftId ?? `${programId}:${user!.id}`,
         programId: programId!,
         eventId,
         orgUnit: orgUnit!.id,
         orgUnitName: orgUnit!.name,
-        currentSection,
+        orgUnitPath: orgUnit!.path,
+        currentSection: currentStep,
+        reportDate,
         values,
-        completedSections,
+        completedSections: completedSteps,
         savedAt: new Date().toISOString(),
         userUid: user!.id,
         ...overrides,
     });
 
     const handleSave = async () => {
-        if (!user || !orgUnit) return;
-        await saveDraft(buildDraft());
-        setSaveStatus(i18n.t('Saved at {{time}}', { time: new Date().toLocaleTimeString() }));
+        if (!canSaveProgress || !user || !orgUnit) return;
+
+        const savedDraft = await saveDraft(buildDraft());
+        setActiveDraftId(savedDraft.draftId);
+        setSaveStatus(i18n.t('Saved at {{time}}', {
+            time: new Date(savedDraft.savedAt).toLocaleTimeString(),
+        }));
     };
 
     const handleSubmit = async () => {
-        if (!user || !orgUnit || !stage) return;
+        if (!user || !orgUnit || !stage || !reportDateValid) return;
+
+        if (!reportDate) {
+            setReportDateTouched(true);
+        }
+
         setSubmitError(null);
+
         try {
             await submitEvent.mutateAsync({
                 draft: buildDraft(),
                 programStageId: stage.id,
-                onDraftDeleted: deleteDraft,
+                onDraftDeleted: () => (
+                    activeDraftId
+                        ? deleteDraft({ draftId: activeDraftId })
+                        : deleteDraft({ orgUnit: orgUnit.id, reportDate })
+                ),
             });
             navigate(`/chat/data-capture/${programId}`);
-        } catch (e) {
-            setSubmitError(e instanceof Error ? e.message : i18n.t('Submission failed.'));
+        } catch (error) {
+            setSubmitError(
+                error instanceof Error
+                    ? error.message
+                    : i18n.t('Submission failed.'),
+            );
         }
     };
 
-    /* ── Loading ── */
-    const isStillLoading = progLoad || (isEditMode && evLoad) || !draftLoaded;
+    const isStillLoading = progLoad || (isEditMode && (evLoad || eventOrgUnitLoad)) || !draftLoaded;
     if (isStillLoading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', padding: '3rem' }}>
@@ -283,10 +436,11 @@ const CaptureForm = () => {
             </Button>
 
             <div className={styles.programHeader}>
-                {/* Programme name, code, description */}
                 <div className={styles.programHeaderMain}>
                     <h2 className={styles.programName}>
-                        {assessment?.name ?? (isEditMode ? i18n.t('Edit assessment') : i18n.t('New assessment'))}
+                        {assessment?.name ?? (
+                            isEditMode ? i18n.t('Edit assessment') : i18n.t('New assessment')
+                        )}
                     </h2>
                     {assessment && (
                         <div className={styles.programMeta}>
@@ -300,51 +454,64 @@ const CaptureForm = () => {
                         <p className={styles.programDesc}>{program.programStages[0].description}</p>
                     )}
                 </div>
-                {/* Selected org unit — only shown once confirmed */}
                 {orgUnit && (
                     <div className={styles.ouHeaderRow}>
-                        {/* <div className={styles.ouHeaderField}> */}
-                        {/*    <span className={styles.ouFieldLabel}>{i18n.t('Organisation unit')}</span> */}
-                        {/*    <span className={styles.ouFieldValue}>{ouDetails?.displayName ?? orgUnit.name}</span> */}
-
-                        {/* </div> */}
-                        {/* {(ouDetails?.level) && ( */}
-                        {/*    <div className={styles.ouHeaderField}> */}
-                        {/*        <span className={styles.ouFieldLabel}>{i18n.t('Level')}</span> */}
-                        {/*        <span className={styles.ouFieldCode}>{ouDetails.level}</span> */}
-                        {/*    </div> */}
-                        {/* )} */}
                         <OrgUnitCard id={orgUnit.id} name={orgUnit.name} />
                     </div>
                 )}
             </div>
 
             {submitError && (
-                <NoticeBox error title={i18n.t('Submission failed')}>
+                <NoticeBox error title={i18n.t('Submission failed')} className={styles.notice}>
                     {submitError}
                 </NoticeBox>
             )}
 
             <div className={styles.layout}>
-                {/* ── Left: vertical section nav ── */}
                 <SectionNav
-                    labels={sectionMetas.map(s => s.name)}
-                    current={currentSection}
-                    completed={completedSections}
+                    labels={sectionMetas.map(section => section.name)}
+                    current={currentStep}
+                    completed={completedSteps}
                     valid={sectionValidity}
+                    reportDateValid={reportDateValid}
                     onSelect={handleNavSelect}
                     orgUnitSet={!!orgUnit}
+                    hideOrgUnitStep={isCompletedEvent}
                 />
 
-                {/* ── Right: content + footer ── */}
                 <div className={styles.contentCol}>
-                    <Card>
+                    <Card className={styles.formCard}>
                         <div className={styles.cardBody}>
-                            {currentSection === 0 && (
+                            {currentStep === 0 && !isCompletedEvent && (
                                 <OrgUnitGate initial={orgUnit} onConfirm={handleOrgUnitConfirm} />
                             )}
 
-                            {currentSection > 0 && currentMeta && (
+                            {currentStep === 1 && (
+                                <div className={styles.sectionStep}>
+                                    <p className={styles.sectionTitle}>{i18n.t('Report date')}</p>
+                                    <p className={styles.sectionProgress}>
+                                        {i18n.t('Capture the report date for this assessment before continuing.')}
+                                    </p>
+                                    <div className={styles.fieldList}>
+                                        <InputField
+                                            label={i18n.t('Report date')}
+                                            type="date"
+                                            value={reportDate}
+                                            required={reportDateRequired}
+                                            error={reportDateTouched && reportDateRequired && !reportDate}
+                                            validationText={
+                                                reportDateTouched && reportDateRequired && !reportDate
+                                                    ? i18n.t('This field is required')
+                                                    : undefined
+                                            }
+                                            onChange={({ value }) => setReportDate(value ?? '')}
+                                            onBlur={() => setReportDateTouched(true)}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+                            {currentStep > 1 && currentMeta && (
                                 <SectionStep
                                     section={currentMeta}
                                     values={values}
@@ -355,8 +522,7 @@ const CaptureForm = () => {
                         </div>
                     </Card>
 
-                    {/* Footer — visible once org unit is set */}
-                    {orgUnit && currentSection > 0 && (
+                    {orgUnit && currentStep > 0 && (
                         <div className={styles.footer}>
                             {saveStatus && <span className={styles.saveStatus}>{saveStatus}</span>}
                             <ButtonStrip end>
@@ -364,24 +530,23 @@ const CaptureForm = () => {
                                     secondary
                                     icon={<IconSave16 />}
                                     onClick={handleSave}
+                                    disabled={!canSaveProgress}
                                 >
                                     {i18n.t('Save progress')}
                                 </Button>
 
-                                {/* Next — shown on every section except the last */}
-                                {!isLastSection && (
+                                {showNext && (
                                     <Button
                                         primary
                                         icon={<IconArrowRight16 />}
-                                        disabled={!currentSectionValid}
+                                        disabled={!currentStepValid}
                                         onClick={handleNext}
                                     >
                                         {i18n.t('Next')}
                                     </Button>
                                 )}
 
-                                {/* Submit — shown only on the last section */}
-                                {isLastSection && (
+                                {showSubmit && (
                                     <Button
                                         primary
                                         onClick={handleSubmit}

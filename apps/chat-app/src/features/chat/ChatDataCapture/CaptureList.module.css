@@ -2,10 +2,15 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    padding: 12px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at top left, rgba(11, 107, 203, 0.08), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef3f8 100%);
 }
 
 .backBtn {
-    margin-block-end: 8px;
+    margin-block-end: 12px;
     align-self: flex-start;
 }
 
@@ -13,40 +18,41 @@
     margin-block-end: var(--spacers-dp16);
 }
 
-/* ── Two-column layout ── */
 .layout {
     display: grid;
-    grid-template-columns: 20vw 1fr;
-    gap: var(--spacers-dp16);
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 20px;
     align-items: start;
 }
 
-/* ── Left: org unit panel ── */
 .ouPanel {
     position: sticky;
     top: 16px;
     border: 1px solid var(--colors-grey300);
-    border-radius: 5px;
-    background: #fff;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
     overflow: hidden;
+    box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.08),
+        0 3px 10px rgba(15, 23, 42, 0.06);
 }
 
 .ouPanelLabel {
     margin: 0;
-    padding: 10px 14px;
+    padding: 16px 18px;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--colors-grey700);
     border-block-end: 1px solid var(--colors-grey300);
-    background: var(--colors-grey050);
+    background: linear-gradient(180deg, #fdfefe 0%, #f3f6fa 100%);
 }
 
 .ouTree {
     max-height: calc(100vh - 220px);
     overflow-y: auto;
-    padding: var(--spacers-dp8);
+    padding: 14px;
 }
 
 .ouLoading {
@@ -55,88 +61,117 @@
     padding: var(--spacers-dp24);
 }
 
-/* ── Right: content column ── */
 .contentCol {
     display: flex;
     flex-direction: column;
-    gap: var(--spacers-dp12);
-    min-width: 58vw;
+    gap: 16px;
+    min-width: 0;
 }
 
-/* Stats row */
 .statsRow {
     display: flex;
-    gap: var(--spacers-dp8);
+    gap: 14px;
+    flex-wrap: wrap;
 }
 
 .stat {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    background: #fff;
+    gap: 12px;
+    min-width: 180px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
     border: 1px solid var(--colors-grey300);
-    border-radius: 5px;
+    border-radius: 18px;
+    box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.08),
+        0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .statNum {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 700;
-    color: #212934;
+    color: #182230;
     line-height: 1;
 }
 
 .statLabel {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--colors-grey700);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
-/* Toolbar inside card */
+.listCard {
+    padding: 0;
+    border: 1px solid rgba(208, 213, 221, 0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 24px 48px rgba(15, 23, 42, 0.1),
+        0 8px 20px rgba(15, 23, 42, 0.05);
+}
+
 .toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacers-dp8);
-    padding: var(--spacers-dp12) var(--spacers-dp16);
+    gap: 12px;
+    padding: 18px 22px 16px;
     border-block-end: 1px solid var(--colors-grey300);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
 }
 
-/* Filter pills */
+.scopeHint {
+    margin: 16px 22px 0;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--colors-grey700);
+    border: 1px solid #d8e6f6;
+    border-radius: 14px;
+    background: #f3f8fe;
+}
+
 .filterPills {
     display: flex;
-    gap: 2px;
+    gap: 4px;
+    padding: 4px;
     border: 1px solid var(--colors-grey300);
-    border-radius: 5px;
+    border-radius: 14px;
     overflow: hidden;
-    background: var(--colors-grey050);
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .pill {
-    padding: 5px 12px;
+    padding: 8px 14px;
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 600;
     border: none;
     background: transparent;
     color: var(--colors-grey700);
     cursor: pointer;
-    transition: background 0.1s, color 0.1s;
+    transition: background 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
     white-space: nowrap;
-    border-inline-end: 1px solid var(--colors-grey300);
+    border-radius: 10px;
 }
 
-.pill:last-child { border-inline-end: none; }
-.pill:hover { background: var(--colors-grey200); color: #212934; }
+.pill:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #212934;
+}
 
 .pillActive {
     background: #fff;
     color: #212934;
     font-weight: 600;
-    box-shadow: inset 0 -2px 0 var(--colors-blue600);
+    box-shadow:
+        0 6px 18px rgba(15, 23, 42, 0.08),
+        inset 0 -2px 0 var(--colors-blue600);
 }
 
-/* Empty / loading */
 .emptyState {
-    padding: var(--spacers-dp24);
+    padding: 32px 24px;
     text-align: center;
     color: var(--colors-grey600);
     font-size: 14px;
@@ -145,18 +180,22 @@
 .loading {
     display: flex;
     justify-content: center;
-    padding: var(--spacers-dp24);
+    padding: 36px 24px;
 }
 
-/* ── Program header ── */
 .programHeader {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--spacers-dp16);
-    padding-block-end: var(--spacers-dp12);
-    border-block-end: 1px solid var(--colors-grey300);
-    margin-block-end: var(--spacers-dp16);
+    padding: 22px 24px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.08),
+        0 4px 12px rgba(15, 23, 42, 0.04);
+    margin-block-end: 18px;
 }
 
 .programHeaderMain {
@@ -168,9 +207,9 @@
 
 .programName {
     margin: 0;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 700;
-    color: #212934;
+    color: #182230;
     line-height: 1.2;
 }
 
@@ -185,10 +224,10 @@
     font-family: "Courier New", monospace;
     font-size: 12px;
     font-weight: 600;
-    background: var(--colors-grey200);
+    background: #eef2f6;
     color: var(--colors-grey800);
-    padding: 2px 7px;
-    border-radius: 3px;
+    padding: 4px 9px;
+    border-radius: 999px;
     border: 1px solid var(--colors-grey300);
 }
 
@@ -199,8 +238,102 @@
 
 .programDesc {
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--colors-grey700);
     line-height: 1.5;
     max-width: 640px;
+}
+
+.tableShell {
+    margin: 18px 22px 22px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    border-radius: 18px;
+    overflow: auto;
+    background: #ffffff;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 8px 18px rgba(15, 23, 42, 0.05);
+}
+
+.tableEmptyCell {
+    padding: 36px 16px !important;
+    color: var(--colors-grey600);
+}
+
+.tableShell :global(table) {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tableShell :global(thead th) {
+    background: linear-gradient(180deg, #f9fbfd 0%, #f3f6fa 100%);
+    color: #475467;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.tableShell :global(tbody tr) {
+    background: #ffffff;
+    transition: background 0.12s ease;
+}
+
+.tableShell :global(tbody tr:hover) {
+    background: #f8fbff;
+}
+
+.tableShell :global(tbody td),
+.tableShell :global(thead th) {
+    border-color: #eaecf0;
+}
+
+.tableShell :global(tbody td) {
+    color: #182230;
+    vertical-align: middle;
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ouPanel {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 8px;
+        border-radius: 18px;
+    }
+
+    .programHeader {
+        padding: 18px;
+    }
+
+    .programName {
+        font-size: 22px;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filterPills {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .pill {
+        flex: 1 1 0;
+        text-align: center;
+    }
+
+    .tableShell {
+        margin: 16px;
+    }
 }

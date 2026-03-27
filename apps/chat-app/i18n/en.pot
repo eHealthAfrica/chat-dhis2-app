@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-25T09:46:58.590Z\n"
-"PO-Revision-Date: 2026-03-25T09:46:58.594Z\n"
+"POT-Creation-Date: 2026-03-27T02:23:22.484Z\n"
+"PO-Revision-Date: 2026-03-27T02:23:22.485Z\n"
 
 msgid "Oops!"
 msgstr "Oops!"
@@ -59,17 +59,29 @@ msgstr "Deselect all"
 msgid "Data Capture"
 msgstr "Data Capture"
 
+msgid "Guides"
+msgstr "Guides"
+
+msgid "Data capture guide"
+msgstr "Data capture guide"
+
+msgid "Assessment setup guide"
+msgstr "Assessment setup guide"
+
 msgid "Settings"
 msgstr "Settings"
 
 msgid "Organisation unit"
 msgstr "Organisation unit"
 
+msgid "Report date"
+msgstr "Report date"
+
 msgid "Has incomplete required fields"
 msgstr "Has incomplete required fields"
 
-msgid "Draft restored — {{time}}"
-msgstr "Draft restored — {{time}}"
+msgid "Draft restored at {{time}}"
+msgstr "Draft restored at {{time}}"
 
 msgid "Saved at {{time}}"
 msgstr "Saved at {{time}}"
@@ -86,11 +98,14 @@ msgstr "Edit assessment"
 msgid "New assessment"
 msgstr "New assessment"
 
-msgid "Level"
-msgstr "Level"
-
 msgid "Submission failed"
 msgstr "Submission failed"
+
+msgid "Capture the report date for this assessment before continuing."
+msgstr "Capture the report date for this assessment before continuing."
+
+msgid "This field is required"
+msgstr "This field is required"
 
 msgid "Save progress"
 msgstr "Save progress"
@@ -101,9 +116,6 @@ msgstr "Next"
 msgid "Submit"
 msgstr "Submit"
 
-msgid "Program ID"
-msgstr "Program ID"
-
 msgid "Completed"
 msgstr "Completed"
 
@@ -113,8 +125,14 @@ msgstr "In progress"
 msgid "Select a program to view and capture assessment events."
 msgstr "Select a program to view and capture assessment events."
 
-msgid "Loading programs…"
-msgstr "Loading programs…"
+msgid "Open"
+msgstr "Open"
+
+msgid "Active programs"
+msgstr "Active programs"
+
+msgid "Loading programs..."
+msgstr "Loading programs..."
 
 msgid "No active programs"
 msgstr "No active programs"
@@ -128,11 +146,14 @@ msgstr "Delete this draft? This cannot be undone."
 msgid "All"
 msgstr "All"
 
-msgid "Active"
-msgstr "Active"
-
 msgid "Drafts"
 msgstr "Drafts"
+
+msgid "View"
+msgstr "View"
+
+msgid "Edit"
+msgstr "Edit"
 
 msgid "Assessments"
 msgstr "Assessments"
@@ -146,14 +167,20 @@ msgstr "Unknown error"
 msgid "Retry"
 msgstr "Retry"
 
+msgid "Showing assessments for the selected organisation unit and all descendants."
+msgstr "Showing assessments for the selected organisation unit and all descendants."
+
 msgid "Select an organisation unit on the left to view its assessments."
 msgstr "Select an organisation unit on the left to view its assessments."
 
 msgid "Status"
 msgstr "Status"
 
-msgid "Event date"
-msgstr "Event date"
+msgid "Created by"
+msgstr "Created by"
+
+msgid "Last updated by"
+msgstr "Last updated by"
 
 msgid "Last updated"
 msgstr "Last updated"
@@ -173,11 +200,8 @@ msgstr "Delete"
 msgid "No assessments found."
 msgstr "No assessments found."
 
-msgid "View"
-msgstr "View"
-
-msgid "Edit"
-msgstr "Edit"
+msgid "Active"
+msgstr "Active"
 
 msgid "Program"
 msgstr "Program"
@@ -190,6 +214,9 @@ msgstr "Short name"
 
 msgid "Code"
 msgstr "Code"
+
+msgid "Program ID"
+msgstr "Program ID"
 
 msgid "Program type"
 msgstr "Program type"
@@ -316,6 +343,24 @@ msgstr "Inactive"
 msgid "No"
 msgstr "No"
 
+msgid "Current location is not available in this browser"
+msgstr "Current location is not available in this browser"
+
+msgid "Could not retrieve your current location"
+msgstr "Could not retrieve your current location"
+
+msgid "Detecting location..."
+msgstr "Detecting location..."
+
+msgid "Use current location"
+msgstr "Use current location"
+
+msgid "Latitude"
+msgstr "Latitude"
+
+msgid "Longitude"
+msgstr "Longitude"
+
 msgid "Hide description"
 msgstr "Hide description"
 
@@ -335,8 +380,20 @@ msgstr ""
 msgid "Proceed to form"
 msgstr "Proceed to form"
 
-msgid "This field is required"
-msgstr "This field is required"
+msgid "Both latitude and longitude are required"
+msgstr "Both latitude and longitude are required"
+
+msgid "Latitude must be a number"
+msgstr "Latitude must be a number"
+
+msgid "Longitude must be a number"
+msgstr "Longitude must be a number"
+
+msgid "Latitude must be between -90 and 90"
+msgstr "Latitude must be between -90 and 90"
+
+msgid "Longitude must be between -180 and 180"
+msgstr "Longitude must be between -180 and 180"
 
 msgid "Must be a whole number"
 msgstr "Must be a whole number"
@@ -358,6 +415,297 @@ msgstr "Must be a number"
 
 msgid "{{filled}} of {{total}} required fields completed"
 msgstr "{{filled}} of {{total}} required fields completed"
+
+msgid "Open assessment settings"
+msgstr "Open assessment settings"
+
+msgid ""
+"Start from Settings if you need to create or import a new assessment. This "
+"area is intended for users who have the required chat settings authority."
+msgstr ""
+"Start from Settings if you need to create or import a new assessment. This "
+"area is intended for users who have the required chat settings authority."
+
+msgid "Use the New assessment action to open the import flow."
+msgstr "Use the New assessment action to open the import flow."
+
+msgid ""
+"Existing assessments stay visible in the settings list for review or "
+"cleanup."
+msgstr ""
+"Existing assessments stay visible in the settings list for review or "
+"cleanup."
+
+msgid "Load the metadata JSON"
+msgstr "Load the metadata JSON"
+
+msgid ""
+"Upload the DHIS2 metadata JSON file for the assessment tool. The import "
+"flow checks the file before it lets you continue."
+msgstr ""
+"Upload the DHIS2 metadata JSON file for the assessment tool. The import "
+"flow checks the file before it lets you continue."
+
+msgid "Only `.json` files are accepted in the import step."
+msgstr "Only `.json` files are accepted in the import step."
+
+msgid "Parsing warnings are shown before you import the assessment."
+msgstr "Parsing warnings are shown before you import the assessment."
+
+msgid "Review the detected program"
+msgstr "Review the detected program"
+
+msgid ""
+"Use the review step to inspect the program, program stage, sections, data "
+"elements, option sets, and indicators that were found in the JSON."
+msgstr ""
+"Use the review step to inspect the program, program stage, sections, data "
+"elements, option sets, and indicators that were found in the JSON."
+
+msgid "Use the Next button after you finish reviewing the metadata preview."
+msgstr "Use the Next button after you finish reviewing the metadata preview."
+
+msgid ""
+"The preview step helps you catch missing or unexpected metadata before "
+"import."
+msgstr ""
+"The preview step helps you catch missing or unexpected metadata before "
+"import."
+
+msgid "Assign organisation units"
+msgstr "Assign organisation units"
+
+msgid ""
+"The next step asks you to select organisation units before the final import "
+"action becomes available."
+msgstr ""
+"The next step asks you to select organisation units before the final import "
+"action becomes available."
+
+msgid "You must select at least one organisation unit before importing."
+msgstr "You must select at least one organisation unit before importing."
+
+msgid ""
+"This selection is part of the guided import flow and is confirmed before "
+"the final import action."
+msgstr ""
+"This selection is part of the guided import flow and is confirmed before "
+"the final import action."
+
+msgid "Import the assessment"
+msgstr "Import the assessment"
+
+msgid ""
+"Use Import assessment to save the program to DHIS2 and then register the "
+"local assessment record so it appears in the chat app."
+msgstr ""
+"Use Import assessment to save the program to DHIS2 and then register the "
+"local assessment record so it appears in the chat app."
+
+msgid ""
+"If the DHIS2 save succeeds but the local save fails, the screen shows a "
+"retry option for the local record."
+msgstr ""
+"If the DHIS2 save succeeds but the local save fails, the screen shows a "
+"retry option for the local record."
+
+msgid "After a successful import, the app returns you to the settings list."
+msgstr "After a successful import, the app returns you to the settings list."
+
+msgid "Confirm the assessment is available"
+msgstr "Confirm the assessment is available"
+
+msgid ""
+"After import, check the settings list and then open Data Capture to confirm "
+"the new active assessment is available for users."
+msgstr ""
+"After import, check the settings list and then open Data Capture to confirm "
+"the new active assessment is available for users."
+
+msgid "Active assessments appear in the data capture home screen."
+msgstr "Active assessments appear in the data capture home screen."
+
+msgid ""
+"Use the assessment details view in settings if you need to inspect the "
+"imported program metadata."
+msgstr ""
+"Use the assessment details view in settings if you need to inspect the "
+"imported program metadata."
+
+msgid "Guide"
+msgstr "Guide"
+
+msgid ""
+"Use this page to walk through the assessment import flow, from loading the "
+"JSON file to selecting organisation units and confirming the assessment is "
+"ready for capture."
+msgstr ""
+"Use this page to walk through the assessment import flow, from loading the "
+"JSON file to selecting organisation units and confirming the assessment is "
+"ready for capture."
+
+msgid "Quick links"
+msgstr "Quick links"
+
+msgid "Before you start"
+msgstr "Before you start"
+
+msgid ""
+"You need access to Chat settings before you can import or manage assessment "
+"tools in this app."
+msgstr ""
+"You need access to Chat settings before you can import or manage assessment "
+"tools in this app."
+
+msgid "Choose an assessment"
+msgstr "Choose an assessment"
+
+msgid ""
+"Open Data Capture and select the assessment card you want to work with. The "
+"list only shows active assessment tools that are already available in the "
+"app."
+msgstr ""
+"Open Data Capture and select the assessment card you want to work with. The "
+"list only shows active assessment tools that are already available in the "
+"app."
+
+msgid "Select the program card to open its event list."
+msgstr "Select the program card to open its event list."
+
+msgid "Use the event list to review both submitted events and saved drafts."
+msgstr "Use the event list to review both submitted events and saved drafts."
+
+msgid "Select the organisation unit"
+msgstr "Select the organisation unit"
+
+msgid ""
+"Choose the organisation unit before you start a new record. For new "
+"records, this selection controls where the event is captured."
+msgstr ""
+"Choose the organisation unit before you start a new record. For new "
+"records, this selection controls where the event is captured."
+
+msgid "Pick the correct facility, district, or branch before continuing."
+msgstr "Pick the correct facility, district, or branch before continuing."
+
+msgid ""
+"Completed events keep their original organisation unit and do not allow "
+"changes."
+msgstr ""
+"Completed events keep their original organisation unit and do not allow "
+"changes."
+
+msgid "Enter the report date"
+msgstr "Enter the report date"
+
+msgid ""
+"Use the Report date step to enter the date for the assessment. You must "
+"complete this step before moving into the form sections."
+msgstr ""
+"Use the Report date step to enter the date for the assessment. You must "
+"complete this step before moving into the form sections."
+
+msgid "The report date is stored as `occurredAt` in the event payload."
+msgstr "The report date is stored as `occurredAt` in the event payload."
+
+msgid "If the date field is blank or invalid, the form will not let you continue."
+msgstr "If the date field is blank or invalid, the form will not let you continue."
+
+msgid "Complete the form sections"
+msgstr "Complete the form sections"
+
+msgid ""
+"Move through the section list on the left and fill the required fields in "
+"each section. The navigation highlights incomplete required fields."
+msgstr ""
+"Move through the section list on the left and fill the required fields in "
+"each section. The navigation highlights incomplete required fields."
+
+msgid "Required fields must be completed before you can submit the assessment."
+msgstr "Required fields must be completed before you can submit the assessment."
+
+msgid "Long section names wrap in the side navigation so you can still read them."
+msgstr "Long section names wrap in the side navigation so you can still read them."
+
+msgid "Capture coordinates when needed"
+msgstr "Capture coordinates when needed"
+
+msgid ""
+"Coordinate fields let you enter latitude and longitude directly, or use the "
+"current location button to fill both values automatically."
+msgstr ""
+"Coordinate fields let you enter latitude and longitude directly, or use the "
+"current location button to fill both values automatically."
+
+msgid "You can edit the coordinates after using current location."
+msgstr "You can edit the coordinates after using current location."
+
+msgid ""
+"Both latitude and longitude must be valid before the field passes "
+"validation."
+msgstr ""
+"Both latitude and longitude must be valid before the field passes "
+"validation."
+
+msgid "Save and resume drafts"
+msgstr "Save and resume drafts"
+
+msgid ""
+"Use Save progress to keep an unfinished record. Drafts are grouped by user "
+"and program, and each saved draft stays unique by organisation unit and "
+"report date."
+msgstr ""
+"Use Save progress to keep an unfinished record. Drafts are grouped by user "
+"and program, and each saved draft stays unique by organisation unit and "
+"report date."
+
+msgid "Open the Drafts tab to continue saved work."
+msgstr "Open the Drafts tab to continue saved work."
+
+msgid ""
+"Parent organisation units can show drafts from all descendants in the event "
+"list."
+msgstr ""
+"Parent organisation units can show drafts from all descendants in the event "
+"list."
+
+msgid "Review submitted events"
+msgstr "Review submitted events"
+
+msgid ""
+"Use the All view in the event list to review tracker events from the "
+"selected organisation unit and all descendants, together with any matching "
+"drafts."
+msgstr ""
+"Use the All view in the event list to review tracker events from the "
+"selected organisation unit and all descendants, together with any matching "
+"drafts."
+
+msgid "Completed events read directly from the DHIS2 tracker events endpoint."
+msgstr "Completed events read directly from the DHIS2 tracker events endpoint."
+
+msgid ""
+"The list shows report date, organisation unit name, creator, and updater "
+"details when available."
+msgstr ""
+"The list shows report date, organisation unit name, creator, and updater "
+"details when available."
+
+msgid ""
+"Use this page as an in-app checklist for selecting an assessment, entering "
+"report dates, completing sections, saving drafts, and reviewing submitted "
+"events."
+msgstr ""
+"Use this page as an in-app checklist for selecting an assessment, entering "
+"report dates, completing sections, saving drafts, and reviewing submitted "
+"events."
+
+msgid ""
+"You need at least one active assessment in the app and access to the "
+"relevant organisation units before you can capture new data."
+msgstr ""
+"You need at least one active assessment in the app and access to the "
+"relevant organisation units before you can capture new data."
 
 msgid "Assessment saved successfully"
 msgstr "Assessment saved successfully"
@@ -425,8 +773,14 @@ msgstr "Code is required"
 msgid "Use letters, digits, underscores, and hyphens only"
 msgstr "Use letters, digits, underscores, and hyphens only"
 
+msgid "Select at least one organisation unit before importing."
+msgstr "Select at least one organisation unit before importing."
+
 msgid "Failed to import assessment."
 msgstr "Failed to import assessment."
+
+msgid "Open setup guide"
+msgstr "Open setup guide"
 
 msgid "Breadcrumb"
 msgstr "Breadcrumb"
@@ -459,11 +813,26 @@ msgstr "Local store save failed"
 msgid "The program was saved to DHIS2 successfully. Only the local record failed."
 msgstr "The program was saved to DHIS2 successfully. Only the local record failed."
 
-msgid "Importing…"
-msgstr "Importing…"
+msgid "No organisation units selected"
+msgstr "No organisation units selected"
+
+msgid "Select the organisation units for this assessment before importing."
+msgstr "Select the organisation units for this assessment before importing."
+
+msgid "Selected organisation units"
+msgstr "Selected organisation units"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Importingâ€¦"
+msgstr "Importingâ€¦"
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Review complete"
+msgstr "Review complete"
 
 msgid "Ready to import"
 msgstr "Ready to import"

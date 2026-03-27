@@ -19,7 +19,7 @@ export const useCaptureStats = (assessment: Assessment | null, userUid: string |
         queryFn:  async () => {
             const result = await engine.query({
                 events: {
-                    resource: 'events',
+                    resource: 'tracker/events',
                     params: {
                         program:    assessment!.programId,
                         status:     'COMPLETED',

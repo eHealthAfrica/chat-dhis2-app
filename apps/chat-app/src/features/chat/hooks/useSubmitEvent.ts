@@ -39,10 +39,10 @@ export const useSubmitEvent = () => {
         mutationFn: async ({ draft, programStageId, onDraftDeleted }) => {
             const payload = buildEventPayload(draft, programStageId);
             let eventId: string;
-
+            alert()
             if (draft.eventId) {
                 await engine.mutate({
-                    resource: 'tracker/events',
+                    resource: 'tracker?async=false',
                     id: draft.eventId,
                     type: 'update',
                     data: { ...payload, event: draft.eventId },
@@ -50,11 +50,12 @@ export const useSubmitEvent = () => {
                 eventId = draft.eventId;
             } else {
                 const result = await engine.mutate({
-                    resource: 'tracker/events',
+                    resource: 'tracker?async=false',
                     type: 'create',
-                    data: payload,
-                }) as { response: { importSummaries: Array<{ reference: string }> } };
-                eventId = result.response.importSummaries[0]?.reference ?? '';
+                    data: {"events": [ payload ]},
+                }) as { bundleReport: any };
+                //eventId = result.response.importSummaries[0]?.reference ?? '';
+                eventId = result.bundleReport.typeReportMap.EVENT.objectReports[0]?.uid ?? '';
             }
 
             await onDraftDeleted();

@@ -137,7 +137,7 @@ export const useDraft = (programId: string, userUid: string) => {
         try {
             const result = await engine.query({
                 drafts: {
-                    resource: `dataStore/chat/${programDraftStoreKey(userUid, programId)}`,
+                    resource: `dataStore/chat/${programDraftStoreKey(userUid, programId)}?encrypt=true`,
                 },
             }) as { drafts: EventDraft[] | { drafts?: EventDraft[] } };
 
@@ -150,18 +150,19 @@ export const useDraft = (programId: string, userUid: string) => {
 
     const writeRemoteProgramDrafts = useCallback(async (drafts: EventDraft[]) => {
         const key = programDraftStoreKey(userUid, programId);
+        alert()
 
         try {
             await engine.mutate({
                 resource: 'dataStore/chat',
-                id: key,
+                id: key+'',
                 type: 'update',
                 data: drafts,
             });
         } catch {
             await engine.mutate({
                 resource: 'dataStore/chat',
-                id: key,
+                id: key+'',
                 type: 'create',
                 data: drafts,
             });

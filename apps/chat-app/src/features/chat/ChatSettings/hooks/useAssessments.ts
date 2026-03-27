@@ -29,7 +29,7 @@ const normalizeAssessment = (
 const readStore = async (dataEngine: ReturnType<typeof useDataEngine>): Promise<Assessment[]> => {
     try {
         const resp = await dataEngine.query({
-            store: { resource: `dataStore/chat/${STORE_KEY}` },
+            store: { resource: `dataStore/chat/${STORE_KEY}?encrypt=true` },
         });
         const d = resp.store as {
             assessments?: Array<Assessment & { dateConfig?: unknown }>;

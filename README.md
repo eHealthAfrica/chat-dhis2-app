@@ -1,6 +1,6 @@
 # CHAT App
 
-A DHIS2 application for chat-based data capture and assessment management. Extracted from the [CHAP Frontend](https://github.com/dhis2-chap/chap-frontend) monorepo, retaining only the chat modules.
+CHAT, short for Climate Health Vulnerability Assessment Tool, is a DHIS2-based application for managing and conducting climate and health vulnerability assessments. It allows administrators to configure or import assessment tools, and enables users to capture structured assessment data across organisation units through guided, section-based workflows.
 
 ## Project Structure
 
@@ -17,6 +17,7 @@ A DHIS2 application for chat-based data capture and assessment management. Extra
 
 - Node.js 20.x or higher
 - pnpm 10.x or higher
+- DHIS2 (2.41+)
 
 ### Installation and Development
 
@@ -35,7 +36,7 @@ pnpm tsc:check       # Type checking
 
 ## License
 
-BSD-3-Clause License for chat-app, MIT License for shared packages. See the original [CHAP Frontend repository](https://github.com/dhis2-chap/chap-frontend) for full license details.
+BSD-3-Clause License for chat-app, MIT License for shared packages.
 
 ## Attribution
 
@@ -44,5 +45,4 @@ This project is derived from [dhis2-chap/chap-frontend](https://github.com/dhis2
 ## Links
 
 - [Original Repository](https://github.com/dhis2-chap/chap-frontend)
-- [DHIS2 CHAP Wiki](https://github.com/dhis2-chap/chap-core/wiki)
 - [DHIS2 Community](https://community.dhis2.org/)

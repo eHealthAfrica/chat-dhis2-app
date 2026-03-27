@@ -149,6 +149,7 @@ export const SidenavLink = ({
     ) : (
         <a
             href={to as string}
+            rel="noreferrer"
             className={cx({
                 [styles['active']]: active,
             })}

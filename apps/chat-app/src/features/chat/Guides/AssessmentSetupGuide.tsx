@@ -1,6 +1,13 @@
 import i18n from '@dhis2/d2-i18n';
 import styles from './Guides.module.css';
 
+import as1OpenSettings from '../../../assets/guide-screenshots/as-1-open-settings.png';
+import as2LoadJson from '../../../assets/guide-screenshots/as-2-load-json.png';
+import as3ReviewProgram from '../../../assets/guide-screenshots/as-3-review-program.png';
+import as4AssignOrgUnits from '../../../assets/guide-screenshots/as-4-assign-org-units.png';
+import as5ImportAssessment from '../../../assets/guide-screenshots/as-5-import-assessment.png';
+import as6ConfirmAvailable from '../../../assets/guide-screenshots/as-6-confirm-available.png';
+
 const steps = [
     {
         id: 'open-settings',
@@ -11,6 +18,7 @@ const steps = [
             i18n.t('Use the New assessment action to open the import flow.'),
             i18n.t('Existing assessments stay visible in the settings list for review or cleanup.'),
         ],
+        image: as1OpenSettings,
     },
     {
         id: 'load-json',
@@ -21,6 +29,7 @@ const steps = [
             i18n.t('Only `.json` files are accepted in the import step.'),
             i18n.t('Parsing warnings are shown before you import the assessment.'),
         ],
+        image: as2LoadJson,
     },
     {
         id: 'review-preview',
@@ -31,6 +40,7 @@ const steps = [
             i18n.t('Use the Next button after you finish reviewing the metadata preview.'),
             i18n.t('The preview step helps you catch missing or unexpected metadata before import.'),
         ],
+        image: as3ReviewProgram,
     },
     {
         id: 'assign-org-units',
@@ -41,6 +51,7 @@ const steps = [
             i18n.t('You must select at least one organisation unit before importing.'),
             i18n.t('This selection is part of the guided import flow and is confirmed before the final import action.'),
         ],
+        image: as4AssignOrgUnits,
     },
     {
         id: 'import-assessment',
@@ -51,6 +62,7 @@ const steps = [
             i18n.t('If the DHIS2 save succeeds but the local save fails, the screen shows a retry option for the local record.'),
             i18n.t('After a successful import, the app returns you to the settings list.'),
         ],
+        image: as5ImportAssessment,
     },
     {
         id: 'confirm-availability',
@@ -61,6 +73,7 @@ const steps = [
             i18n.t('Active assessments appear in the data capture home screen.'),
             i18n.t('Use the assessment details view in settings if you need to inspect the imported program metadata.'),
         ],
+        image: as6ConfirmAvailable,
     },
 ];
 
@@ -119,6 +132,13 @@ export const AssessmentSetupGuide = () => {
                                     <li key={bullet}>{bullet}</li>
                                 ))}
                             </ul>
+                            {step.image && (
+                                <img
+                                    src={step.image}
+                                    alt={step.title}
+                                    className={styles.stepImage}
+                                />
+                            )}
                         </section>
                     ))}
                 </div>

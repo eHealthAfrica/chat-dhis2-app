@@ -245,6 +245,15 @@
     }
 }
 
+.stepImage {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 8px;
+    border: 1px solid rgba(208, 213, 221, 0.92);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    display: block;
+}
+
 @media (max-width: 768px) {
     .page {
         width: 100%;

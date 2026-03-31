@@ -1,6 +1,14 @@
 import i18n from '@dhis2/d2-i18n';
 import styles from './Guides.module.css';
 
+import dc1ChooseAssessment from '../../../assets/guide-screenshots/dc-1-choose-assessment.png';
+import dc2SelectOrgUnit from '../../../assets/guide-screenshots/dc-2-select-org-unit.png';
+import dc3ReportDate from '../../../assets/guide-screenshots/dc-3-report-date.png';
+import dc4CompleteSections from '../../../assets/guide-screenshots/dc-4-complete-sections.png';
+import dc5Coordinates from '../../../assets/guide-screenshots/dc-5-coordinates.png';
+import dc6SaveDrafts from '../../../assets/guide-screenshots/dc-6-save-drafts.png';
+import dc7ReviewEvents from '../../../assets/guide-screenshots/dc-7-review-events.png';
+
 const steps = [
     {
         id: 'choose-program',
@@ -11,6 +19,7 @@ const steps = [
             i18n.t('Select the program card to open its event list.'),
             i18n.t('Use the event list to review both submitted events and saved drafts.'),
         ],
+        image: dc1ChooseAssessment,
     },
     {
         id: 'select-org-unit',
@@ -21,6 +30,7 @@ const steps = [
             i18n.t('Pick the correct facility, district, or branch before continuing.'),
             i18n.t('Completed events keep their original organisation unit and do not allow changes.'),
         ],
+        image: dc2SelectOrgUnit,
     },
     {
         id: 'report-date',
@@ -31,6 +41,7 @@ const steps = [
             i18n.t('The report date is stored as `occurredAt` in the event payload.'),
             i18n.t('If the date field is blank or invalid, the form will not let you continue.'),
         ],
+        image: dc3ReportDate,
     },
     {
         id: 'complete-sections',
@@ -41,6 +52,7 @@ const steps = [
             i18n.t('Required fields must be completed before you can submit the assessment.'),
             i18n.t('Long section names wrap in the side navigation so you can still read them.'),
         ],
+        image: dc4CompleteSections,
     },
     {
         id: 'coordinates',
@@ -51,6 +63,7 @@ const steps = [
             i18n.t('You can edit the coordinates after using current location.'),
             i18n.t('Both latitude and longitude must be valid before the field passes validation.'),
         ],
+        image: dc5Coordinates,
     },
     {
         id: 'drafts',
@@ -61,6 +74,7 @@ const steps = [
             i18n.t('Open the Drafts tab to continue saved work.'),
             i18n.t('Parent organisation units can show drafts from all descendants in the event list.'),
         ],
+        image: dc6SaveDrafts,
     },
     {
         id: 'review-events',
@@ -71,6 +85,7 @@ const steps = [
             i18n.t('Completed events read directly from the DHIS2 tracker events endpoint.'),
             i18n.t('The list shows report date, organisation unit name, creator, and updater details when available.'),
         ],
+        image: dc7ReviewEvents,
     },
 ];
 
@@ -129,6 +144,13 @@ export const DataCaptureGuide = () => {
                                     <li key={bullet}>{bullet}</li>
                                 ))}
                             </ul>
+                            {step.image && (
+                                <img
+                                    src={step.image}
+                                    alt={step.title}
+                                    className={styles.stepImage}
+                                />
+                            )}
                         </section>
                     ))}
                 </div>

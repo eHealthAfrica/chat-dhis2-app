@@ -2,6 +2,7 @@
 
 ### Features
 
+* add screenshots to each step in the data capture and assessment setup guide pages
 * add root `meta-data-packages` sample assessment packages for drought, flood, and heatwave imports
 * update the DHIS2 app manifest with a new app id and raise the minimum supported DHIS2 version to `2.41`
 * read assessment configuration and grouped draft progress from encrypted `dataStore/chat` resources

@@ -9,6 +9,7 @@ import { AssessmentPreview } from '../NewAssessment/parseAssessmentJson';
 ───────────────────────────────────────────────────────────── */
 export interface SaveProgramPayload {
     preview: AssessmentPreview;
+    selectedOrgUnits: Array<{ id: string }>;
 }
 
 export interface SaveProgramResult {
@@ -41,22 +42,27 @@ const generateCode = (name: string): string =>
         .replace(/^_+|_+$/, '')
         .slice(0, 50);
 
-const buildMetadataPayload = (preview: AssessmentPreview) => {
+export const buildMetadataPayload = (preview: AssessmentPreview, selectedOrgUnits: Array<{ id: string }>) => {
     const optionSets = preview.optionSets.map(os => ({
         id:        os.id,
         name:      os.name,
         valueType: os.valueType,
     }));
 
-    const options = preview.optionSets.flatMap(os =>
-        os.options.map((o, index) => ({
-            id:        o.id,
-            code:      o.code,
-            name:      o.name,
-            sortOrder: index + 1,
-            optionSet: { id: os.id },
-        })),
-    );
+    const options = preview.optionSets.reduce<Array<{
+        id: string; code: string; name: string; sortOrder: number; optionSet: { id: string };
+    }>>((acc, os) => {
+        os.options.forEach((o, index) => {
+            acc.push({
+                id:        o.id,
+                code:      o.code,
+                name:      o.name,
+                sortOrder: index + 1,
+                optionSet: { id: os.id },
+            });
+        });
+        return acc;
+    }, []);
 
     const dataElements = preview.dataElements.map(de => ({
         id:              de.id,
@@ -100,8 +106,9 @@ const buildMetadataPayload = (preview: AssessmentPreview) => {
             name:        preview.program.name,
             shortName:   preview.program.shortName,
             programType: preview.program.programType,
-            code:        preview.program.code?.trim() || generateCode(preview.program.name),
-            programStages: programStages.map(ps => ({ id: ps.id })),
+            code:              preview.program.code?.trim() || generateCode(preview.program.name),
+            programStages:     programStages.map(ps => ({ id: ps.id })),
+            organisationUnits: selectedOrgUnits,
         }]
         : [];
 
@@ -111,7 +118,10 @@ const buildMetadataPayload = (preview: AssessmentPreview) => {
         shortName:       pi.shortName ?? pi.name.slice(0, 50),
         analyticsType:   pi.analyticsType,
         aggregationType: pi.aggregationType,
+        ...(pi.expression      ? { expression: pi.expression }              : {}),
         ...(pi.filter          ? { filter:  pi.filter }                     : {}),
+        ...(pi.analyticsPeriodBoundaries.length > 0
+            ? { analyticsPeriodBoundaries: pi.analyticsPeriodBoundaries }   : {}),
         ...(preview.program?.id ? { program: { id: preview.program!.id } }  : {}),
     }));
 
@@ -145,11 +155,11 @@ export const useSaveProgramToDhis2 = ({
     );
 
     const mutation = useMutation<SaveProgramResult, Error, SaveProgramPayload>({
-        mutationFn: async ({ preview }) => {
+        mutationFn: async ({ preview, selectedOrgUnits }) => {
             const result = await engine.mutate({
                 resource: 'metadata',
                 type:     'create' as const,
-                data:     buildMetadataPayload(preview),
+                data:     buildMetadataPayload(preview, selectedOrgUnits),
                 params: {
                     importStrategy: 'CREATE_AND_UPDATE',
                     atomicMode:     'NONE',

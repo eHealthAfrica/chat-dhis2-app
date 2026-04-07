@@ -126,7 +126,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, 400px);
     gap: 20px;
 }
 
@@ -135,8 +135,10 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    min-height: 320px;
+    width: 400px;
+    height: 320px;
     padding: 24px;
+    overflow: hidden;
     border: 1px solid rgba(208, 213, 221, 0.92);
     border-radius: 10px;
     background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
@@ -368,7 +370,8 @@
     }
 
     .card {
-        min-height: auto;
+        width: 100%;
+        height: 320px;
         padding: 20px;
     }
 

@@ -1,0 +1,49 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1400" height="700" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      .eyebrow { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #667085; letter-spacing: 1px; text-transform: uppercase; }
+      .title { font: 700 28px "Segoe UI", Arial, sans-serif; fill: #182230; }
+      .body { font: 500 14px "Segoe UI", Arial, sans-serif; fill: #475467; }
+      .label { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #344054; text-transform: uppercase; letter-spacing: 0.7px; }
+      .value { font: 600 16px "Segoe UI", Arial, sans-serif; fill: #101828; }
+      .button { font: 700 13px "Segoe UI", Arial, sans-serif; fill: #0B6BCB; }
+      .error { font: 600 12px "Segoe UI", Arial, sans-serif; fill: #B42318; }
+      .note { font: 600 12px "Segoe UI", Arial, sans-serif; fill: #667085; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#bg)"/>
+
+  <text x="120" y="60" class="eyebrow">Simpler Coordinate Layout</text>
+  <text x="120" y="100" class="title">Keep it inline, just cleaner</text>
+  <text x="120" y="130" class="body">Suggestion: one compact row with a fixed button column and two evenly sized inputs.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="120" y="170" width="960" height="214" rx="24" fill="#FFFFFF"/>
+  </g>
+  <rect x="120" y="170" width="960" height="214" rx="24" fill="#FFFFFF" stroke="#D0D5DD"/>
+
+  <text x="156" y="210" class="label">Coordinate *</text>
+
+  <rect x="156" y="232" width="196" height="96" rx="18" fill="#EFF8FF" stroke="#B2DDFF"/>
+  <text x="254" y="286" text-anchor="middle" class="button">Use current location</text>
+
+  <rect x="372" y="232" width="322" height="96" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="396" y="262" class="label">Latitude</text>
+  <text x="396" y="298" class="value">9.0765</text>
+
+  <rect x="714" y="232" width="322" height="96" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="738" y="262" class="label">Longitude</text>
+  <text x="738" y="298" class="value">7.3986</text>
+
+  <text x="156" y="354" class="error">Longitude must be between -180 and 180</text>
+
+  <text x="120" y="438" class="note">This keeps the field simple: no extra panels, no modal, just better alignment and spacing.</text>
+</svg>

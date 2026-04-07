@@ -57,6 +57,13 @@ interface RawProgram {
     programStages?: { id: string }[];
 }
 
+interface RawAnalyticsPeriodBoundary {
+    analyticsPeriodBoundaryType: string;
+    boundaryTarget?: string;
+    offsetPeriodType?: string;
+    offsetPeriods?: number;
+}
+
 interface RawProgramIndicator {
     id: string;
     name: string;
@@ -66,6 +73,7 @@ interface RawProgramIndicator {
     expression?: string;
     filter?: string;
     analyticsType?: string;
+    analyticsPeriodBoundaries?: RawAnalyticsPeriodBoundary[];
 }
 
 interface RawOrganisationUnitRef {
@@ -143,6 +151,7 @@ export interface ParsedProgramIndicator {
     expression: string;
     filter: string;
     analyticsType: string;
+    analyticsPeriodBoundaries: RawAnalyticsPeriodBoundary[];
 }
 
 export interface ParsedOrganisationUnitRef {
@@ -261,6 +270,7 @@ export function parseAssessmentJson(raw: RawMetadataJson): AssessmentPreview {
             expression: pi.expression ?? '',
             filter: pi.filter ?? '',
             analyticsType: pi.analyticsType ?? '—',
+            analyticsPeriodBoundaries: pi.analyticsPeriodBoundaries ?? [],
         })
     );
 

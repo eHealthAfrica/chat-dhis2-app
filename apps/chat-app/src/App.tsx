@@ -12,6 +12,7 @@ import { SyncUrlWithGlobalShell } from './utils/syncUrlWithGlobalShell';
 import { ChatLayout } from './features/chat/ChatLayout';
 import { ChatSettingsPage } from './features/chat/pages/ChatSettingsPage';
 import { NewAssessmentPage } from './features/chat/pages/NewAssessmentPage';
+import { AddExistingAssessmentPage } from './features/chat/pages/AddExistingAssessmentPage';
 import { DataCaptureGuidePage } from './features/chat/pages/DataCaptureGuidePage';
 import { AssessmentSetupGuidePage } from './features/chat/pages/AssessmentSetupGuidePage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -72,6 +73,14 @@ const router = createHashRouter([
                         element: (
                             <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
                                 <NewAssessmentPage />
+                            </RequireAuthority>
+                        ),
+                    },
+                    {
+                        path: 'settings/existing',
+                        element: (
+                            <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
+                                <AddExistingAssessmentPage />
                             </RequireAuthority>
                         ),
                     },

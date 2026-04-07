@@ -1,0 +1,63 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="120" y1="96" x2="1080" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F9FBFD"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1400" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      .eyebrow { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #667085; letter-spacing: 1.1px; text-transform: uppercase; }
+      .title { font: 700 30px "Segoe UI", Arial, sans-serif; fill: #182230; }
+      .body { font: 500 14px "Segoe UI", Arial, sans-serif; fill: #475467; }
+      .label { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #344054; text-transform: uppercase; letter-spacing: 0.7px; }
+      .value { font: 600 16px "Segoe UI", Arial, sans-serif; fill: #101828; }
+      .button { font: 700 13px "Segoe UI", Arial, sans-serif; fill: #0B6BCB; }
+      .hint { font: 500 13px "Segoe UI", Arial, sans-serif; fill: #667085; }
+      .error { font: 600 12px "Segoe UI", Arial, sans-serif; fill: #B42318; }
+      .caption { font: 600 12px "Segoe UI", Arial, sans-serif; fill: #667085; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#bg)"/>
+
+  <text x="120" y="64" class="eyebrow">Coordinate Field Suggestion</text>
+
+  <g filter="url(#shadow)">
+    <rect x="120" y="96" width="960" height="524" rx="28" fill="url(#panel)"/>
+  </g>
+  <rect x="120" y="96" width="960" height="524" rx="28" fill="url(#panel)" stroke="#D0D5DD"/>
+
+  <text x="168" y="154" class="title">Household coordinates</text>
+  <text x="168" y="184" class="body">Suggestion: keep the action, inputs, helper text, and validation inside one clear field block instead of spreading them vertically.</text>
+
+  <rect x="168" y="222" width="864" height="318" rx="24" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="196" y="258" class="label">Coordinate</text>
+
+  <rect x="196" y="282" width="180" height="52" rx="16" fill="#EFF8FF" stroke="#B2DDFF"/>
+  <text x="286" y="314" text-anchor="middle" class="button">Use current location</text>
+
+  <rect x="396" y="282" width="296" height="92" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="420" y="312" class="label">Latitude</text>
+  <text x="420" y="348" class="value">9.0765</text>
+
+  <rect x="712" y="282" width="296" height="92" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="736" y="312" class="label">Longitude</text>
+  <text x="736" y="348" class="value">7.3986</text>
+
+  <rect x="196" y="394" width="812" height="54" rx="16" fill="#F5F9FF" stroke="#D8E6F6"/>
+  <text x="220" y="427" class="hint">Stored as DHIS2 coordinate format: [longitude, latitude]</text>
+
+  <rect x="196" y="466" width="812" height="42" rx="14" fill="#FEF3F2" stroke="#F7B5B0"/>
+  <text x="220" y="492" class="error">Validation appears here only when coordinates are incomplete or out of range.</text>
+
+  <text x="168" y="582" class="eyebrow">Layout Notes</text>
+  <text x="168" y="612" class="caption">1. Keep the button aligned with the input row, but give it a fixed-width action slot.</text>
+  <text x="168" y="638" class="caption">2. Use equal-height latitude and longitude cards so the field reads as one compact unit.</text>
+  <text x="168" y="664" class="caption">3. Put helper text and validation directly below the row to avoid making the section feel fragmented.</text>
+</svg>

@@ -1,0 +1,117 @@
+<svg width="1440" height="1024" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1440" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#EEF3F8"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1000" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F9FBFD"/>
+    </linearGradient>
+    <filter id="shadowLg" x="0" y="0" width="1800" height="1400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <filter id="shadowMd" x="0" y="0" width="1800" height="1400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .title { font: 700 32px "Segoe UI", Arial, sans-serif; fill: #182230; }
+      .label { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #667085; letter-spacing: 1px; text-transform: uppercase; }
+      .body { font: 500 14px "Segoe UI", Arial, sans-serif; fill: #475467; }
+      .mono { font: 700 12px Consolas, monospace; fill: #344054; }
+      .nav { font: 600 13px "Segoe UI", Arial, sans-serif; fill: #344054; }
+      .fieldLabel { font: 700 12px "Segoe UI", Arial, sans-serif; fill: #344054; text-transform: uppercase; letter-spacing: 0.7px; }
+      .fieldValue { font: 600 15px "Segoe UI", Arial, sans-serif; fill: #101828; }
+      .button { font: 700 13px "Segoe UI", Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1024" fill="url(#bg)"/>
+
+  <rect x="48" y="32" width="116" height="34" rx="8" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="106" y="54" text-anchor="middle" class="body">Back</text>
+
+  <g filter="url(#shadowLg)">
+    <rect x="48" y="84" width="1344" height="148" rx="26" fill="url(#panel)"/>
+  </g>
+  <rect x="48" y="84" width="1344" height="148" rx="26" fill="url(#panel)" stroke="#D0D5DD"/>
+  <text x="82" y="136" class="title">Household Follow-Up Assessment</text>
+  <rect x="84" y="150" width="92" height="26" rx="13" fill="#EEF2F6"/>
+  <text x="130" y="167" text-anchor="middle" class="mono">HFAT-001</text>
+  <text x="82" y="202" class="body">Use the same page language as the event list: raised header, structured left rail, and one strong content surface for the form.</text>
+
+  <g filter="url(#shadowMd)">
+    <rect x="1074" y="116" width="282" height="86" rx="20" fill="#FFFFFF"/>
+  </g>
+  <rect x="1074" y="116" width="282" height="86" rx="20" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="1100" y="146" class="label">Organisation unit</text>
+  <text x="1100" y="180" class="fieldValue">District Alpha</text>
+
+  <g filter="url(#shadowLg)">
+    <rect x="48" y="264" width="294" height="676" rx="22" fill="url(#panel)"/>
+  </g>
+  <rect x="48" y="264" width="294" height="676" rx="22" fill="url(#panel)" stroke="#D0D5DD"/>
+  <rect x="48" y="264" width="294" height="64" rx="22" fill="#F8FAFC"/>
+  <path d="M48 308H342" stroke="#D0D5DD"/>
+  <text x="76" y="302" class="label">Form Steps</text>
+
+  <rect x="70" y="346" width="250" height="52" rx="14" fill="#EAF2FF" stroke="#B2DDFF"/>
+  <circle cx="96" cy="372" r="12" fill="#0B6BCB"/>
+  <text x="96" y="376" text-anchor="middle" class="button" fill="#FFFFFF">1</text>
+  <text x="122" y="377" class="nav">Organisation unit</text>
+
+  <rect x="70" y="410" width="250" height="52" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <circle cx="96" cy="436" r="12" fill="#FFFFFF" stroke="#98A2B3"/>
+  <text x="96" y="440" text-anchor="middle" class="button" fill="#475467">2</text>
+  <text x="122" y="441" class="nav">Dates</text>
+
+  <rect x="70" y="474" width="250" height="52" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <circle cx="96" cy="500" r="12" fill="#FFFFFF" stroke="#98A2B3"/>
+  <text x="96" y="504" text-anchor="middle" class="button" fill="#475467">3</text>
+  <text x="122" y="505" class="nav">Household details</text>
+
+  <rect x="70" y="538" width="250" height="52" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <circle cx="96" cy="564" r="12" fill="#FFFFFF" stroke="#98A2B3"/>
+  <text x="96" y="568" text-anchor="middle" class="button" fill="#475467">4</text>
+  <text x="122" y="569" class="nav">Symptoms</text>
+
+  <g filter="url(#shadowLg)">
+    <rect x="370" y="264" width="1022" height="676" rx="24" fill="url(#panel)"/>
+  </g>
+  <rect x="370" y="264" width="1022" height="676" rx="24" fill="url(#panel)" stroke="#D0D5DD"/>
+
+  <rect x="370" y="264" width="1022" height="86" rx="24" fill="#FFFFFF"/>
+  <path d="M370 350H1392" stroke="#D0D5DD"/>
+  <text x="404" y="312" class="title" font-size="24">Household details</text>
+  <text x="404" y="336" class="body">2 of 6 required fields completed</text>
+
+  <rect x="404" y="382" width="438" height="86" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="428" y="412" class="fieldLabel">Head of household</text>
+  <text x="428" y="446" class="fieldValue">Martha Bello</text>
+
+  <rect x="864" y="382" width="494" height="86" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="888" y="412" class="fieldLabel">Phone number</text>
+  <text x="888" y="446" class="fieldValue">0800 123 4567</text>
+
+  <rect x="404" y="492" width="954" height="96" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="428" y="522" class="fieldLabel">Address</text>
+  <text x="428" y="556" class="fieldValue">12 Market Road, Garki</text>
+
+  <rect x="404" y="612" width="954" height="108" rx="18" fill="#F8FAFC" stroke="#D0D5DD"/>
+  <text x="428" y="642" class="fieldLabel">Coordinates</text>
+  <rect x="428" y="660" width="190" height="38" rx="12" fill="#EFF8FF" stroke="#B2DDFF"/>
+  <text x="523" y="684" text-anchor="middle" class="button" fill="#0B6BCB">Use current location</text>
+  <rect x="634" y="650" width="300" height="48" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="654" y="680" class="fieldLabel">Latitude</text>
+  <rect x="948" y="650" width="300" height="48" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="968" y="680" class="fieldLabel">Longitude</text>
+
+  <rect x="370" y="846" width="1022" height="94" rx="22" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="404" y="900" class="body">Saved at 10:42 AM</text>
+  <rect x="1050" y="872" width="124" height="42" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="1112" y="898" text-anchor="middle" class="button" fill="#475467">Save progress</text>
+  <rect x="1188" y="872" width="84" height="42" rx="14" fill="#FFFFFF" stroke="#D0D5DD"/>
+  <text x="1230" y="898" text-anchor="middle" class="button" fill="#475467">Next</text>
+  <rect x="1286" y="872" width="84" height="42" rx="14" fill="#0B6BCB"/>
+  <text x="1328" y="898" text-anchor="middle" class="button" fill="#FFFFFF">Submit</text>
+</svg>

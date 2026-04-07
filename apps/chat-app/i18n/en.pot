@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-27T02:23:22.484Z\n"
-"PO-Revision-Date: 2026-03-27T02:23:22.485Z\n"
+"POT-Creation-Date: 2026-04-07T03:51:29.700Z\n"
+"PO-Revision-Date: 2026-04-07T03:51:29.700Z\n"
 
 msgid "Oops!"
 msgstr "Oops!"
@@ -71,6 +71,67 @@ msgstr "Assessment setup guide"
 msgid "Settings"
 msgstr "Settings"
 
+msgid "Failed to load programs."
+msgstr "Failed to load programs."
+
+msgid "Failed to save assessment."
+msgstr "Failed to save assessment."
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Breadcrumb"
+msgstr "Breadcrumb"
+
+msgid "CHAT"
+msgstr "CHAT"
+
+msgid "Link existing program"
+msgstr "Link existing program"
+
+msgid ""
+"Search for a DHIS2 program already deployed in this instance and register "
+"it as a CHAT assessment."
+msgstr ""
+"Search for a DHIS2 program already deployed in this instance and register "
+"it as a CHAT assessment."
+
+msgid "Failed to save"
+msgstr "Failed to save"
+
+msgid "Search programs by name…"
+msgstr "Search programs by name…"
+
+msgid "Search failed"
+msgstr "Search failed"
+
+msgid "Searching…"
+msgstr "Searching…"
+
+msgid "No programs found."
+msgstr "No programs found."
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Short name"
+msgstr "Short name"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Program ID"
+msgstr "Program ID"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Already added"
+msgstr "Already added"
+
+msgid "Add"
+msgstr "Add"
+
 msgid "Organisation unit"
 msgstr "Organisation unit"
 
@@ -88,9 +149,6 @@ msgstr "Saved at {{time}}"
 
 msgid "Submission failed."
 msgstr "Submission failed."
-
-msgid "Back"
-msgstr "Back"
 
 msgid "Edit assessment"
 msgstr "Edit assessment"
@@ -205,18 +263,6 @@ msgstr "Active"
 
 msgid "Program"
 msgstr "Program"
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Short name"
-msgstr "Short name"
-
-msgid "Code"
-msgstr "Code"
-
-msgid "Program ID"
-msgstr "Program ID"
 
 msgid "Program type"
 msgstr "Program type"
@@ -782,12 +828,6 @@ msgstr "Failed to import assessment."
 msgid "Open setup guide"
 msgstr "Open setup guide"
 
-msgid "Breadcrumb"
-msgstr "Breadcrumb"
-
-msgid "CHAT"
-msgstr "CHAT"
-
 msgid "Import assessment"
 msgstr "Import assessment"
 
@@ -813,6 +853,12 @@ msgstr "Local store save failed"
 msgid "The program was saved to DHIS2 successfully. Only the local record failed."
 msgstr "The program was saved to DHIS2 successfully. Only the local record failed."
 
+msgid "Import"
+msgstr "Import"
+
+msgid "Review the metadata below, then click Import assessment to send it to DHIS2."
+msgstr "Review the metadata below, then click Import assessment to send it to DHIS2."
+
 msgid "No organisation units selected"
 msgstr "No organisation units selected"
 
@@ -825,8 +871,8 @@ msgstr "Selected organisation units"
 msgid "Previous"
 msgstr "Previous"
 
-msgid "Importingâ€¦"
-msgstr "Importingâ€¦"
+msgid "Importing…"
+msgstr "Importing…"
 
 msgid "Cancel"
 msgstr "Cancel"
@@ -866,6 +912,3 @@ msgstr "Load file"
 
 msgid "Review"
 msgstr "Review"
-
-msgid "Import"
-msgstr "Import"

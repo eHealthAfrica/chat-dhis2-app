@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, CircularLoader, IconAdd16, IconDelete16, IconView16, NoticeBox } from '@dhis2/ui';
+import { Button, Card, CircularLoader, IconAdd16, IconDelete16, IconView16, IconLink16, NoticeBox } from '@dhis2/ui';
 import i18n from '@dhis2/d2-i18n';
 import { useState } from 'react';
 import styles from './ChatSettings.module.css';
@@ -36,13 +36,22 @@ export const ChatSettings = () => {
                         )}
                     </p>
                 </div>
-                <Button
-                    primary
-                    icon={<IconAdd16 />}
-                    onClick={() => navigate('/chat/settings/new')}
-                >
-                    {i18n.t('New assessment')}
-                </Button>
+                <div className={styles.headerActions}>
+                    <Button
+                        secondary
+                        icon={<IconLink16 />}
+                        onClick={() => navigate('/chat/settings/existing')}
+                    >
+                        {i18n.t('Link existing program')}
+                    </Button>
+                    <Button
+                        primary
+                        icon={<IconAdd16 />}
+                        onClick={() => navigate('/chat/settings/new')}
+                    >
+                        {i18n.t('New assessment')}
+                    </Button>
+                </div>
             </div>
 
             {isError && (

@@ -4,7 +4,7 @@ import styles from './NewAssessment.module.css'
 type SState = 'done' | 'active' | 'pending'
 
 interface StepsProps {
-    current: 1 | 2 | 3 | 4
+    current: 1 | 2 | 3 | 4 | 5
 }
 
 export const Steps = ({ current }: StepsProps) => {

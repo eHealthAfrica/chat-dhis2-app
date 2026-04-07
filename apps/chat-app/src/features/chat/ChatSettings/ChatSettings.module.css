@@ -28,6 +28,13 @@
     color: var(--colors-grey700, #4a5768);
 }
 
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
 
 /* ── Table card ──────────────────────────────────────────── */
 .cardInner {

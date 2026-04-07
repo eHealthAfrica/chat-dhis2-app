@@ -48,7 +48,7 @@ export const NewAssessment = () => {
     const [parseError, setParseError] = useState<string | null>(null);
     const [preview, setPreview] = useState<AssessmentPreview | null>(null);
     const [warnings, setWarnings] = useState<string[]>([]);
-    const [workflowStep, setWorkflowStep] = useState<2 | 3>(2);
+    const [workflowStep, setWorkflowStep] = useState<2 | 3 | 4>(2);
 
     const [name, setName] = useState('');
     const [shortName, setShortName] = useState('');
@@ -194,11 +194,18 @@ export const NewAssessment = () => {
     };
 
     const handleNextStep = () => {
-        setWorkflowStep(3);
+        if (workflowStep === 3 && selectedOrgUnits.length === 0) {
+            setErrors(prev => ({
+                ...prev,
+                organisationUnits: i18n.t('Select at least one organisation unit before importing.'),
+            }));
+            return;
+        }
+        setWorkflowStep(prev => (prev + 1) as 3 | 4);
     };
 
     const handlePreviousStep = () => {
-        setWorkflowStep(2);
+        setWorkflowStep(prev => (prev - 1) as 2 | 3);
     };
 
     const saveToLocalStore = async (program: Dhis2Program): Promise<boolean> => {
@@ -226,7 +233,10 @@ export const NewAssessment = () => {
         if (Object.keys(validationErrors).length || !preview) return;
 
         try {
-            await saveProgramToDhis2({ preview });
+            await saveProgramToDhis2({
+                preview,
+                selectedOrgUnits: selectedOrgUnits.map(ou => ({ id: ou.id })),
+            });
 
             const searchCode = code.trim();
             const dhis2Result = await engine.query({
@@ -268,7 +278,7 @@ export const NewAssessment = () => {
     };
 
     const hasErrors = localStoreError !== null;
-    const currentStep = !preview ? 1 : (isSaving || dhis2Saved ? 4 : workflowStep);
+    const currentStep = !preview ? 1 : (isSaving || dhis2Saved ? 5 : workflowStep);
 
     return (
         <div className={styles.page}>
@@ -350,9 +360,23 @@ export const NewAssessment = () => {
                             </>
                         )}
 
+                        {filtered && workflowStep === 4 && (
+                            <>
+                                <Card accent="cf" step={4} title={i18n.t('Import')} defaultOpen>
+                                    <p className={styles.assignHint}>
+                                        {i18n.t('Review the metadata below, then click Import assessment to send it to DHIS2.')}
+                                    </p>
+                                </Card>
+                                <ProgramCard preview={filtered} />
+                                <SectionsCard sections={filtered.sections} />
+                                <DataElementsCard dataElements={filtered.dataElements} query={deQ} setQuery={setDeQ} />
+                                <OptionSetsCard optionSets={filtered.optionSets} query={osQ} setQuery={setOsQ} />
+                                <ProgramIndicatorsCard indicators={filtered.programIndicators} query={piQ} setQuery={setPiQ} />
+                            </>
+                        )}
+
                         {filtered && workflowStep === 3 && (
                             <>
-                                <ProgramCard preview={filtered} />
                                 <Card
                                     accent="cf"
                                     step={3}
@@ -436,15 +460,22 @@ export const NewAssessment = () => {
                     </div>
 
                     <div className={styles.footer}>
-                        {workflowStep === 2 ? (
-                            <Button
-                                primary
-                                onClick={handleNextStep}
-                                disabled={isSaving || hasErrors}
-                            >
+                        {workflowStep === 2 && (
+                            <Button primary onClick={handleNextStep} disabled={isSaving || hasErrors}>
                                 {i18n.t('Next')}
                             </Button>
-                        ) : (
+                        )}
+                        {workflowStep === 3 && (
+                            <>
+                                <Button secondary onClick={handlePreviousStep} disabled={isSaving}>
+                                    {i18n.t('Previous')}
+                                </Button>
+                                <Button primary onClick={handleNextStep} disabled={isSaving || hasErrors}>
+                                    {i18n.t('Next')}
+                                </Button>
+                            </>
+                        )}
+                        {workflowStep === 4 && (
                             <>
                                 <Button secondary onClick={handlePreviousStep} disabled={isSaving}>
                                     {i18n.t('Previous')}
@@ -453,9 +484,9 @@ export const NewAssessment = () => {
                                     primary
                                     onClick={onImport}
                                     loading={isSaving}
-                                    disabled={isSaving || hasErrors || selectedOrgUnits.length === 0}
+                                    disabled={isSaving || hasErrors}
                                 >
-                                    {isSaving ? i18n.t('Importingâ€¦') : i18n.t('Import assessment')}
+                                    {isSaving ? i18n.t('Importing…') : i18n.t('Import assessment')}
                                 </Button>
                             </>
                         )}
@@ -463,7 +494,13 @@ export const NewAssessment = () => {
                             {dhis2Saved ? i18n.t('Close') : i18n.t('Cancel')}
                         </Button>
                         <div className={styles.footerSummary}>
-                            <span>{workflowStep === 2 ? i18n.t('Review complete') : i18n.t('Ready to import')}</span>
+                            <span>
+                                {workflowStep === 2
+                                    ? i18n.t('Review complete')
+                                    : workflowStep === 3
+                                    ? i18n.t('Assign organisation units')
+                                    : i18n.t('Ready to import')}
+                            </span>
                             <span className={styles.footerBadge}>
                                 ✓
                                 {workflowStep === 2

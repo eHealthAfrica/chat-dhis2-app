@@ -128,10 +128,33 @@ const CaptureHome = () => {
             ) : active.length === 0 ? (
                 <div className={styles.empty}>
                     <div className={styles.emptyIcon}>A</div>
-                    <p className={styles.emptyTitle}>{i18n.t('No active programs')}</p>
+                    <p className={styles.emptyTitle}>{i18n.t('No assessments available')}</p>
                     <p className={styles.emptyBody}>
-                        {i18n.t('Import an assessment program in Settings to get started.')}
+                        {i18n.t('There are no active assessment programs set up yet. An administrator needs to import or link a program before data capture can begin.')}
                     </p>
+                    <div className={styles.emptyHint}>
+                        <div className={styles.emptyHintContent}>
+                            <ul className={styles.emptyHintList}>
+                                <li>
+                                    {i18n.t('Your user role may not include the required access — reach out to your DHIS2 administrator to request it.')}
+                                </li>
+                                <li>
+                                    {i18n.t('Administrators can follow the')}{' '}
+                                    <a href="#/chat/guides/admin-setup" className={styles.emptyHintLink}>
+                                        {i18n.t('admin setup guide')}
+                                    </a>
+                                    {' '}{i18n.t('to assign authorities and configure the app.')}
+                                </li>
+                                <li>
+                                    {i18n.t('To import or link an assessment program, refer to the')}{' '}
+                                    <a href="#/chat/guides/assessment-setup" className={styles.emptyHintLink}>
+                                        {i18n.t('assessment setup guide')}
+                                    </a>
+                                    {'.'}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <div className={styles.grid}>

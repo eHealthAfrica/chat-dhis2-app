@@ -39,7 +39,6 @@ export const useSubmitEvent = () => {
         mutationFn: async ({ draft, programStageId, onDraftDeleted }) => {
             const payload = buildEventPayload(draft, programStageId);
             let eventId: string;
-            alert()
             if (draft.eventId) {
                 await engine.mutate({
                     resource: 'tracker?async=false',

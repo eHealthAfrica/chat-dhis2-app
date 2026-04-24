@@ -150,7 +150,6 @@ export const useDraft = (programId: string, userUid: string) => {
 
     const writeRemoteProgramDrafts = useCallback(async (drafts: EventDraft[]) => {
         const key = programDraftStoreKey(userUid, programId);
-        alert()
 
         try {
             await engine.mutate({

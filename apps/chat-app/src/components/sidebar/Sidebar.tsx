@@ -88,6 +88,12 @@ export const Sidebar = ({
                                 to="/chat/guides/assessment-setup"
                             />
                         )}
+                        {canAccessSettings && (
+                            <SidebarNavLink
+                                label={i18n.t('Admin setup guide')}
+                                to="/chat/guides/admin-setup"
+                            />
+                        )}
                     </SidenavParent>
                     {canAccessSettings && (
                         <SidebarNavLink

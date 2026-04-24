@@ -75,13 +75,24 @@ export const ChatSettings = () => {
                                     'Create your first assessment to start collecting chat data and provisioning DHIS2 datasets.',
                                 )}
                             </p>
-                            <Button
-                                primary
-                                icon={<IconAdd16 />}
-                                onClick={() => navigate('/chat/settings/new')}
-                            >
-                                {i18n.t('Create assessment')}
-                            </Button>
+                            <div className={styles.emptyActions}>
+                                <Button
+                                    secondary
+                                    icon={<IconLink16 />}
+                                    onClick={() => navigate('/chat/settings/existing')}
+                                >
+                                    {i18n.t('Link existing program')}
+                                </Button>
+                                <Button
+                                    primary
+                                    icon={<IconAdd16 />}
+                                    onClick={() => navigate('/chat/settings/new')}
+                                >
+                                    {i18n.t('Import assessment')}
+                                </Button>
+                            </div>
+
+                            <div className={styles.emptyDivider} />
                         </div>
                     ) : (
                         <div className={styles.tableScrollWrapper}>

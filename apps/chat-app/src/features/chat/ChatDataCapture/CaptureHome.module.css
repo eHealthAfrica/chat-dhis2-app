@@ -124,6 +124,67 @@
     line-height: 1.6;
 }
 
+.emptyDivider {
+    width: 48px;
+    height: 1px;
+    background: #e4e7ec;
+    margin: 8px 0;
+    flex-shrink: 0;
+}
+
+.emptyHint {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    max-width: 480px;
+    padding: 16px 20px;
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+    background: #fafafa;
+    text-align: left;
+}
+
+.emptyHintIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e8f0fb;
+    color: #0b6bcb;
+    font-size: 13px;
+    font-weight: 800;
+    margin-top: 1px;
+}
+
+.emptyHintContent {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.emptyHintList {
+    margin: 4px 0 0;
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: #667085;
+    line-height: 1.6;
+}
+
+.emptyHintLink {
+    color: #0b6bcb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.emptyHintLink:hover {
+    text-decoration: underline;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 400px);

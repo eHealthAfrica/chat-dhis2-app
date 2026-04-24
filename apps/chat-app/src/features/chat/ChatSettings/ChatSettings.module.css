@@ -168,3 +168,83 @@
     justify-content: center;
     padding: 48px;
 }
+
+/* ── Empty state actions ─────────────────────────────────── */
+.emptyActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ── Admin setup guide (shown in empty state) ────────────── */
+.emptyDivider {
+    width: 100%;
+    max-width: 520px;
+    border: none;
+    border-top: 1px solid var(--colors-grey200, #e8edf2);
+    margin: 28px auto 0;
+}
+
+.setupGuide {
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    background: var(--colors-grey050, #fafafa);
+    border: 1px solid var(--colors-grey200, #e8edf2);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.setupGuideTitle {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--colors-grey700, #4a5768);
+}
+
+.setupGuideBody {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--colors-grey700, #4a5768);
+    line-height: 1.6;
+}
+
+.authorityRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 1px solid var(--colors-grey300, #d5dde5);
+    border-radius: 6px;
+    margin-block-end: 12px;
+}
+
+.authorityCode {
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: #1e3a5f;
+    background: #e8f0fb;
+    border: 1px solid #c5d8f5;
+    border-radius: 4px;
+    padding: 2px 8px;
+    white-space: nowrap;
+}
+
+.authorityDesc {
+    font-size: 13px;
+    color: var(--colors-grey700, #4a5768);
+}
+
+.setupGuideNote {
+    margin: 0;
+    font-size: 12px;
+    color: var(--colors-grey600, #6c7787);
+    font-style: italic;
+}

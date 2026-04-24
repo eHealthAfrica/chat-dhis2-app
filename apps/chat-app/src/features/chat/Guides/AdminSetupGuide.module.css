@@ -1,0 +1,61 @@
+/* ── Authority block ─────────────────────────────────────── */
+.authorityBlock {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1px solid #c5d8f5;
+    border-radius: 8px;
+    background: #f0f7ff;
+}
+
+.authorityCode {
+    font-size: 13px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: #1e3a5f;
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
+    border-radius: 4px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.authorityDesc {
+    font-size: 13px;
+    color: #344054;
+    line-height: 1.5;
+}
+
+/* ── Note block ──────────────────────────────────────────── */
+.noteBlock {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border: 1px solid #d8e6f6;
+    border-radius: 8px;
+    background: #f5f9ff;
+}
+
+.noteText {
+    font-size: 13px;
+    color: #475467;
+    line-height: 1.55;
+    flex: 1;
+}
+
+.noteLink {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0b6bcb;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.noteLink:hover {
+    text-decoration: underline;
+}

@@ -15,6 +15,7 @@ import { NewAssessmentPage } from './features/chat/pages/NewAssessmentPage';
 import { AddExistingAssessmentPage } from './features/chat/pages/AddExistingAssessmentPage';
 import { DataCaptureGuidePage } from './features/chat/pages/DataCaptureGuidePage';
 import { AssessmentSetupGuidePage } from './features/chat/pages/AssessmentSetupGuidePage';
+import { AdminSetupGuidePage } from './features/chat/pages/AdminSetupGuidePage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CaptureHome, CaptureList, CaptureForm } from './features/chat/ChatDataCapture';
@@ -96,6 +97,14 @@ const router = createHashRouter([
                                 element: (
                                     <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
                                         <AssessmentSetupGuidePage />
+                                    </RequireAuthority>
+                                ),
+                            },
+                            {
+                                path: 'admin-setup',
+                                element: (
+                                    <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
+                                        <AdminSetupGuidePage />
                                     </RequireAuthority>
                                 ),
                             },

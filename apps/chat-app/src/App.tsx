@@ -20,6 +20,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { CaptureHome, CaptureList, CaptureForm } from './features/chat/ChatDataCapture';
 import { RequireAuthority } from './components/RequireAuthority';
+import { ClimateImportNewPage } from './features/chat/pages/ClimateImportNewPage';
+import { ClimateImportListPage } from './features/chat/pages/ClimateImportListPage';
+import { ClimateSetupPage } from './features/chat/pages/ClimateSetupPage';
 
 export type RouteHandle = {
     fullWidth?: boolean;
@@ -84,6 +87,27 @@ const router = createHashRouter([
                                 <AddExistingAssessmentPage />
                             </RequireAuthority>
                         ),
+                    },
+                    {
+                        path: 'settings/climate-setup',
+                        element: (
+                            <RequireAuthority authority="F_CHAT_ADD_SETTINGS">
+                                <ClimateSetupPage />
+                            </RequireAuthority>
+                        ),
+                    },
+                    {
+                        path: 'climate-import',
+                        children: [
+                            {
+                                index: true,
+                                element: <ClimateImportListPage />,
+                            },
+                            {
+                                path: 'new',
+                                element: <ClimateImportNewPage />,
+                            },
+                        ],
                     },
                     {
                         path: 'guides',

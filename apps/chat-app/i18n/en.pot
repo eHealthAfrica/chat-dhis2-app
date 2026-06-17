@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-07T03:51:29.700Z\n"
-"PO-Revision-Date: 2026-04-07T03:51:29.700Z\n"
+"POT-Creation-Date: 2026-06-17T05:14:49.818Z\n"
+"PO-Revision-Date: 2026-06-17T05:14:49.819Z\n"
 
 msgid "Oops!"
 msgstr "Oops!"
@@ -59,6 +59,9 @@ msgstr "Deselect all"
 msgid "Data Capture"
 msgstr "Data Capture"
 
+msgid "Climate Import"
+msgstr "Climate Import"
+
 msgid "Guides"
 msgstr "Guides"
 
@@ -68,8 +71,17 @@ msgstr "Data capture guide"
 msgid "Assessment setup guide"
 msgstr "Assessment setup guide"
 
+msgid "Admin setup guide"
+msgstr "Admin setup guide"
+
 msgid "Settings"
 msgstr "Settings"
+
+msgid "Assessments"
+msgstr "Assessments"
+
+msgid "Climate Setup"
+msgstr "Climate Setup"
 
 msgid "Failed to load programs."
 msgstr "Failed to load programs."
@@ -192,11 +204,37 @@ msgstr "Active programs"
 msgid "Loading programs..."
 msgstr "Loading programs..."
 
-msgid "No active programs"
-msgstr "No active programs"
+msgid "No assessments available"
+msgstr "No assessments available"
 
-msgid "Import an assessment program in Settings to get started."
-msgstr "Import an assessment program in Settings to get started."
+msgid ""
+"There are no active assessment programs set up yet. An administrator needs "
+"to import or link a program before data capture can begin."
+msgstr ""
+"There are no active assessment programs set up yet. An administrator needs "
+"to import or link a program before data capture can begin."
+
+msgid ""
+"Your user role may not include the required access — reach out to your "
+"DHIS2 administrator to request it."
+msgstr ""
+"Your user role may not include the required access — reach out to your "
+"DHIS2 administrator to request it."
+
+msgid "Administrators can follow the"
+msgstr "Administrators can follow the"
+
+msgid "admin setup guide"
+msgstr "admin setup guide"
+
+msgid "to assign authorities and configure the app."
+msgstr "to assign authorities and configure the app."
+
+msgid "To import or link an assessment program, refer to the"
+msgstr "To import or link an assessment program, refer to the"
+
+msgid "assessment setup guide"
+msgstr "assessment setup guide"
 
 msgid "Delete this draft? This cannot be undone."
 msgstr "Delete this draft? This cannot be undone."
@@ -212,9 +250,6 @@ msgstr "View"
 
 msgid "Edit"
 msgstr "Edit"
-
-msgid "Assessments"
-msgstr "Assessments"
 
 msgid "Failed to load events"
 msgstr "Failed to load events"
@@ -377,14 +412,652 @@ msgstr ""
 "Create your first assessment to start collecting chat data and provisioning "
 "DHIS2 datasets."
 
-msgid "Create assessment"
-msgstr "Create assessment"
+msgid "Import assessment"
+msgstr "Import assessment"
 
 msgid "—"
 msgstr "—"
 
 msgid "Inactive"
 msgstr "Inactive"
+
+msgid "Failed to load saved imports"
+msgstr "Failed to load saved imports"
+
+msgid "Climate imports"
+msgstr "Climate imports"
+
+msgid ""
+"Import weather and climate data from Google Earth Engine into DHIS2 data "
+"elements."
+msgstr ""
+"Import weather and climate data from Google Earth Engine into DHIS2 data "
+"elements."
+
+msgid "New import"
+msgstr "New import"
+
+msgid ""
+"Select a climate dataset, target data element and organisation units to "
+"import data."
+msgstr ""
+"Select a climate dataset, target data element and organisation units to "
+"import data."
+
+msgid "Saved imports"
+msgstr "Saved imports"
+
+msgid ""
+"No saved imports yet. Run a new import and check \"Save this import for "
+"re-running later\" to create one."
+msgstr ""
+"No saved imports yet. Run a new import and check \"Save this import for "
+"re-running later\" to create one."
+
+msgid "Import weather and climate data"
+msgstr "Import weather and climate data"
+
+msgid "2. Select data element"
+msgstr "2. Select data element"
+
+msgid "5. Review and import"
+msgstr "5. Review and import"
+
+msgid ""
+"You can import at most {{max}} data values in a single import, but you are "
+"trying to import {{count}} values ({{orgUnits}} org units × {{periods}} "
+"periods). Please reduce the date range or select fewer organisation units."
+msgid_plural ""
+"You can import at most {{max}} data values in a single import, but you are "
+"trying to import {{count}} values ({{orgUnits}} org units × {{periods}} "
+"periods). Please reduce the date range or select fewer organisation units."
+msgstr[0] ""
+"You can import at most {{max}} data values in a single import, but you are "
+"trying to import {{count}} values ({{orgUnits}} org units × {{periods}} "
+"periods). Please reduce the date range or select fewer organisation units."
+msgstr[1] ""
+"You can import at most {{max}} data values in a single import, but you are "
+"trying to import {{count}} values ({{orgUnits}} org units × {{periods}} "
+"periods). Please reduce the date range or select fewer organisation units."
+
+msgid "Save this import for re-running later"
+msgstr "Save this import for re-running later"
+
+msgid "Import name"
+msgstr "Import name"
+
+msgid "Start import"
+msgstr "Start import"
+
+msgid "Select a data source to begin."
+msgstr "Select a data source to begin."
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "Monthly"
+msgstr "Monthly"
+
+msgid "Yearly"
+msgstr "Yearly"
+
+msgid "16-day"
+msgstr "16-day"
+
+msgid "Climate data setup"
+msgstr "Climate data setup"
+
+msgid "Data element mappings"
+msgstr "Data element mappings"
+
+msgid ""
+"Map each climate dataset to an existing DHIS2 data element. The mapped "
+"element will be pre-selected when you start a new import."
+msgstr ""
+"Map each climate dataset to an existing DHIS2 data element. The mapped "
+"element will be pre-selected when you start a new import."
+
+msgid "Could not load saved mappings"
+msgstr "Could not load saved mappings"
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "Could not load data elements"
+msgstr "Could not load data elements"
+
+msgid "Climate dataset"
+msgstr "Climate dataset"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "DHIS2 data element"
+msgstr "DHIS2 data element"
+
+msgid "No match"
+msgstr "No match"
+
+msgid "Select data element"
+msgstr "Select data element"
+
+msgid "Saving..."
+msgstr "Saving..."
+
+msgid "Data elements for metadata import"
+msgstr "Data elements for metadata import"
+
+msgid ""
+"Use these values to create data elements in the Maintenance app, or "
+"download as CSV for bulk metadata import."
+msgstr ""
+"Use these values to create data elements in the Maintenance app, or "
+"download as CSV for bulk metadata import."
+
+msgid "Hide table"
+msgstr "Hide table"
+
+msgid "Show table"
+msgstr "Show table"
+
+msgid "Download CSV"
+msgstr "Download CSV"
+
+msgid "Loading data elements..."
+msgstr "Loading data elements..."
+
+msgid "No data elements found. Select a dataset first."
+msgstr "No data elements found. Select a dataset first."
+
+msgid "No data elements found for the selected period type."
+msgstr "No data elements found for the selected period type."
+
+msgid "Showing data elements from {{periodType}} data sets"
+msgstr "Showing data elements from {{periodType}} data sets"
+
+msgid "No match found"
+msgstr "No match found"
+
+msgid "Need help setting up data elements? Check the "
+msgstr "Need help setting up data elements? Check the "
+
+msgid "setup guide"
+msgstr "setup guide"
+
+msgid "1. Select data source"
+msgstr "1. Select data source"
+
+msgid "Climate data source"
+msgstr "Climate data source"
+
+msgid "Start and end date are not within the valid range."
+msgstr "Start and end date are not within the valid range."
+
+msgid "Start date is not within the valid range."
+msgstr "Start date is not within the valid range."
+
+msgid "End date is not within the valid range."
+msgstr "End date is not within the valid range."
+
+msgid "Start date must be on or before the end date."
+msgstr "Start date must be on or before the end date."
+
+msgid "Start year"
+msgstr "Start year"
+
+msgid "End year"
+msgstr "End year"
+
+msgid "Valid range: {{startDate}} – {{endDate}}"
+msgstr "Valid range: {{startDate}} – {{endDate}}"
+
+msgid "Start date"
+msgstr "Start date"
+
+msgid "End date"
+msgstr "End date"
+
+msgid "Delete \"{{name}}\"?"
+msgstr "Delete \"{{name}}\"?"
+
+msgid "Created by {{name}} on {{date}}."
+msgstr "Created by {{name}} on {{date}}."
+
+msgid ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+msgstr ""
+"Deleting will remove the saved import and its update history. Imported data "
+"values in DHIS2 will not be affected."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+msgstr ""
+"An org unit in your selection has boundaries that are too detailed to "
+"process."
+
+msgid "Import failed"
+msgstr "Import failed"
+
+msgid "Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+msgstr "Extracting data from Google Earth Engine (batch {{current}} of {{total}})"
+
+msgid "Extracting data from Google Earth Engine"
+msgstr "Extracting data from Google Earth Engine"
+
+msgid "No data for the following org units: {{orgUnits}}"
+msgstr "No data for the following org units: {{orgUnits}}"
+
+msgid "Importing data to DHIS2..."
+msgstr "Importing data to DHIS2..."
+
+msgid "Import complete"
+msgstr "Import complete"
+
+msgid "Imported: {{imported}}, Updated: {{updated}}, Ignored: {{ignored}}"
+msgstr "Imported: {{imported}}, Updated: {{updated}}, Ignored: {{ignored}}"
+
+msgid "{{count}} values could not be imported (no data available)"
+msgid_plural "{{count}} values could not be imported (no data available)"
+msgstr[0] "{{count}} values could not be imported (no data available)"
+msgstr[1] "{{count}} values could not be imported (no data available)"
+
+msgid "Import conflicts"
+msgstr "Import conflicts"
+
+msgid "... and {{count}} more"
+msgid_plural "... and {{count}} more"
+msgstr[0] "... and {{count}} more"
+msgstr[1] "... and {{count}} more"
+
+msgid "Importing climate data"
+msgstr "Importing climate data"
+
+msgid "Saved as \"{{name}}\""
+msgstr "Saved as \"{{name}}\""
+
+msgid "View in Imports →"
+msgstr "View in Imports →"
+
+msgid "Importing..."
+msgstr "Importing..."
+
+msgid "{{periodTypeName}} values from {{startDate}} to {{endDate}}"
+msgstr "{{periodTypeName}} values from {{startDate}} to {{endDate}}"
+
+msgid "For {{periodId}} ({{start}} to {{end}})"
+msgstr "For {{periodId}} ({{start}} to {{end}})"
+
+msgid "{{periodTypeName}} values from {{start}} to {{end}}"
+msgstr "{{periodTypeName}} values from {{start}} to {{end}}"
+
+msgid "For the {{periodTypeNoun}} {{date}}"
+msgstr "For the {{periodTypeNoun}} {{date}}"
+
+msgid "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
+msgstr "{{periodTypeName}} values between {{startDate}} and {{endDate}}"
+
+msgid ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgid_plural ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+msgstr[0] ""
+"Selected org units: {{ouText}} ({{count}} organisation unit has geometry "
+"and will be imported)"
+msgstr[1] ""
+"Selected org units: {{ouText}} ({{count}} organisation units have geometry "
+"and will be imported)"
+
+msgid "To data element \"{{dataElement}}\""
+msgstr "To data element \"{{dataElement}}\""
+
+msgid "{{count}} data values will be imported"
+msgid_plural "{{count}} data values will be imported"
+msgstr[0] "{{count}} data value will be imported"
+msgstr[1] "{{count}} data values will be imported"
+
+msgid "Failed to load organisation units"
+msgstr "Failed to load organisation units"
+
+msgid "Failed to load org unit geometries"
+msgstr "Failed to load org unit geometries"
+
+msgid "No org unit geometries found for the selected units"
+msgstr "No org unit geometries found for the selected units"
+
+msgid "3. Select organisation units"
+msgstr "3. Select organisation units"
+
+msgid "Loading org unit geometries..."
+msgstr "Loading org unit geometries..."
+
+msgid "{{count}} organisation unit{{plural}} with geometry found"
+msgid_plural "{{count}} organisation unit{{plural}} with geometry found"
+msgstr[0] "{{count}} organisation unit{{plural}} with geometry found"
+msgstr[1] "{{count}} organisation unit{{plural}} with geometry found"
+
+msgid "4. Import date range"
+msgstr "4. Import date range"
+
+msgid ""
+"The data will be assigned a yearly period type matching the year it was "
+"collected: {{datasetPeriod}}"
+msgstr ""
+"The data will be assigned a yearly period type matching the year it was "
+"collected: {{datasetPeriod}}"
+
+msgid "Period type: {{periodType}}"
+msgstr "Period type: {{periodType}}"
+
+msgid "Period type"
+msgstr "Period type"
+
+msgid "Since last import ({{range}})"
+msgstr "Since last import ({{range}})"
+
+msgid "Import \"{{name}}\""
+msgstr "Import \"{{name}}\""
+
+msgid "Data source"
+msgstr "Data source"
+
+msgid "Organisation units"
+msgstr "Organisation units"
+
+msgid "with geometry"
+msgstr "with geometry"
+
+msgid "Time zone"
+msgstr "Time zone"
+
+msgid "{{periodType}} date range"
+msgstr "{{periodType}} date range"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Use default range"
+msgstr "Use default range"
+
+msgid "Change"
+msgstr "Change"
+
+msgid "No org unit geometries found"
+msgstr "No org unit geometries found"
+
+msgid "None of the selected organisation units have boundaries stored in DHIS2."
+msgstr "None of the selected organisation units have boundaries stored in DHIS2."
+
+msgid "Range exceeds the {{max}}-value limit. Reduce the date range."
+msgstr "Range exceeds the {{max}}-value limit. Reduce the date range."
+
+msgid "Data imported through {{date}} · Last run {{relative}}"
+msgstr "Data imported through {{date}} · Last run {{relative}}"
+
+msgid "Last run {{relative}}"
+msgstr "Last run {{relative}}"
+
+msgid "Never imported"
+msgstr "Never imported"
+
+msgid "{{date}} by {{user}}"
+msgstr "{{date}} by {{user}}"
+
+msgid "Rename"
+msgstr "Rename"
+
+msgid "Data source is not available"
+msgstr "Data source is not available"
+
+msgid "Import…"
+msgstr "Import…"
+
+msgid "More actions"
+msgstr "More actions"
+
+msgid "Air temperature (ERA5-Land)"
+msgstr "Air temperature (ERA5-Land)"
+
+msgid "Air temperature"
+msgstr "Air temperature"
+
+msgid "Average air temperature in °C at 2 m above the surface."
+msgstr "Average air temperature in °C at 2 m above the surface."
+
+msgid "Average"
+msgstr "Average"
+
+msgid "Max air temperature (ERA5-Land)"
+msgstr "Max air temperature (ERA5-Land)"
+
+msgid "Max air temperature"
+msgstr "Max air temperature"
+
+msgid "Maximum air temperature in °C at 2 m above the surface."
+msgstr "Maximum air temperature in °C at 2 m above the surface."
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min temperature (ERA5-Land)"
+msgstr "Min temperature (ERA5-Land)"
+
+msgid "Min air temperature"
+msgstr "Min air temperature"
+
+msgid "Minimum air temperature in °C at 2 m above the surface."
+msgstr "Minimum air temperature in °C at 2 m above the surface."
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Precipitation (ERA5-Land)"
+msgstr "Precipitation (ERA5-Land)"
+
+msgid "Precipitation (ERA5)"
+msgstr "Precipitation (ERA5)"
+
+msgid "Total precipitation in mm."
+msgstr "Total precipitation in mm."
+
+msgid "Sum"
+msgstr "Sum"
+
+msgid "Precipitation (CHIRPS)"
+msgstr "Precipitation (CHIRPS)"
+
+msgid "Precipitation in mm."
+msgstr "Precipitation in mm."
+
+msgid "Dewpoint temperature (ERA5-Land)"
+msgstr "Dewpoint temperature (ERA5-Land)"
+
+msgid "Dewpoint temperature"
+msgstr "Dewpoint temperature"
+
+msgid ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+msgstr ""
+"Temperature in °C at 2 m above the surface to which the air would have to "
+"be cooled for saturation to occur."
+
+msgid "Relative humidity (ERA5-Land)"
+msgstr "Relative humidity (ERA5-Land)"
+
+msgid "Relative humidity"
+msgstr "Relative humidity"
+
+msgid ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+msgstr ""
+"Percentage of water vapor in the air compared to the total amount of vapor "
+"that can exist in the air at its current temperature. Calculated using air "
+"temperature and dewpoint temperature at 2 m above surface."
+
+msgid "Heat stress (ERA5-HEAT)"
+msgstr "Heat stress (ERA5-HEAT)"
+
+msgid "Heat stress"
+msgstr "Heat stress"
+
+msgid "Average felt temperature in °C."
+msgstr "Average felt temperature in °C."
+
+msgid "Max heat stress (ERA5-HEAT)"
+msgstr "Max heat stress (ERA5-HEAT)"
+
+msgid "Max heat stress"
+msgstr "Max heat stress"
+
+msgid "Maximum felt temperature in °C."
+msgstr "Maximum felt temperature in °C."
+
+msgid "Min heat stress (ERA5-HEAT)"
+msgstr "Min heat stress (ERA5-HEAT)"
+
+msgid "Min heat stress"
+msgstr "Min heat stress"
+
+msgid "Minimum felt temperature in °C."
+msgstr "Minimum felt temperature in °C."
+
+msgid "NDVI - Normalized difference vegetation index (MODIS)"
+msgstr "NDVI - Normalized difference vegetation index (MODIS)"
+
+msgid "NDVI"
+msgstr "NDVI"
+
+msgid ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+msgstr ""
+"Landsat Normalized Difference Vegetation Index (NDVI) is used to quantify "
+"vegetation greenness and is useful in understanding vegetation density and "
+"assessing changes in plant health. NDVI values range from -1 to 1, with "
+"higher values indicating denser vegetation."
+
+msgid "EVI - Enhanced vegetation index (MODIS)"
+msgstr "EVI - Enhanced vegetation index (MODIS)"
+
+msgid "EVI"
+msgstr "EVI"
+
+msgid ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range "
+"from -1 to 1, with higher values indicating denser vegetation."
+msgstr ""
+"Enhanced vegetation index (EVI) differs from NDVI by reducing the influence "
+"of atmospheric conditions and canopy background noise. EVI values range "
+"from -1 to 1, with higher values indicating denser vegetation."
+
+msgid "Mean elevation (SRTM)"
+msgstr "Mean elevation (SRTM)"
+
+msgid "Mean elevation"
+msgstr "Mean elevation"
+
+msgid "Mean elevation in meters above sea level."
+msgstr "Mean elevation in meters above sea level."
+
+msgid "First value"
+msgstr "First value"
+
+msgid "Min elevation (SRTM)"
+msgstr "Min elevation (SRTM)"
+
+msgid "Min elevation"
+msgstr "Min elevation"
+
+msgid "Min elevation in meters above sea level."
+msgstr "Min elevation in meters above sea level."
+
+msgid "Max elevation (SRTM)"
+msgstr "Max elevation (SRTM)"
+
+msgid "Max elevation"
+msgstr "Max elevation"
+
+msgid "Max elevation in meters above sea level."
+msgstr "Max elevation in meters above sea level."
+
+msgid "Standard deviation of elevation (SRTM)"
+msgstr "Standard deviation of elevation (SRTM)"
+
+msgid "Std dev elevation"
+msgstr "Std dev elevation"
+
+msgid "Standard deviation of elevation in meters above sea level."
+msgstr "Standard deviation of elevation in meters above sea level."
+
+msgid "Percentage of area with this land cover type."
+msgstr "Percentage of area with this land cover type."
+
+msgid "Climate/Weather"
+msgstr "Climate/Weather"
+
+msgid "Environment"
+msgstr "Environment"
+
+msgid "Land"
+msgstr "Land"
+
+msgid "No data found for the selected period"
+msgstr "No data found for the selected period"
+
+msgid "just now"
+msgstr "just now"
+
+msgid "{{count}} minutes ago"
+msgid_plural "{{count}} minutes ago"
+msgstr[0] "{{count}} minute ago"
+msgstr[1] "{{count}} minutes ago"
+
+msgid "{{count}} hours ago"
+msgid_plural "{{count}} hours ago"
+msgstr[0] "{{count}} hour ago"
+msgstr[1] "{{count}} hours ago"
+
+msgid "{{count}} days ago"
+msgid_plural "{{count}} days ago"
+msgstr[0] "{{count}} day ago"
+msgstr[1] "{{count}} days ago"
+
+msgid "{{count}} months ago"
+msgid_plural "{{count}} months ago"
+msgstr[0] "{{count}} month ago"
+msgstr[1] "{{count}} months ago"
+
+msgid "{{count}} years ago"
+msgid_plural "{{count}} years ago"
+msgstr[0] "{{count}} year ago"
+msgstr[1] "{{count}} years ago"
+
+msgid "day"
+msgstr "day"
+
+msgid "week"
+msgstr "week"
+
+msgid "month"
+msgstr "month"
+
+msgid "year"
+msgstr "year"
 
 msgid "No"
 msgstr "No"
@@ -461,6 +1134,146 @@ msgstr "Must be a number"
 
 msgid "{{filled}} of {{total}} required fields completed"
 msgstr "{{filled}} of {{total}} required fields completed"
+
+msgid "Install the app"
+msgstr "Install the app"
+
+msgid ""
+"Build and deploy the CHAT app to your DHIS2 instance, or install it "
+"directly from the DHIS2 App Hub if it is listed there."
+msgstr ""
+"Build and deploy the CHAT app to your DHIS2 instance, or install it "
+"directly from the DHIS2 App Hub if it is listed there."
+
+msgid "The app requires DHIS2 version 2.41 or higher."
+msgstr "The app requires DHIS2 version 2.41 or higher."
+
+msgid ""
+"After installation the app appears in the DHIS2 app menu under its "
+"registered display name."
+msgstr ""
+"After installation the app appears in the DHIS2 app menu under its "
+"registered display name."
+
+msgid "Assign user authorities"
+msgstr "Assign user authorities"
+
+msgid ""
+"CHAT uses a custom authority to control who can manage assessments. Assign "
+"it to the relevant user roles in DHIS2 → User Management → User Roles."
+msgstr ""
+"CHAT uses a custom authority to control who can manage assessments. Assign "
+"it to the relevant user roles in DHIS2 → User Management → User Roles."
+
+msgid ""
+"Open the target user role, go to the Authorities tab, search for the "
+"authority below, and save."
+msgstr ""
+"Open the target user role, go to the Authorities tab, search for the "
+"authority below, and save."
+
+msgid ""
+"Users without this authority can still access Data Capture and Guides, but "
+"cannot create or delete assessments."
+msgstr ""
+"Users without this authority can still access Data Capture and Guides, but "
+"cannot create or delete assessments."
+
+msgid "Create, import, link, and delete assessments in the Settings page"
+msgstr "Create, import, link, and delete assessments in the Settings page"
+
+msgid "Import a metadata package"
+msgstr "Import a metadata package"
+
+msgid ""
+"Assessment tools are distributed as DHIS2 metadata JSON packages. Download "
+"a package and use the import wizard to push it to your instance."
+msgstr ""
+"Assessment tools are distributed as DHIS2 metadata JSON packages. Download "
+"a package and use the import wizard to push it to your instance."
+
+msgid "Navigate to Settings → New assessment and upload the metadata .json file."
+msgstr "Navigate to Settings → New assessment and upload the metadata .json file."
+
+msgid ""
+"Review the detected program, sections, data elements, option sets, and "
+"indicators."
+msgstr ""
+"Review the detected program, sections, data elements, option sets, and "
+"indicators."
+
+msgid ""
+"Assign the relevant organisation units, then click Import assessment to "
+"push the metadata to DHIS2 and register the record."
+msgstr ""
+"Assign the relevant organisation units, then click Import assessment to "
+"push the metadata to DHIS2 and register the record."
+
+msgid ""
+"Pre-built metadata packages are available in the meta-data-packages folder "
+"of the repository."
+msgstr ""
+"Pre-built metadata packages are available in the meta-data-packages folder "
+"of the repository."
+
+msgid "Link an existing program (optional)"
+msgstr "Link an existing program (optional)"
+
+msgid ""
+"If the DHIS2 program is already deployed in your instance, you can register "
+"it without re-importing the metadata."
+msgstr ""
+"If the DHIS2 program is already deployed in your instance, you can register "
+"it without re-importing the metadata."
+
+msgid "Navigate to Settings → Link existing program."
+msgstr "Navigate to Settings → Link existing program."
+
+msgid ""
+"Search for the program by name, then click Add to register it as a CHAT "
+"assessment."
+msgstr ""
+"Search for the program by name, then click Add to register it as a CHAT "
+"assessment."
+
+msgid ""
+"The program must already exist in DHIS2 — this step only adds the local "
+"assessment record."
+msgstr ""
+"The program must already exist in DHIS2 — this step only adds the local "
+"assessment record."
+
+msgid "Verify the setup"
+msgstr "Verify the setup"
+
+msgid ""
+"After adding an assessment, confirm it is visible and working for both "
+"admin and data-capture users."
+msgstr ""
+"After adding an assessment, confirm it is visible and working for both "
+"admin and data-capture users."
+
+msgid "Open Settings and confirm the new assessment appears with status Active."
+msgstr "Open Settings and confirm the new assessment appears with status Active."
+
+msgid ""
+"Open an assessment record and check that all form sections and data "
+"elements load correctly."
+msgstr ""
+"Open an assessment record and check that all form sections and data "
+"elements load correctly."
+
+msgid "Guide"
+msgstr "Guide"
+
+msgid "Quick links"
+msgstr "Quick links"
+
+msgid "Before you start"
+msgstr "Before you start"
+
+msgid "Browse metadata packages →"
+msgstr "Browse metadata packages →"
 
 msgid "Open assessment settings"
 msgstr "Open assessment settings"
@@ -578,9 +1391,6 @@ msgstr ""
 "Use the assessment details view in settings if you need to inspect the "
 "imported program metadata."
 
-msgid "Guide"
-msgstr "Guide"
-
 msgid ""
 "Use this page to walk through the assessment import flow, from loading the "
 "JSON file to selecting organisation units and confirming the assessment is "
@@ -589,12 +1399,6 @@ msgstr ""
 "Use this page to walk through the assessment import flow, from loading the "
 "JSON file to selecting organisation units and confirming the assessment is "
 "ready for capture."
-
-msgid "Quick links"
-msgstr "Quick links"
-
-msgid "Before you start"
-msgstr "Before you start"
 
 msgid ""
 "You need access to Chat settings before you can import or manage assessment "
@@ -828,9 +1632,6 @@ msgstr "Failed to import assessment."
 msgid "Open setup guide"
 msgstr "Open setup guide"
 
-msgid "Import assessment"
-msgstr "Import assessment"
-
 msgid ""
 "Upload a DHIS2 metadata JSON export, review the detected program, sections, "
 "data elements and option sets, then confirm details and import."
@@ -843,9 +1644,6 @@ msgstr "File error"
 
 msgid "Parse warning"
 msgstr "Parse warning"
-
-msgid "Import failed"
-msgstr "Import failed"
 
 msgid "Local store save failed"
 msgstr "Local store save failed"
@@ -873,9 +1671,6 @@ msgstr "Previous"
 
 msgid "Importing…"
 msgstr "Importing…"
-
-msgid "Cancel"
-msgstr "Cancel"
 
 msgid "Review complete"
 msgstr "Review complete"
@@ -912,3 +1707,28 @@ msgstr "Load file"
 
 msgid "Review"
 msgstr "Review"
+
+msgctxt "SETTINGS) and confirm the assessment card appears in Data Capture."
+msgid "Log in as a data-capture user (without F_CHAT_ADD"
+msgstr ""
+"Log in as a data-capture user (without F_CHAT_ADD_SETTINGS) and confirm the "
+"assessment card appears in Data Capture."
+
+msgctxt "SETTINGS authority to manage assessments inside the app."
+msgid ""
+"You need DHIS2 superuser or user-management access to assign authorities, "
+"and the F_CHAT_ADD"
+msgstr ""
+"You need DHIS2 superuser or user-management access to assign authorities, "
+"and the F_CHAT_ADD_SETTINGS authority to manage assessments inside the app."
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "CHAT – Climate Health Vulnerability Assessment Tool"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""
+"Climate Health Vulnerability Assessment Tool (CHAT) is a digital tool "
+"developed by eHealth Africa, based on the World Health Organization’s "
+"Checklists"

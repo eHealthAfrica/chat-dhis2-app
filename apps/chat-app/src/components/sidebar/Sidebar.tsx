@@ -43,7 +43,9 @@ export const Sidebar = ({
     const location = useLocation();
     const { hasAuthority: canAccessSettings } = useHasAuthority('F_CHAT_ADD_SETTINGS');
     const isGuideRoute = location.pathname.startsWith('/chat/guides');
+    const isSettingsRoute = location.pathname.startsWith('/chat/settings');
     const [guidesOpen, setGuidesOpen] = useState(isGuideRoute);
+    const [settingsOpen, setSettingsOpen] = useState(isSettingsRoute);
 
     useEffect(() => {
         // only react if explicitly defined
@@ -61,6 +63,12 @@ export const Sidebar = ({
         }
     }, [isGuideRoute]);
 
+    useEffect(() => {
+        if (isSettingsRoute) {
+            setSettingsOpen(true);
+        }
+    }, [isSettingsRoute]);
+
     return (
         <aside
             className={cx(styles.asideWrapper, className, {
@@ -72,6 +80,10 @@ export const Sidebar = ({
                     <SidebarNavLink
                         label={i18n.t('Data Capture')}
                         to="/chat/data-capture"
+                    />
+                    <SidebarNavLink
+                        label={i18n.t('Climate Import')}
+                        to="/chat/climate-import"
                     />
                     <SidenavParent
                         label={i18n.t('Guides')}
@@ -96,10 +108,21 @@ export const Sidebar = ({
                         )}
                     </SidenavParent>
                     {canAccessSettings && (
-                        <SidebarNavLink
+                        <SidenavParent
                             label={i18n.t('Settings')}
-                            to="/chat/settings"
-                        />
+                            open={settingsOpen}
+                            onClick={() => setSettingsOpen(current => !current)}
+                        >
+                            <SidebarNavLink
+                                label={i18n.t('Assessments')}
+                                to="/chat/settings"
+                                end
+                            />
+                            <SidebarNavLink
+                                label={i18n.t('Climate Setup')}
+                                to="/chat/settings/climate-setup"
+                            />
+                        </SidenavParent>
                     )}
                 </SidenavItems>
             </Sidenav>

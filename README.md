@@ -140,3 +140,7 @@ Sample assessment tools for import and testing are available in the [`meta-data-
 - Draft progress is persisted locally and through the DHIS2 data store.
 - Completed assessments are stored and viewed as DHIS2 events.
 - GitHub repository: https://github.com/eHealthAfrica/chat-dhis2-app
+
+
+
+    time_period,location,rainfall,mean_temperature,mean_relative_humidity

@@ -1,0 +1,396 @@
+.page {
+    padding: 24px;
+    max-width: 900px;
+}
+
+.page h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--colors-grey900);
+    margin: 0 0 24px 0;
+}
+
+.page h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--colors-grey900);
+    margin: 0 0 12px 0;
+}
+
+.formSection {
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.submitRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.warning {
+    padding: 12px;
+    background: var(--colors-yellow100);
+    border: 1px solid var(--colors-yellow500);
+    border-radius: 3px;
+    color: var(--colors-yellow900);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.importTypeCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.importTypeCard {
+    border: 2px solid var(--colors-grey300);
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    display: block;
+}
+
+.importTypeCardSelected {
+    border: 2px solid var(--colors-blue600);
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    display: block;
+    background: var(--colors-blue050);
+}
+
+.importTypeCardSubtitle {
+    font-size: 13px;
+    color: var(--colors-grey700);
+    margin: 4px 0 0 24px;
+}
+
+.saveRecurringBox {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--colors-grey200);
+}
+
+/* List page */
+.listPage {
+    padding: 24px;
+    max-width: 900px;
+}
+
+.listPageHeader {
+    margin-bottom: 24px;
+}
+
+.listPageTitle {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+}
+
+.listPageSubtitle {
+    color: var(--colors-grey700);
+    margin: 0;
+}
+
+.newImportCard {
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.newImportCard h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+}
+
+.newImportCardBody {
+    flex: 1;
+    color: var(--colors-grey700);
+    font-size: 14px;
+    margin: 0;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 12px 0;
+}
+
+.emptyState {
+    background: var(--colors-grey050);
+    border: 1px solid var(--colors-grey200);
+    border-radius: 4px;
+    padding: 24px;
+    color: var(--colors-grey700);
+    font-size: 14px;
+}
+
+/* Saved import cards */
+.savedImportsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.savedImportCard {
+    background: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    border-radius: 4px;
+    padding: 16px;
+}
+
+.savedImportCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.savedImportCardName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.savedImportTitle {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.savedImportNameInput {
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid var(--colors-blue600);
+    border-radius: 3px;
+    padding: 2px 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.savedImportIconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--colors-grey600);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.savedImportIconButton:hover {
+    color: var(--colors-grey900);
+}
+
+.savedImportCardActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+.savedImportRunStatus {
+    font-size: 13px;
+    color: var(--colors-grey600);
+    margin: 0 0 4px 0;
+}
+
+.savedImportRunError {
+    font-size: 13px;
+    color: var(--colors-red600);
+    margin: 0 0 4px 0;
+}
+
+.savedImportMeta {
+    font-size: 13px;
+    color: var(--colors-grey700);
+    margin: 0;
+}
+
+/* Setup page */
+.setupPage {
+    padding: 24px;
+    max-width: 80vw;
+}
+
+.setupPage h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 16px 0;
+}
+
+.setupPage h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 20px 0 8px 0;
+}
+
+.setupTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.setupTable th,
+.setupTable td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--colors-grey300);
+    vertical-align: top;
+}
+
+.setupTable thead th {
+    background: var(--colors-grey100);
+    font-weight: 500;
+}
+
+.setupTable tbody th {
+    font-weight: 500;
+    background: var(--colors-grey050);
+    width: 200px;
+}
+
+.codeCell {
+    font-family: monospace;
+    font-size: 13px;
+    background: var(--colors-grey050);
+    padding: 2px 6px;
+    border-radius: 3px;
+    word-break: break-all;
+}
+
+/* Data element mapping table */
+.mappingTableWrapper {
+    overflow-x: auto;
+    margin-bottom: 8px;
+}
+
+.mappingTable {
+    width: 50vw;
+    border-collapse: collapse;
+    font-size: 14px;
+    table-layout: fixed;
+}
+
+.mappingTable th,
+.mappingTable td {
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid var(--colors-grey300);
+    vertical-align: middle;
+}
+
+.mappingTable thead th {
+    background: var(--colors-grey100);
+    font-weight: 500;
+}
+
+.colDataset {
+    width: 28%;
+}
+
+.colPeriod {
+    width: 10%;
+    white-space: nowrap;
+}
+
+.colElement {
+    width: 52%;
+}
+
+.colAction {
+    width: 10%;
+    text-align: center;
+}
+
+.mappingDatasetName {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.mappingCode {
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--colors-grey600);
+    background: var(--colors-grey050);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.mappingLoading,
+.mappingSaving {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--colors-grey700);
+    padding: 8px 0;
+}
+
+/* Metadata import table */
+.metaTableWrapper {
+    overflow-x: auto;
+    margin-bottom: 16px;
+    border: 1px solid var(--colors-grey300);
+    border-radius: 4px;
+}
+
+.metaTable {
+    border-collapse: collapse;
+    font-size: 12px;
+    white-space: nowrap;
+    width: max-content;
+    min-width: 100%;
+}
+
+.metaTable th,
+.metaTable td {
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--colors-grey200);
+    border-right: 1px solid var(--colors-grey200);
+    vertical-align: top;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.metaTable thead th {
+    background: var(--colors-grey100);
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.metaDescCell {
+    white-space: normal;
+    max-width: 280px;
+}
+
+.metaEmptyCell {
+    color: var(--colors-grey500);
+    text-align: center;
+}

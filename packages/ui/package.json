@@ -3,7 +3,7 @@
     "packageManager": "pnpm@10.14.0",
     "type": "commonjs",
     "version": "4.0.0",
-    "module": "./build\\es\\index.js",
+    "module": "./build/es/index.js",
     "types": "./build/types/index.d.ts",
     "license": "MIT",
     "scripts": {
@@ -14,11 +14,11 @@
         "deploy": "d2-app-scripts deploy",
         "tsc:check": "tsc --noEmit"
     },
-    "main": "./build\\cjs\\index.js",
+    "main": "./build/cjs/index.js",
     "exports": {
-        "import": "./build\\es\\index.js",
-        "require": "./build\\cjs\\index.js",
-        "types": "./build\\types\\index.d.ts"
+        "import": "./build/es/index.js",
+        "require": "./build/cjs/index.js",
+        "types": "./build/types/index.d.ts"
     },
     "peerDependencies": {
         "react": ">=18",

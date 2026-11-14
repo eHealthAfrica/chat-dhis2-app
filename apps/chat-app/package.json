@@ -9,10 +9,17 @@
         "start": "d2-app-scripts start",
         "deploy": "d2-app-scripts deploy",
         "tsc:check": "tsc --noEmit",
-        "linter:check": "eslint . --config ../../eslint.config.mts"
+        "linter:check": "eslint . --config ../../eslint.config.mts",
+        "e2e": "playwright test",
+        "e2e:headed": "playwright test --headed",
+        "e2e:ui": "playwright test --ui",
+        "e2e:integration": "playwright test --grep @integration",
+        "e2e:integration:group3": "playwright test --grep @integration e2e/tests/dhis2-integration-group3-event-capture.capture.spec.ts"
     },
     "devDependencies": {
         "@dhis2/cli-app-scripts": "12.8.0-alpha.3",
+        "@playwright/test": "1.61.1",
+        "dotenv": "^17.4.2",
         "vite": "5.4.21"
     },
     "peerDependencies": {

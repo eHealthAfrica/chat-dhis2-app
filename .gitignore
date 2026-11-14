@@ -12,3 +12,6 @@
 .playwright-mcp/**
 .ralph
 .idea
+
+# APK binaries — too large for git; store locally or in object storage
+apks/*.apk

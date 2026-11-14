@@ -1,0 +1,44 @@
+# Local DHIS2 2.41 instance for the chat-dhis2-app e2e suites (DHIS2-374).
+#
+#   docker compose -f docker-compose.dhis2.yml up -d
+#   curl -fsS http://localhost:8081/api/ping   # -> "pong"
+#
+# Port 8081 (not 8080) so it does not clash with the ePIMS Keycloak stack.
+name: chat-dhis2-e2e
+
+services:
+  # PostGIS is required: DHIS2 creates geometry columns during schema migration.
+  dhis2-db:
+    image: postgis/postgis:15-3.4-alpine
+    environment:
+      POSTGRES_USER: dhis
+      POSTGRES_PASSWORD: dhis
+      POSTGRES_DB: dhis2
+    volumes:
+      - dhis2_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dhis -d dhis2"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  dhis2:
+    image: dhis2/core:2.41.11
+    depends_on:
+      dhis2-db:
+        condition: service_healthy
+    environment:
+      JAVA_OPTS: "-Xms512m -Xmx2g"
+    volumes:
+      - ./dhis2-home:/opt/dhis2
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/api/ping || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 60
+      start_period: 120s
+
+volumes:
+  dhis2_db:

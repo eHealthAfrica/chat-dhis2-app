@@ -1,0 +1,42 @@
+{
+    "programs": [
+        {
+            "id": "e2eImpPrg01",
+            "name": "E2E Imported Assessment",
+            "shortName": "E2E Imported",
+            "code": "E2E_IMPORTED_ASSESSMENT",
+            "programType": "WITHOUT_REGISTRATION",
+            "programStages": [{ "id": "e2eImpStg01" }]
+        }
+    ],
+    "programStages": [
+        {
+            "id": "e2eImpStg01",
+            "name": "E2E Imported Stage",
+            "description": "Imported via E2E",
+            "programStageSections": [{ "id": "e2eImpSec01" }]
+        }
+    ],
+    "programStageSections": [
+        {
+            "id": "e2eImpSec01",
+            "name": "General",
+            "sortOrder": 1,
+            "dataElements": [{ "id": "e2eImpDe001" }]
+        }
+    ],
+    "dataElements": [
+        {
+            "id": "e2eImpDe001",
+            "name": "E2E Imported Field",
+            "shortName": "E2E Field",
+            "code": "E2E_IMPORTED_FIELD",
+            "valueType": "TEXT",
+            "domainType": "TRACKER",
+            "aggregationType": "NONE"
+        }
+    ],
+    "optionSets": [],
+    "options": [],
+    "programIndicators": []
+}

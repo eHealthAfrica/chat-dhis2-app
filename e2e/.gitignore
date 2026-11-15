@@ -1,0 +1,6 @@
+# Runtime data written by the local DHIS2 container (logs, uploaded files, installed apps).
+# Only dhis.conf is source; the rest is generated.
+infra/dhis2-home/*
+!infra/dhis2-home/dhis.conf
+# Generated local env (bootstrap-dhis2.sh writes this; never commit).
+infra/.env.local

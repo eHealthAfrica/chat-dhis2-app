@@ -62,5 +62,12 @@ export default defineConfig({
             use: { ...devices['Desktop Chrome'], storageState: CAPTURE_STATE },
             testMatch: /.*\.(capture|shared)\.spec\.ts/,
         },
+        {
+            // Request-only API specs with no browser role (e.g. the Group 10 security spec).
+            // No storageState: a DHIS2 session cookie would authenticate the calls under test.
+            name: 'api',
+            use: {},
+            testMatch: /.*dhis2-integration-group10-security\.spec\.ts/,
+        },
     ],
 });
